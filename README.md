@@ -34,7 +34,5 @@ Oponent: Ing. Jana Veselá
 ```
 Schválil: Ing. Petra Hrbáčková, ředitelka školy
 ```
-Powered by TCPDF (www.tcpdf.org)
-Stránka 1 / 1
 
 
