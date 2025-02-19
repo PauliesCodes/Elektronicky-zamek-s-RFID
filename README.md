@@ -1,5 +1,5 @@
 # Elektronicky-zamek-s-RFID
-![alt text]([http://url/to/img.png](https://raw.githubusercontent.com/PauliesCodes/Elektronicky-zamek-s-RFID/refs/heads/main/image.jpg))
+![image](image,jpg)
 Zadání ročníkové práce
 
 ```
