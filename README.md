@@ -1,5 +1,5 @@
 # Elektronicky-zamek-s-RFID
-![image](image,jpg)
+![image](image.jpg)
 Zadání ročníkové práce
 
 ```
