@@ -22,8 +22,9 @@ main.d main.o: .././main.cpp \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdarg.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\wdt.h \
- g:\mir\include\lcd_i2c_u.h g:\mir\include\i2c_u.h \
- g:\mir\include\bit_mac_u.h g:\mir\include\kbd_u.h
+ .././..//..//INCLUDE/lcd_i2c_u.h .././..//..//INCLUDE/i2c_u.h \
+ .././..//..//INCLUDE/bit_mac_u.h .././..//..//INCLUDE/i2c_u.h \
+ .././..//..//INCLUDE/kbd_u.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -71,10 +72,12 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\wdt.h:
 
-g:\mir\include\lcd_i2c_u.h:
+.././..//..//INCLUDE/lcd_i2c_u.h:
 
-g:\mir\include\i2c_u.h:
+.././..//..//INCLUDE/i2c_u.h:
 
-g:\mir\include\bit_mac_u.h:
+.././..//..//INCLUDE/bit_mac_u.h:
 
-g:\mir\include\kbd_u.h:
+.././..//..//INCLUDE/i2c_u.h:
+
+.././..//..//INCLUDE/kbd_u.h:

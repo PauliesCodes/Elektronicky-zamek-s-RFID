@@ -115,6 +115,8 @@ LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/b
 LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a
 LOAD C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega644a/avr5\libatmega644a.a
 END GROUP
+                0x00000000                __TEXT_REGION_ORIGIN__ = DEFINED (__TEXT_REGION_ORIGIN__)?__TEXT_REGION_ORIGIN__:0x0
+                0x00800060                __DATA_REGION_ORIGIN__ = DEFINED (__DATA_REGION_ORIGIN__)?__DATA_REGION_ORIGIN__:0x800060
                 0x00020000                __TEXT_REGION_LENGTH__ = DEFINED (__TEXT_REGION_LENGTH__)?__TEXT_REGION_LENGTH__:0x20000
                 0x0000ffa0                __DATA_REGION_LENGTH__ = DEFINED (__DATA_REGION_LENGTH__)?__DATA_REGION_LENGTH__:0xffa0
                 0x00010000                __EEPROM_REGION_LENGTH__ = DEFINED (__EEPROM_REGION_LENGTH__)?__EEPROM_REGION_LENGTH__:0x10000
@@ -213,7 +215,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x10fa
+.text           0x00000000     0x113e
  *(.vectors)
  .vectors       0x00000000       0x7c C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega644a/avr5/crtatmega644a.o
                 0x00000000                __vector_default
@@ -379,57 +381,57 @@ END GROUP
                 0x000006e8       0x2c main.o
                 0x000006e8                _Z7savePinPKc
  .text._Z12FirstStartUpv
-                0x00000714      0x12a main.o
+                0x00000714      0x102 main.o
                 0x00000714                _Z12FirstStartUpv
  .text._Z10ComparePinPKc
-                0x0000083e       0x14 main.o
-                0x0000083e                _Z10ComparePinPKc
+                0x00000816       0x14 main.o
+                0x00000816                _Z10ComparePinPKc
  .text._Z16SetRegistersInitv
-                0x00000852       0x8a main.o
-                0x00000852                _Z16SetRegistersInitv
+                0x0000082a       0x8a main.o
+                0x0000082a                _Z16SetRegistersInitv
  .text._Z8OpenLockv
-                0x000008dc       0x2a main.o
-                0x000008dc                _Z8OpenLockv
+                0x000008b4       0x2a main.o
+                0x000008b4                _Z8OpenLockv
  .text._Z12AccessDeniedv
-                0x00000906       0x24 main.o
-                0x00000906                _Z12AccessDeniedv
+                0x000008de       0x24 main.o
+                0x000008de                _Z12AccessDeniedv
  .text._Z12findFreeSlotv
-                0x0000092a       0x2c main.o
-                0x0000092a                _Z12findFreeSlotv
+                0x00000902       0x2c main.o
+                0x00000902                _Z12findFreeSlotv
  .text._Z8saveChipPci
-                0x00000956       0x84 main.o
-                0x00000956                _Z8saveChipPci
+                0x0000092e       0x84 main.o
+                0x0000092e                _Z8saveChipPci
  .text._Z8readChipiPc
-                0x000009da       0x74 main.o
-                0x000009da                _Z8readChipiPc
+                0x000009b2       0x74 main.o
+                0x000009b2                _Z8readChipiPc
  .text._Z12isChipStoredPc
-                0x00000a4e       0x72 main.o
-                0x00000a4e                _Z12isChipStoredPc
+                0x00000a26       0x72 main.o
+                0x00000a26                _Z12isChipStoredPc
  .text._Z7AddChipv
-                0x00000ac0       0xc4 main.o
-                0x00000ac0                _Z7AddChipv
+                0x00000a98       0xf6 main.o
+                0x00000a98                _Z7AddChipv
  .text._Z10RemoveChipv
-                0x00000b84       0xe8 main.o
-                0x00000b84                _Z10RemoveChipv
+                0x00000b8e      0x122 main.o
+                0x00000b8e                _Z10RemoveChipv
  .text._Z18CheckForOpenByRFIDRb
-                0x00000c6c       0x80 main.o
-                0x00000c6c                _Z18CheckForOpenByRFIDRb
+                0x00000cb0       0x80 main.o
+                0x00000cb0                _Z18CheckForOpenByRFIDRb
  .text._Z10verifyUserv
-                0x00000cec      0x118 main.o
-                0x00000cec                _Z10verifyUserv
+                0x00000d30      0x118 main.o
+                0x00000d30                _Z10verifyUserv
  .text._Z7restartv
-                0x00000e04       0x16 main.o
-                0x00000e04                _Z7restartv
- .text.main     0x00000e1a      0x2ca main.o
-                0x00000e1a                main
+                0x00000e48       0x16 main.o
+                0x00000e48                _Z7restartv
+ .text.main     0x00000e5e      0x2ca main.o
+                0x00000e5e                main
  .text.avr-libc
-                0x000010e4       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strcmp.o)
-                0x000010e4                strcmp
-                0x000010f6                . = ALIGN (0x2)
+                0x00001128       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strcmp.o)
+                0x00001128                strcmp
+                0x0000113a                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000010f6        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x000010f6                _exit
-                0x000010f6                exit
+ .fini9         0x0000113a        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x0000113a                _exit
+                0x0000113a                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -448,11 +450,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000010f6        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x0000113a        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x000010fa                _etext = .
+                0x0000113e                _etext = .
 
-.data           0x00800100       0xe0 load address 0x000010fa
+.data           0x00800100       0xde load address 0x0000113e
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -460,53 +462,52 @@ END GROUP
  *(.rodata)
  *(.rodata*)
  .rodata.str1.1
-                0x00800100       0xdf main.o
-                                 0xe0 (size before relaxing)
+                0x00800100       0xde main.o
+                                 0xdf (size before relaxing)
  *(.gnu.linkonce.r*)
-                0x008001e0                . = ALIGN (0x2)
- *fill*         0x008001df        0x1 
-                0x008001e0                _edata = .
-                0x008001e0                PROVIDE (__data_end, .)
+                0x008001de                . = ALIGN (0x2)
+                0x008001de                _edata = .
+                0x008001de                PROVIDE (__data_end, .)
 
-.bss            0x008001e0       0x22
-                0x008001e0                PROVIDE (__bss_start, .)
+.bss            0x008001de       0x22
+                0x008001de                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
  .bss.idle_time
-                0x008001e0        0x2 main.o
-                0x008001e0                idle_time
+                0x008001de        0x2 main.o
+                0x008001de                idle_time
  .bss.pristupovyPin
-                0x008001e2        0x7 main.o
-                0x008001e2                pristupovyPin
- .bss.data_OK   0x008001e9        0x1 main.o
-                0x008001e9                data_OK
- .bss.start_OK  0x008001ea        0x1 main.o
-                0x008001ea                start_OK
- .bss.i         0x008001eb        0x1 main.o
-                0x008001eb                i
+                0x008001e0        0x7 main.o
+                0x008001e0                pristupovyPin
+ .bss.data_OK   0x008001e7        0x1 main.o
+                0x008001e7                data_OK
+ .bss.start_OK  0x008001e8        0x1 main.o
+                0x008001e8                start_OK
+ .bss.i         0x008001e9        0x1 main.o
+                0x008001e9                i
  .bss.data_prijata
-                0x008001ec       0x10 main.o
-                0x008001ec                data_prijata
- .bss.KB_DEL1   0x008001fc        0x2 main.o
-                0x008001fc                KB_DEL1
- .bss.KB_LAST   0x008001fe        0x1 main.o
-                0x008001fe                KB_LAST
- .bss.KB_CNTR   0x008001ff        0x1 main.o
-                0x008001ff                KB_CNTR
- .bss.KB_CMD2   0x00800200        0x1 main.o
-                0x00800200                KB_CMD2
- .bss.KB_CMD1   0x00800201        0x1 main.o
-                0x00800201                KB_CMD1
+                0x008001ea       0x10 main.o
+                0x008001ea                data_prijata
+ .bss.KB_DEL1   0x008001fa        0x2 main.o
+                0x008001fa                KB_DEL1
+ .bss.KB_LAST   0x008001fc        0x1 main.o
+                0x008001fc                KB_LAST
+ .bss.KB_CNTR   0x008001fd        0x1 main.o
+                0x008001fd                KB_CNTR
+ .bss.KB_CMD2   0x008001fe        0x1 main.o
+                0x008001fe                KB_CMD2
+ .bss.KB_CMD1   0x008001ff        0x1 main.o
+                0x008001ff                KB_CMD1
  *(COMMON)
-                0x00800202                PROVIDE (__bss_end, .)
-                0x000010fa                __data_load_start = LOADADDR (.data)
-                0x000011da                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00800200                PROVIDE (__bss_end, .)
+                0x0000113e                __data_load_start = LOADADDR (.data)
+                0x0000121c                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800202        0x0
+.noinit         0x00800200        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x00800202                _end = .
+                0x00800200                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -579,34 +580,34 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x2e02
+.debug_info     0x00000000     0x2e5a
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x6cc C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega644a/avr5/crtatmega644a.o
- .debug_info    0x000006cc     0x2736 main.o
+ .debug_info    0x000006cc     0x278e main.o
 
 .debug_abbrev   0x00000000      0xa46
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x66e C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega644a/avr5/crtatmega644a.o
  .debug_abbrev  0x0000066e      0x3d8 main.o
 
-.debug_line     0x00000000     0x158a
+.debug_line     0x00000000     0x15b6
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x151 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega644a/avr5/crtatmega644a.o
- .debug_line    0x00000151     0x1439 main.o
+ .debug_line    0x00000151     0x1465 main.o
 
-.debug_frame    0x00000000      0x564
+.debug_frame    0x00000000      0x54c
  *(.debug_frame)
- .debug_frame   0x00000000      0x564 main.o
+ .debug_frame   0x00000000      0x54c main.o
 
-.debug_str      0x00000000      0xa4b
+.debug_str      0x00000000      0xa75
  *(.debug_str)
  .debug_str     0x00000000      0x252 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega644a/avr5/crtatmega644a.o
- .debug_str     0x00000252      0x7f9 main.o
-                                0x832 (size before relaxing)
+ .debug_str     0x00000252      0x823 main.o
+                                0x85c (size before relaxing)
 
-.debug_loc      0x00000000     0x245c
+.debug_loc      0x00000000     0x2555
  *(.debug_loc)
- .debug_loc     0x00000000     0x245c main.o
+ .debug_loc     0x00000000     0x2555 main.o
 
 .debug_macinfo
  *(.debug_macinfo)

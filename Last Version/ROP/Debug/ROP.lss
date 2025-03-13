@@ -3,31 +3,31 @@ ROP.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         000000e0  00800100  000010fa  0000118e  2**0
+  0 .data         000000de  00800100  0000113e  000011d2  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         000010fa  00000000  00000000  00000094  2**1
+  1 .text         0000113e  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          00000022  008001e0  008001e0  0000126e  2**0
+  2 .bss          00000022  008001de  008001de  000012b0  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  0000126e  2**0
+  3 .comment      00000030  00000000  00000000  000012b0  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000012a0  2**2
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000012e0  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 000001a0  00000000  00000000  000012e0  2**0
+  5 .debug_aranges 000001a0  00000000  00000000  00001320  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00002e02  00000000  00000000  00001480  2**0
+  6 .debug_info   00002e5a  00000000  00000000  000014c0  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000a46  00000000  00000000  00004282  2**0
+  7 .debug_abbrev 00000a46  00000000  00000000  0000431a  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   0000158a  00000000  00000000  00004cc8  2**0
+  8 .debug_line   000015b6  00000000  00000000  00004d60  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000564  00000000  00000000  00006254  2**2
+  9 .debug_frame  0000054c  00000000  00000000  00006318  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000a4b  00000000  00000000  000067b8  2**0
+ 10 .debug_str    00000a75  00000000  00000000  00006864  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    0000245c  00000000  00000000  00007203  2**0
+ 11 .debug_loc    00002555  00000000  00000000  000072d9  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000208  00000000  00000000  0000965f  2**0
+ 12 .debug_ranges 00000208  00000000  00000000  0000982e  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -77,18 +77,18 @@ Disassembly of section .text:
       88:	11 e0       	ldi	r17, 0x01	; 1
       8a:	a0 e0       	ldi	r26, 0x00	; 0
       8c:	b1 e0       	ldi	r27, 0x01	; 1
-      8e:	ea ef       	ldi	r30, 0xFA	; 250
-      90:	f0 e1       	ldi	r31, 0x10	; 16
+      8e:	ee e3       	ldi	r30, 0x3E	; 62
+      90:	f1 e1       	ldi	r31, 0x11	; 17
       92:	02 c0       	rjmp	.+4      	; 0x98 <__do_copy_data+0x10>
       94:	05 90       	lpm	r0, Z+
       96:	0d 92       	st	X+, r0
-      98:	a0 3e       	cpi	r26, 0xE0	; 224
+      98:	ae 3d       	cpi	r26, 0xDE	; 222
       9a:	b1 07       	cpc	r27, r17
       9c:	d9 f7       	brne	.-10     	; 0x94 <__do_copy_data+0xc>
 
 0000009e <__do_clear_bss>:
       9e:	22 e0       	ldi	r18, 0x02	; 2
-      a0:	a0 ee       	ldi	r26, 0xE0	; 224
+      a0:	ae ed       	ldi	r26, 0xDE	; 222
       a2:	b1 e0       	ldi	r27, 0x01	; 1
       a4:	01 c0       	rjmp	.+2      	; 0xa8 <.do_clear_bss_start>
 
@@ -96,11 +96,11 @@ Disassembly of section .text:
       a6:	1d 92       	st	X+, r1
 
 000000a8 <.do_clear_bss_start>:
-      a8:	a2 30       	cpi	r26, 0x02	; 2
+      a8:	a0 30       	cpi	r26, 0x00	; 0
       aa:	b2 07       	cpc	r27, r18
       ac:	e1 f7       	brne	.-8      	; 0xa6 <.do_clear_bss_loop>
-      ae:	0e 94 0d 07 	call	0xe1a	; 0xe1a <main>
-      b2:	0c 94 7b 08 	jmp	0x10f6	; 0x10f6 <_exit>
+      ae:	0e 94 2f 07 	call	0xe5e	; 0xe5e <main>
+      b2:	0c 94 9d 08 	jmp	0x113a	; 0x113a <_exit>
 
 000000b6 <__bad_interrupt>:
       b6:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -714,61 +714,61 @@ bool timesUP(){
 
 0000056e <_Z12kb_on_timer1v>:
      56e:	0e 94 72 02 	call	0x4e4	; 0x4e4 <_Z12kb_read_portv>
-     572:	90 91 fe 01 	lds	r25, 0x01FE	; 0x8001fe <KB_LAST>
+     572:	90 91 fc 01 	lds	r25, 0x01FC	; 0x8001fc <KB_LAST>
      576:	89 13       	cpse	r24, r25
      578:	0a c0       	rjmp	.+20     	; 0x58e <_Z12kb_on_timer1v+0x20>
-     57a:	90 91 ff 01 	lds	r25, 0x01FF	; 0x8001ff <KB_CNTR>
+     57a:	90 91 fd 01 	lds	r25, 0x01FD	; 0x8001fd <KB_CNTR>
      57e:	94 31       	cpi	r25, 0x14	; 20
      580:	58 f4       	brcc	.+22     	; 0x598 <_Z12kb_on_timer1v+0x2a>
-     582:	80 91 ff 01 	lds	r24, 0x01FF	; 0x8001ff <KB_CNTR>
+     582:	80 91 fd 01 	lds	r24, 0x01FD	; 0x8001fd <KB_CNTR>
      586:	8f 5f       	subi	r24, 0xFF	; 255
-     588:	80 93 ff 01 	sts	0x01FF, r24	; 0x8001ff <KB_CNTR>
+     588:	80 93 fd 01 	sts	0x01FD, r24	; 0x8001fd <KB_CNTR>
      58c:	08 95       	ret
-     58e:	80 93 fe 01 	sts	0x01FE, r24	; 0x8001fe <KB_LAST>
-     592:	10 92 ff 01 	sts	0x01FF, r1	; 0x8001ff <KB_CNTR>
+     58e:	80 93 fc 01 	sts	0x01FC, r24	; 0x8001fc <KB_LAST>
+     592:	10 92 fd 01 	sts	0x01FD, r1	; 0x8001fd <KB_CNTR>
      596:	08 95       	ret
      598:	88 23       	and	r24, r24
      59a:	b1 f1       	breq	.+108    	; 0x608 <_Z12kb_on_timer1v+0x9a>
-     59c:	20 91 fc 01 	lds	r18, 0x01FC	; 0x8001fc <KB_DEL1>
-     5a0:	30 91 fd 01 	lds	r19, 0x01FD	; 0x8001fd <KB_DEL1+0x1>
+     59c:	20 91 fa 01 	lds	r18, 0x01FA	; 0x8001fa <KB_DEL1>
+     5a0:	30 91 fb 01 	lds	r19, 0x01FB	; 0x8001fb <KB_DEL1+0x1>
      5a4:	23 2b       	or	r18, r19
      5a6:	d1 f0       	breq	.+52     	; 0x5dc <_Z12kb_on_timer1v+0x6e>
-     5a8:	20 91 fc 01 	lds	r18, 0x01FC	; 0x8001fc <KB_DEL1>
-     5ac:	30 91 fd 01 	lds	r19, 0x01FD	; 0x8001fd <KB_DEL1+0x1>
+     5a8:	20 91 fa 01 	lds	r18, 0x01FA	; 0x8001fa <KB_DEL1>
+     5ac:	30 91 fb 01 	lds	r19, 0x01FB	; 0x8001fb <KB_DEL1+0x1>
      5b0:	21 50       	subi	r18, 0x01	; 1
      5b2:	31 09       	sbc	r19, r1
-     5b4:	30 93 fd 01 	sts	0x01FD, r19	; 0x8001fd <KB_DEL1+0x1>
-     5b8:	20 93 fc 01 	sts	0x01FC, r18	; 0x8001fc <KB_DEL1>
+     5b4:	30 93 fb 01 	sts	0x01FB, r19	; 0x8001fb <KB_DEL1+0x1>
+     5b8:	20 93 fa 01 	sts	0x01FA, r18	; 0x8001fa <KB_DEL1>
      5bc:	23 2b       	or	r18, r19
      5be:	41 f5       	brne	.+80     	; 0x610 <_Z12kb_on_timer1v+0xa2>
-     5c0:	90 91 00 02 	lds	r25, 0x0200	; 0x800200 <KB_CMD2>
+     5c0:	90 91 fe 01 	lds	r25, 0x01FE	; 0x8001fe <KB_CMD2>
      5c4:	91 11       	cpse	r25, r1
      5c6:	03 c0       	rjmp	.+6      	; 0x5ce <_Z12kb_on_timer1v+0x60>
      5c8:	80 68       	ori	r24, 0x80	; 128
-     5ca:	80 93 00 02 	sts	0x0200, r24	; 0x800200 <KB_CMD2>
+     5ca:	80 93 fe 01 	sts	0x01FE, r24	; 0x8001fe <KB_CMD2>
      5ce:	86 e9       	ldi	r24, 0x96	; 150
      5d0:	90 e0       	ldi	r25, 0x00	; 0
-     5d2:	90 93 fd 01 	sts	0x01FD, r25	; 0x8001fd <KB_DEL1+0x1>
-     5d6:	80 93 fc 01 	sts	0x01FC, r24	; 0x8001fc <KB_DEL1>
+     5d2:	90 93 fb 01 	sts	0x01FB, r25	; 0x8001fb <KB_DEL1+0x1>
+     5d6:	80 93 fa 01 	sts	0x01FA, r24	; 0x8001fa <KB_DEL1>
      5da:	08 95       	ret
-     5dc:	90 91 01 02 	lds	r25, 0x0201	; 0x800201 <KB_CMD1>
+     5dc:	90 91 ff 01 	lds	r25, 0x01FF	; 0x8001ff <KB_CMD1>
      5e0:	91 11       	cpse	r25, r1
      5e2:	04 c0       	rjmp	.+8      	; 0x5ec <_Z12kb_on_timer1v+0x7e>
      5e4:	98 2f       	mov	r25, r24
      5e6:	90 68       	ori	r25, 0x80	; 128
-     5e8:	90 93 01 02 	sts	0x0201, r25	; 0x800201 <KB_CMD1>
-     5ec:	90 91 00 02 	lds	r25, 0x0200	; 0x800200 <KB_CMD2>
+     5e8:	90 93 ff 01 	sts	0x01FF, r25	; 0x8001ff <KB_CMD1>
+     5ec:	90 91 fe 01 	lds	r25, 0x01FE	; 0x8001fe <KB_CMD2>
      5f0:	91 11       	cpse	r25, r1
      5f2:	03 c0       	rjmp	.+6      	; 0x5fa <_Z12kb_on_timer1v+0x8c>
      5f4:	80 68       	ori	r24, 0x80	; 128
-     5f6:	80 93 00 02 	sts	0x0200, r24	; 0x800200 <KB_CMD2>
+     5f6:	80 93 fe 01 	sts	0x01FE, r24	; 0x8001fe <KB_CMD2>
      5fa:	88 e5       	ldi	r24, 0x58	; 88
      5fc:	92 e0       	ldi	r25, 0x02	; 2
-     5fe:	90 93 fd 01 	sts	0x01FD, r25	; 0x8001fd <KB_DEL1+0x1>
-     602:	80 93 fc 01 	sts	0x01FC, r24	; 0x8001fc <KB_DEL1>
+     5fe:	90 93 fb 01 	sts	0x01FB, r25	; 0x8001fb <KB_DEL1+0x1>
+     602:	80 93 fa 01 	sts	0x01FA, r24	; 0x8001fa <KB_DEL1>
      606:	08 95       	ret
-     608:	10 92 fd 01 	sts	0x01FD, r1	; 0x8001fd <KB_DEL1+0x1>
-     60c:	10 92 fc 01 	sts	0x01FC, r1	; 0x8001fc <KB_DEL1>
+     608:	10 92 fb 01 	sts	0x01FB, r1	; 0x8001fb <KB_DEL1+0x1>
+     60c:	10 92 fa 01 	sts	0x01FA, r1	; 0x8001fa <KB_DEL1>
      610:	08 95       	ret
 
 00000612 <__vector_20>:
@@ -780,30 +780,30 @@ bool timesUP(){
      61c:	8f 93       	push	r24
      61e:	ef 93       	push	r30
      620:	ff 93       	push	r31
-     622:	80 91 c6 00 	lds	r24, 0x00C6	; 0x8000c6 <__TEXT_REGION_LENGTH__+0x7e00c6>
+     622:	80 91 c6 00 	lds	r24, 0x00C6	; 0x8000c6 <__DATA_REGION_ORIGIN__+0x66>
      626:	82 30       	cpi	r24, 0x02	; 2
      628:	19 f4       	brne	.+6      	; 0x630 <__vector_20+0x1e>
      62a:	81 e0       	ldi	r24, 0x01	; 1
-     62c:	80 93 ea 01 	sts	0x01EA, r24	; 0x8001ea <start_OK>
-     630:	80 91 ea 01 	lds	r24, 0x01EA	; 0x8001ea <start_OK>
+     62c:	80 93 e8 01 	sts	0x01E8, r24	; 0x8001e8 <start_OK>
+     630:	80 91 e8 01 	lds	r24, 0x01E8	; 0x8001e8 <start_OK>
      634:	88 23       	and	r24, r24
      636:	c1 f0       	breq	.+48     	; 0x668 <__vector_20+0x56>
-     638:	e0 91 eb 01 	lds	r30, 0x01EB	; 0x8001eb <i>
+     638:	e0 91 e9 01 	lds	r30, 0x01E9	; 0x8001e9 <i>
      63c:	f0 e0       	ldi	r31, 0x00	; 0
-     63e:	80 91 c6 00 	lds	r24, 0x00C6	; 0x8000c6 <__TEXT_REGION_LENGTH__+0x7e00c6>
-     642:	e4 51       	subi	r30, 0x14	; 20
+     63e:	80 91 c6 00 	lds	r24, 0x00C6	; 0x8000c6 <__DATA_REGION_ORIGIN__+0x66>
+     642:	e6 51       	subi	r30, 0x16	; 22
      644:	fe 4f       	sbci	r31, 0xFE	; 254
      646:	80 83       	st	Z, r24
-     648:	80 91 eb 01 	lds	r24, 0x01EB	; 0x8001eb <i>
+     648:	80 91 e9 01 	lds	r24, 0x01E9	; 0x8001e9 <i>
      64c:	8f 5f       	subi	r24, 0xFF	; 255
-     64e:	80 93 eb 01 	sts	0x01EB, r24	; 0x8001eb <i>
-     652:	80 91 eb 01 	lds	r24, 0x01EB	; 0x8001eb <i>
+     64e:	80 93 e9 01 	sts	0x01E9, r24	; 0x8001e9 <i>
+     652:	80 91 e9 01 	lds	r24, 0x01E9	; 0x8001e9 <i>
      656:	8e 30       	cpi	r24, 0x0E	; 14
      658:	38 f0       	brcs	.+14     	; 0x668 <__vector_20+0x56>
      65a:	81 e0       	ldi	r24, 0x01	; 1
-     65c:	80 93 e9 01 	sts	0x01E9, r24	; 0x8001e9 <data_OK>
-     660:	10 92 eb 01 	sts	0x01EB, r1	; 0x8001eb <i>
-     664:	10 92 ea 01 	sts	0x01EA, r1	; 0x8001ea <start_OK>
+     65c:	80 93 e7 01 	sts	0x01E7, r24	; 0x8001e7 <data_OK>
+     660:	10 92 e9 01 	sts	0x01E9, r1	; 0x8001e9 <i>
+     664:	10 92 e8 01 	sts	0x01E8, r1	; 0x8001e8 <start_OK>
      668:	ff 91       	pop	r31
      66a:	ef 91       	pop	r30
      66c:	8f 91       	pop	r24
@@ -821,11 +821,11 @@ bool timesUP(){
      680:	11 24       	eor	r1, r1
      682:	8f 93       	push	r24
      684:	9f 93       	push	r25
-     686:	80 91 e0 01 	lds	r24, 0x01E0	; 0x8001e0 <__data_end>
-     68a:	90 91 e1 01 	lds	r25, 0x01E1	; 0x8001e1 <__data_end+0x1>
+     686:	80 91 de 01 	lds	r24, 0x01DE	; 0x8001de <__data_end>
+     68a:	90 91 df 01 	lds	r25, 0x01DF	; 0x8001df <__data_end+0x1>
      68e:	0a 96       	adiw	r24, 0x0a	; 10
-     690:	90 93 e1 01 	sts	0x01E1, r25	; 0x8001e1 <__data_end+0x1>
-     694:	80 93 e0 01 	sts	0x01E0, r24	; 0x8001e0 <__data_end>
+     690:	90 93 df 01 	sts	0x01DF, r25	; 0x8001df <__data_end+0x1>
+     694:	80 93 de 01 	sts	0x01DE, r24	; 0x8001de <__data_end>
      698:	9f 91       	pop	r25
      69a:	8f 91       	pop	r24
      69c:	0f 90       	pop	r0
@@ -854,8 +854,6 @@ bool timesUP(){
      6c2:	08 95       	ret
 
 000006c4 <_Z12showMenuTextv>:
-//const char ulozenyKod[16] = "0112E9D2E8C0"; // muj do skoly cip xd
-//const char ulozenyKod[16] = "1112E9D2E8C0";
 
 void showMenuText(){
 
@@ -929,333 +927,345 @@ void savePin(const char pin[6]) {
 00000714 <_Z12FirstStartUpv>:
 
 void FirstStartUp() {
-     714:	cf 92       	push	r12
-     716:	df 92       	push	r13
-     718:	ef 92       	push	r14
-     71a:	ff 92       	push	r15
-     71c:	0f 93       	push	r16
-     71e:	1f 93       	push	r17
-     720:	cf 93       	push	r28
-     722:	df 93       	push	r29
-     724:	cd b7       	in	r28, 0x3d	; 61
-     726:	de b7       	in	r29, 0x3e	; 62
-     728:	27 97       	sbiw	r28, 0x07	; 7
-     72a:	0f b6       	in	r0, 0x3f	; 63
-     72c:	f8 94       	cli
-     72e:	de bf       	out	0x3e, r29	; 62
-     730:	0f be       	out	0x3f, r0	; 63
-     732:	cd bf       	out	0x3d, r28	; 61
+     714:	1f 93       	push	r17
+     716:	cf 93       	push	r28
+     718:	df 93       	push	r29
+     71a:	cd b7       	in	r28, 0x3d	; 61
+     71c:	de b7       	in	r29, 0x3e	; 62
+     71e:	27 97       	sbiw	r28, 0x07	; 7
+     720:	0f b6       	in	r0, 0x3f	; 63
+     722:	f8 94       	cli
+     724:	de bf       	out	0x3e, r29	; 62
+     726:	0f be       	out	0x3f, r0	; 63
+     728:	cd bf       	out	0x3d, r28	; 61
 	char code[7] = {0};
-     734:	fe 01       	movw	r30, r28
-     736:	31 96       	adiw	r30, 0x01	; 1
-     738:	87 e0       	ldi	r24, 0x07	; 7
-     73a:	df 01       	movw	r26, r30
-     73c:	1d 92       	st	X+, r1
-     73e:	8a 95       	dec	r24
-     740:	e9 f7       	brne	.-6      	; 0x73c <_Z12FirstStartUpv+0x28>
+     72a:	fe 01       	movw	r30, r28
+     72c:	31 96       	adiw	r30, 0x01	; 1
+     72e:	87 e0       	ldi	r24, 0x07	; 7
+     730:	df 01       	movw	r26, r30
+     732:	1d 92       	st	X+, r1
+     734:	8a 95       	dec	r24
+     736:	e9 f7       	brne	.-6      	; 0x732 <_Z12FirstStartUpv+0x1e>
 	uint8_t index = 0;
 	char key;
 	
 	clearDisplay();
-     742:	0e 94 6b 03 	call	0x6d6	; 0x6d6 <_Z12clearDisplayv>
+     738:	0e 94 6b 03 	call	0x6d6	; 0x6d6 <_Z12clearDisplayv>
 
 	text_row1("Enter PIN:");
-     746:	88 e2       	ldi	r24, 0x28	; 40
-     748:	91 e0       	ldi	r25, 0x01	; 1
-     74a:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
+     73c:	88 e2       	ldi	r24, 0x28	; 40
+     73e:	91 e0       	ldi	r25, 0x01	; 1
+     740:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
 	
 }
 
 void FirstStartUp() {
 	char code[7] = {0};
 	uint8_t index = 0;
-     74e:	10 e0       	ldi	r17, 0x00	; 0
+     744:	10 e0       	ldi	r17, 0x00	; 0
 
 	text_row1("Enter PIN:");
 
 	while (1) {
 		
 		kb_on_timer1();
-     750:	0e 94 b7 02 	call	0x56e	; 0x56e <_Z12kb_on_timer1v>
+     746:	0e 94 b7 02 	call	0x56e	; 0x56e <_Z12kb_on_timer1v>
 
 		if (KB_CMD1 & 0x80) {
-     754:	80 91 01 02 	lds	r24, 0x0201	; 0x800201 <KB_CMD1>
-     758:	88 23       	and	r24, r24
-     75a:	d4 f7       	brge	.-12     	; 0x750 <_Z12FirstStartUpv+0x3c>
+     74a:	80 91 ff 01 	lds	r24, 0x01FF	; 0x8001ff <KB_CMD1>
+     74e:	88 23       	and	r24, r24
+     750:	d4 f7       	brge	.-12     	; 0x746 <_Z12FirstStartUpv+0x32>
 			
 			key = (char)(KB_CMD1 & 0x7F);
-     75c:	80 91 01 02 	lds	r24, 0x0201	; 0x800201 <KB_CMD1>
-     760:	8f 77       	andi	r24, 0x7F	; 127
+     752:	80 91 ff 01 	lds	r24, 0x01FF	; 0x8001ff <KB_CMD1>
+     756:	8f 77       	andi	r24, 0x7F	; 127
 			KB_CMD1 = 0;
-     762:	10 92 01 02 	sts	0x0201, r1	; 0x800201 <KB_CMD1>
+     758:	10 92 ff 01 	sts	0x01FF, r1	; 0x8001ff <KB_CMD1>
 
 			if (key >= '0' && key <= '9' && index < 6) {
-     766:	90 ed       	ldi	r25, 0xD0	; 208
-     768:	98 0f       	add	r25, r24
-     76a:	9a 30       	cpi	r25, 0x0A	; 10
-     76c:	c0 f4       	brcc	.+48     	; 0x79e <_Z12FirstStartUpv+0x8a>
-     76e:	16 30       	cpi	r17, 0x06	; 6
-     770:	b0 f4       	brcc	.+44     	; 0x79e <_Z12FirstStartUpv+0x8a>
+     75c:	90 ed       	ldi	r25, 0xD0	; 208
+     75e:	98 0f       	add	r25, r24
+     760:	9a 30       	cpi	r25, 0x0A	; 10
+     762:	c0 f4       	brcc	.+48     	; 0x794 <_Z12FirstStartUpv+0x80>
+     764:	16 30       	cpi	r17, 0x06	; 6
+     766:	b0 f4       	brcc	.+44     	; 0x794 <_Z12FirstStartUpv+0x80>
 				
 				code[index] = key;
-     772:	21 2f       	mov	r18, r17
-     774:	30 e0       	ldi	r19, 0x00	; 0
-     776:	e1 e0       	ldi	r30, 0x01	; 1
-     778:	f0 e0       	ldi	r31, 0x00	; 0
-     77a:	ec 0f       	add	r30, r28
-     77c:	fd 1f       	adc	r31, r29
-     77e:	e2 0f       	add	r30, r18
-     780:	f3 1f       	adc	r31, r19
-     782:	80 83       	st	Z, r24
+     768:	21 2f       	mov	r18, r17
+     76a:	30 e0       	ldi	r19, 0x00	; 0
+     76c:	e1 e0       	ldi	r30, 0x01	; 1
+     76e:	f0 e0       	ldi	r31, 0x00	; 0
+     770:	ec 0f       	add	r30, r28
+     772:	fd 1f       	adc	r31, r29
+     774:	e2 0f       	add	r30, r18
+     776:	f3 1f       	adc	r31, r19
+     778:	80 83       	st	Z, r24
 				code[index + 1] = '\0';
-     784:	e2 e0       	ldi	r30, 0x02	; 2
-     786:	f0 e0       	ldi	r31, 0x00	; 0
-     788:	ec 0f       	add	r30, r28
-     78a:	fd 1f       	adc	r31, r29
-     78c:	e2 0f       	add	r30, r18
-     78e:	f3 1f       	adc	r31, r19
-     790:	10 82       	st	Z, r1
+     77a:	e2 e0       	ldi	r30, 0x02	; 2
+     77c:	f0 e0       	ldi	r31, 0x00	; 0
+     77e:	ec 0f       	add	r30, r28
+     780:	fd 1f       	adc	r31, r29
+     782:	e2 0f       	add	r30, r18
+     784:	f3 1f       	adc	r31, r19
+     786:	10 82       	st	Z, r1
 				index++;
-     792:	1f 5f       	subi	r17, 0xFF	; 255
+     788:	1f 5f       	subi	r17, 0xFF	; 255
 				text_row2(code);
-     794:	ce 01       	movw	r24, r28
-     796:	01 96       	adiw	r24, 0x01	; 1
-     798:	0e 94 d5 01 	call	0x3aa	; 0x3aa <_Z9text_row2Pc>
-     79c:	d9 cf       	rjmp	.-78     	; 0x750 <_Z12FirstStartUpv+0x3c>
+     78a:	ce 01       	movw	r24, r28
+     78c:	01 96       	adiw	r24, 0x01	; 1
+     78e:	0e 94 d5 01 	call	0x3aa	; 0x3aa <_Z9text_row2Pc>
+     792:	d9 cf       	rjmp	.-78     	; 0x746 <_Z12FirstStartUpv+0x32>
 				
 				} else if (key == '*' && index > 0) {
-     79e:	8a 32       	cpi	r24, 0x2A	; 42
-     7a0:	79 f4       	brne	.+30     	; 0x7c0 <_Z12FirstStartUpv+0xac>
-     7a2:	11 23       	and	r17, r17
-     7a4:	a9 f2       	breq	.-86     	; 0x750 <_Z12FirstStartUpv+0x3c>
+     794:	8a 32       	cpi	r24, 0x2A	; 42
+     796:	79 f4       	brne	.+30     	; 0x7b6 <_Z12FirstStartUpv+0xa2>
+     798:	11 23       	and	r17, r17
+     79a:	a9 f2       	breq	.-86     	; 0x746 <_Z12FirstStartUpv+0x32>
 				
 				index--;
-     7a6:	11 50       	subi	r17, 0x01	; 1
+     79c:	11 50       	subi	r17, 0x01	; 1
 				code[index] = '\0';
-     7a8:	e1 e0       	ldi	r30, 0x01	; 1
-     7aa:	f0 e0       	ldi	r31, 0x00	; 0
-     7ac:	ec 0f       	add	r30, r28
-     7ae:	fd 1f       	adc	r31, r29
-     7b0:	e1 0f       	add	r30, r17
-     7b2:	f1 1d       	adc	r31, r1
-     7b4:	10 82       	st	Z, r1
+     79e:	e1 e0       	ldi	r30, 0x01	; 1
+     7a0:	f0 e0       	ldi	r31, 0x00	; 0
+     7a2:	ec 0f       	add	r30, r28
+     7a4:	fd 1f       	adc	r31, r29
+     7a6:	e1 0f       	add	r30, r17
+     7a8:	f1 1d       	adc	r31, r1
+     7aa:	10 82       	st	Z, r1
 				text_row2(code);
-     7b6:	ce 01       	movw	r24, r28
-     7b8:	01 96       	adiw	r24, 0x01	; 1
-     7ba:	0e 94 d5 01 	call	0x3aa	; 0x3aa <_Z9text_row2Pc>
-     7be:	c8 cf       	rjmp	.-112    	; 0x750 <_Z12FirstStartUpv+0x3c>
+     7ac:	ce 01       	movw	r24, r28
+     7ae:	01 96       	adiw	r24, 0x01	; 1
+     7b0:	0e 94 d5 01 	call	0x3aa	; 0x3aa <_Z9text_row2Pc>
+     7b4:	c8 cf       	rjmp	.-112    	; 0x746 <_Z12FirstStartUpv+0x32>
 				
 				} else if (key == 'D' && index == 6) {
-     7c0:	84 34       	cpi	r24, 0x44	; 68
-     7c2:	31 f6       	brne	.-116    	; 0x750 <_Z12FirstStartUpv+0x3c>
-     7c4:	16 30       	cpi	r17, 0x06	; 6
-     7c6:	21 f6       	brne	.-120    	; 0x750 <_Z12FirstStartUpv+0x3c>
+     7b6:	84 34       	cpi	r24, 0x44	; 68
+     7b8:	31 f6       	brne	.-116    	; 0x746 <_Z12FirstStartUpv+0x32>
+     7ba:	16 30       	cpi	r17, 0x06	; 6
+     7bc:	21 f6       	brne	.-120    	; 0x746 <_Z12FirstStartUpv+0x32>
 				
-				text_row1("Code saved!");
-     7c8:	83 e3       	ldi	r24, 0x33	; 51
-     7ca:	91 e0       	ldi	r25, 0x01	; 1
-     7cc:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
+				text_row1("Pin saved!");
+     7be:	83 e3       	ldi	r24, 0x33	; 51
+     7c0:	91 e0       	ldi	r25, 0x01	; 1
+     7c2:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
-     7d0:	bf ef       	ldi	r27, 0xFF	; 255
-     7d2:	ef eb       	ldi	r30, 0xBF	; 191
-     7d4:	f1 e2       	ldi	r31, 0x21	; 33
-     7d6:	b1 50       	subi	r27, 0x01	; 1
-     7d8:	e0 40       	sbci	r30, 0x00	; 0
-     7da:	f0 40       	sbci	r31, 0x00	; 0
-     7dc:	e1 f7       	brne	.-8      	; 0x7d6 <_Z12FirstStartUpv+0xc2>
-     7de:	00 c0       	rjmp	.+0      	; 0x7e0 <_Z12FirstStartUpv+0xcc>
-     7e0:	00 00       	nop
-     7e2:	8e 01       	movw	r16, r28
-     7e4:	0f 5f       	subi	r16, 0xFF	; 255
-     7e6:	1f 4f       	sbci	r17, 0xFF	; 255
-     7e8:	0f 2e       	mov	r0, r31
-     7ea:	f2 ee       	ldi	r31, 0xE2	; 226
-     7ec:	ef 2e       	mov	r14, r31
-     7ee:	f1 e0       	ldi	r31, 0x01	; 1
-     7f0:	ff 2e       	mov	r15, r31
-     7f2:	f0 2d       	mov	r31, r0
-     7f4:	6e 01       	movw	r12, r28
-     7f6:	28 e0       	ldi	r18, 0x08	; 8
-     7f8:	c2 0e       	add	r12, r18
-     7fa:	d1 1c       	adc	r13, r1
+     7c6:	bf ef       	ldi	r27, 0xFF	; 255
+     7c8:	2f eb       	ldi	r18, 0xBF	; 191
+     7ca:	81 e2       	ldi	r24, 0x21	; 33
+     7cc:	b1 50       	subi	r27, 0x01	; 1
+     7ce:	20 40       	sbci	r18, 0x00	; 0
+     7d0:	80 40       	sbci	r24, 0x00	; 0
+     7d2:	e1 f7       	brne	.-8      	; 0x7cc <_Z12FirstStartUpv+0xb8>
+     7d4:	00 c0       	rjmp	.+0      	; 0x7d6 <_Z12FirstStartUpv+0xc2>
+     7d6:	00 00       	nop
+     7d8:	fe 01       	movw	r30, r28
+     7da:	31 96       	adiw	r30, 0x01	; 1
+     7dc:	a0 ee       	ldi	r26, 0xE0	; 224
+     7de:	b1 e0       	ldi	r27, 0x01	; 1
+     7e0:	9e 01       	movw	r18, r28
+     7e2:	28 5f       	subi	r18, 0xF8	; 248
+     7e4:	3f 4f       	sbci	r19, 0xFF	; 255
 				_delay_ms(1000);
 				
 				for (int i = 0; i < 7; i++) {
 					pristupovyPin[i] = code[i];
-     7fc:	d8 01       	movw	r26, r16
-     7fe:	8d 91       	ld	r24, X+
-     800:	8d 01       	movw	r16, r26
-     802:	f7 01       	movw	r30, r14
-     804:	81 93       	st	Z+, r24
-     806:	7f 01       	movw	r14, r30
-					savePin(code);
-     808:	ce 01       	movw	r24, r28
-     80a:	01 96       	adiw	r24, 0x01	; 1
-     80c:	0e 94 74 03 	call	0x6e8	; 0x6e8 <_Z7savePinPKc>
-					EEPROM_write(FIRST_STARTUP, 0x00);
-     810:	60 e0       	ldi	r22, 0x00	; 0
-     812:	80 e0       	ldi	r24, 0x00	; 0
-     814:	90 e0       	ldi	r25, 0x00	; 0
-     816:	0e 94 5a 03 	call	0x6b4	; 0x6b4 <_Z12EEPROM_writejh>
+     7e6:	81 91       	ld	r24, Z+
+     7e8:	8d 93       	st	X+, r24
 				} else if (key == 'D' && index == 6) {
 				
-				text_row1("Code saved!");
+				text_row1("Pin saved!");
 				_delay_ms(1000);
 				
 				for (int i = 0; i < 7; i++) {
-     81a:	0c 15       	cp	r16, r12
-     81c:	1d 05       	cpc	r17, r13
-     81e:	71 f7       	brne	.-36     	; 0x7fc <_Z12FirstStartUpv+0xe8>
+     7ea:	e2 17       	cp	r30, r18
+     7ec:	f3 07       	cpc	r31, r19
+     7ee:	d9 f7       	brne	.-10     	; 0x7e6 <_Z12FirstStartUpv+0xd2>
+					pristupovyPin[i] = code[i];
+				}
+				
+				savePin(code);
+     7f0:	ce 01       	movw	r24, r28
+     7f2:	01 96       	adiw	r24, 0x01	; 1
+     7f4:	0e 94 74 03 	call	0x6e8	; 0x6e8 <_Z7savePinPKc>
+				EEPROM_write(FIRST_STARTUP, 0x00);
+     7f8:	60 e0       	ldi	r22, 0x00	; 0
+     7fa:	80 e0       	ldi	r24, 0x00	; 0
+     7fc:	90 e0       	ldi	r25, 0x00	; 0
+     7fe:	0e 94 5a 03 	call	0x6b4	; 0x6b4 <_Z12EEPROM_writejh>
 
 				break;
 			}
 		}
 	}
 }
-     820:	27 96       	adiw	r28, 0x07	; 7
-     822:	0f b6       	in	r0, 0x3f	; 63
-     824:	f8 94       	cli
-     826:	de bf       	out	0x3e, r29	; 62
-     828:	0f be       	out	0x3f, r0	; 63
-     82a:	cd bf       	out	0x3d, r28	; 61
-     82c:	df 91       	pop	r29
-     82e:	cf 91       	pop	r28
-     830:	1f 91       	pop	r17
-     832:	0f 91       	pop	r16
-     834:	ff 90       	pop	r15
-     836:	ef 90       	pop	r14
-     838:	df 90       	pop	r13
-     83a:	cf 90       	pop	r12
-     83c:	08 95       	ret
+     802:	27 96       	adiw	r28, 0x07	; 7
+     804:	0f b6       	in	r0, 0x3f	; 63
+     806:	f8 94       	cli
+     808:	de bf       	out	0x3e, r29	; 62
+     80a:	0f be       	out	0x3f, r0	; 63
+     80c:	cd bf       	out	0x3d, r28	; 61
+     80e:	df 91       	pop	r29
+     810:	cf 91       	pop	r28
+     812:	1f 91       	pop	r17
+     814:	08 95       	ret
 
-0000083e <_Z10ComparePinPKc>:
+00000816 <_Z10ComparePinPKc>:
 
 
 
 bool ComparePin(const char* zadanyPin) {
 
 	if (strcmp(zadanyPin, pristupovyPin) == 0) return true;
-     83e:	62 ee       	ldi	r22, 0xE2	; 226
-     840:	71 e0       	ldi	r23, 0x01	; 1
-     842:	0e 94 72 08 	call	0x10e4	; 0x10e4 <strcmp>
-     846:	21 e0       	ldi	r18, 0x01	; 1
-     848:	89 2b       	or	r24, r25
-     84a:	09 f0       	breq	.+2      	; 0x84e <_Z10ComparePinPKc+0x10>
-     84c:	20 e0       	ldi	r18, 0x00	; 0
+     816:	60 ee       	ldi	r22, 0xE0	; 224
+     818:	71 e0       	ldi	r23, 0x01	; 1
+     81a:	0e 94 94 08 	call	0x1128	; 0x1128 <strcmp>
+     81e:	21 e0       	ldi	r18, 0x01	; 1
+     820:	89 2b       	or	r24, r25
+     822:	09 f0       	breq	.+2      	; 0x826 <_Z10ComparePinPKc+0x10>
+     824:	20 e0       	ldi	r18, 0x00	; 0
 
 	return false;
 		
 }
-     84e:	82 2f       	mov	r24, r18
-     850:	08 95       	ret
+     826:	82 2f       	mov	r24, r18
+     828:	08 95       	ret
 
-00000852 <_Z16SetRegistersInitv>:
+0000082a <_Z16SetRegistersInitv>:
 
 void SetRegistersInit(){
 
 	UCSR0A = 0;
-     852:	10 92 c0 00 	sts	0x00C0, r1	; 0x8000c0 <__TEXT_REGION_LENGTH__+0x7e00c0>
+     82a:	10 92 c0 00 	sts	0x00C0, r1	; 0x8000c0 <__DATA_REGION_ORIGIN__+0x60>
 	UCSR0B |= (1<<RXCIE0)|(1<<RXEN0)|(1<<TXEN0); //povoleni p?eru?en? od p??jmu
-     856:	e1 ec       	ldi	r30, 0xC1	; 193
-     858:	f0 e0       	ldi	r31, 0x00	; 0
-     85a:	80 81       	ld	r24, Z
-     85c:	88 69       	ori	r24, 0x98	; 152
-     85e:	80 83       	st	Z, r24
+     82e:	e1 ec       	ldi	r30, 0xC1	; 193
+     830:	f0 e0       	ldi	r31, 0x00	; 0
+     832:	80 81       	ld	r24, Z
+     834:	88 69       	ori	r24, 0x98	; 152
+     836:	80 83       	st	Z, r24
 	UCSR0C |= (1<<UPM01)|(1<<UCSZ01)|(1<<UCSZ00);
-     860:	e2 ec       	ldi	r30, 0xC2	; 194
-     862:	f0 e0       	ldi	r31, 0x00	; 0
-     864:	80 81       	ld	r24, Z
-     866:	86 62       	ori	r24, 0x26	; 38
-     868:	80 83       	st	Z, r24
+     838:	e2 ec       	ldi	r30, 0xC2	; 194
+     83a:	f0 e0       	ldi	r31, 0x00	; 0
+     83c:	80 81       	ld	r24, Z
+     83e:	86 62       	ori	r24, 0x26	; 38
+     840:	80 83       	st	Z, r24
 	UBRR0 = 71; //9600
-     86a:	87 e4       	ldi	r24, 0x47	; 71
-     86c:	90 e0       	ldi	r25, 0x00	; 0
-     86e:	90 93 c5 00 	sts	0x00C5, r25	; 0x8000c5 <__TEXT_REGION_LENGTH__+0x7e00c5>
-     872:	80 93 c4 00 	sts	0x00C4, r24	; 0x8000c4 <__TEXT_REGION_LENGTH__+0x7e00c4>
+     842:	87 e4       	ldi	r24, 0x47	; 71
+     844:	90 e0       	ldi	r25, 0x00	; 0
+     846:	90 93 c5 00 	sts	0x00C5, r25	; 0x8000c5 <__DATA_REGION_ORIGIN__+0x65>
+     84a:	80 93 c4 00 	sts	0x00C4, r24	; 0x8000c4 <__DATA_REGION_ORIGIN__+0x64>
 
 	DDRA = 0b11111111;
-     876:	8f ef       	ldi	r24, 0xFF	; 255
-     878:	81 b9       	out	0x01, r24	; 1
+     84e:	8f ef       	ldi	r24, 0xFF	; 255
+     850:	81 b9       	out	0x01, r24	; 1
 	PORTA= 0b10000000;
-     87a:	90 e8       	ldi	r25, 0x80	; 128
-     87c:	92 b9       	out	0x02, r25	; 2
+     852:	90 e8       	ldi	r25, 0x80	; 128
+     854:	92 b9       	out	0x02, r25	; 2
 
 	DDRB = 255;
-     87e:	84 b9       	out	0x04, r24	; 4
+     856:	84 b9       	out	0x04, r24	; 4
 	PORTB = 255;
-     880:	85 b9       	out	0x05, r24	; 5
+     858:	85 b9       	out	0x05, r24	; 5
 	
 	kb_init();
-     882:	0e 94 3b 02 	call	0x476	; 0x476 <_Z7kb_initv>
+     85a:	0e 94 3b 02 	call	0x476	; 0x476 <_Z7kb_initv>
 	i2c_init();
-     886:	0e 94 5d 00 	call	0xba	; 0xba <_Z8i2c_initv>
+     85e:	0e 94 5d 00 	call	0xba	; 0xba <_Z8i2c_initv>
 	set_bit(prt(pwr));
-     88a:	10 9a       	sbi	0x02, 0	; 2
+     862:	10 9a       	sbi	0x02, 0	; 2
 
-	TCCR1B = (1 << WGM12);                // CTC mód
-     88c:	e1 e8       	ldi	r30, 0x81	; 129
-     88e:	f0 e0       	ldi	r31, 0x00	; 0
-     890:	88 e0       	ldi	r24, 0x08	; 8
-     892:	80 83       	st	Z, r24
-	TCCR1B |= (1 << CS12) | (1 << CS10);  // Pøeddìlièka 1024
-     894:	80 81       	ld	r24, Z
-     896:	85 60       	ori	r24, 0x05	; 5
-     898:	80 83       	st	Z, r24
+	TCCR1B = (1 << WGM12);                // CTC m?d
+     864:	e1 e8       	ldi	r30, 0x81	; 129
+     866:	f0 e0       	ldi	r31, 0x00	; 0
+     868:	88 e0       	ldi	r24, 0x08	; 8
+     86a:	80 83       	st	Z, r24
+	TCCR1B |= (1 << CS12) | (1 << CS10);  // P?edd?li?ka 1024
+     86c:	80 81       	ld	r24, Z
+     86e:	85 60       	ori	r24, 0x05	; 5
+     870:	80 83       	st	Z, r24
 	OCR1A = 108;                          // Hodnota pro 10 ms interval
-     89a:	8c e6       	ldi	r24, 0x6C	; 108
-     89c:	90 e0       	ldi	r25, 0x00	; 0
-     89e:	90 93 89 00 	sts	0x0089, r25	; 0x800089 <__TEXT_REGION_LENGTH__+0x7e0089>
-     8a2:	80 93 88 00 	sts	0x0088, r24	; 0x800088 <__TEXT_REGION_LENGTH__+0x7e0088>
-	TIMSK1 = (1 << OCIE1A);               // Povolení pøerušení na compare match
-     8a6:	82 e0       	ldi	r24, 0x02	; 2
-     8a8:	80 93 6f 00 	sts	0x006F, r24	; 0x80006f <__TEXT_REGION_LENGTH__+0x7e006f>
+     872:	8c e6       	ldi	r24, 0x6C	; 108
+     874:	90 e0       	ldi	r25, 0x00	; 0
+     876:	90 93 89 00 	sts	0x0089, r25	; 0x800089 <__DATA_REGION_ORIGIN__+0x29>
+     87a:	80 93 88 00 	sts	0x0088, r24	; 0x800088 <__DATA_REGION_ORIGIN__+0x28>
+	TIMSK1 = (1 << OCIE1A);               // Povolen? p?eru?en? na compare match
+     87e:	82 e0       	ldi	r24, 0x02	; 2
+     880:	80 93 6f 00 	sts	0x006F, r24	; 0x80006f <__DATA_REGION_ORIGIN__+0xf>
 
 	sei();
-     8ac:	78 94       	sei
+     884:	78 94       	sei
 	
 	if (i2c_open_wr(HWA,0))
-     8ae:	60 e0       	ldi	r22, 0x00	; 0
-     8b0:	88 e7       	ldi	r24, 0x78	; 120
-     8b2:	0e 94 c8 00 	call	0x190	; 0x190 <_Z11i2c_open_wrhh>
-     8b6:	88 23       	and	r24, r24
-     8b8:	81 f0       	breq	.+32     	; 0x8da <_Z16SetRegistersInitv+0x88>
+     886:	60 e0       	ldi	r22, 0x00	; 0
+     888:	88 e7       	ldi	r24, 0x78	; 120
+     88a:	0e 94 c8 00 	call	0x190	; 0x190 <_Z11i2c_open_wrhh>
+     88e:	88 23       	and	r24, r24
+     890:	81 f0       	breq	.+32     	; 0x8b2 <_Z16SetRegistersInitv+0x88>
 	{
 		lcd_clr();
-     8ba:	0e 94 e3 00 	call	0x1c6	; 0x1c6 <_Z7lcd_clrv>
+     892:	0e 94 e3 00 	call	0x1c6	; 0x1c6 <_Z7lcd_clrv>
 		lcd_on();
-     8be:	0e 94 f6 00 	call	0x1ec	; 0x1ec <_Z6lcd_onv>
+     896:	0e 94 f6 00 	call	0x1ec	; 0x1ec <_Z6lcd_onv>
 		cur_on();
-     8c2:	0e 94 1b 01 	call	0x236	; 0x236 <_Z6cur_onv>
+     89a:	0e 94 1b 01 	call	0x236	; 0x236 <_Z6cur_onv>
 		cur_blink_off();
-     8c6:	0e 94 2e 01 	call	0x25c	; 0x25c <_Z13cur_blink_offv>
-     8ca:	8c ec       	ldi	r24, 0xCC	; 204
-     8cc:	9a e0       	ldi	r25, 0x0A	; 10
-     8ce:	01 97       	sbiw	r24, 0x01	; 1
-     8d0:	f1 f7       	brne	.-4      	; 0x8ce <_Z16SetRegistersInitv+0x7c>
-     8d2:	00 c0       	rjmp	.+0      	; 0x8d4 <_Z16SetRegistersInitv+0x82>
-     8d4:	00 00       	nop
+     89e:	0e 94 2e 01 	call	0x25c	; 0x25c <_Z13cur_blink_offv>
+     8a2:	8c ec       	ldi	r24, 0xCC	; 204
+     8a4:	9a e0       	ldi	r25, 0x0A	; 10
+     8a6:	01 97       	sbiw	r24, 0x01	; 1
+     8a8:	f1 f7       	brne	.-4      	; 0x8a6 <_Z16SetRegistersInitv+0x7c>
+     8aa:	00 c0       	rjmp	.+0      	; 0x8ac <_Z16SetRegistersInitv+0x82>
+     8ac:	00 00       	nop
 		_delay_ms(1);
 		i2c_stop();
-     8d6:	0e 94 7d 00 	call	0xfa	; 0xfa <_Z8i2c_stopv>
-     8da:	08 95       	ret
+     8ae:	0e 94 7d 00 	call	0xfa	; 0xfa <_Z8i2c_stopv>
+     8b2:	08 95       	ret
 
-000008dc <_Z8OpenLockv>:
+000008b4 <_Z8OpenLockv>:
 
 }
 
 void OpenLock(){
 	
 	clearDisplay();
-     8dc:	0e 94 6b 03 	call	0x6d6	; 0x6d6 <_Z12clearDisplayv>
+     8b4:	0e 94 6b 03 	call	0x6d6	; 0x6d6 <_Z12clearDisplayv>
 	PORTB = 0;
-     8e0:	15 b8       	out	0x05, r1	; 5
+     8b8:	15 b8       	out	0x05, r1	; 5
 	text_row1("Access allowed!");
-     8e2:	8f e3       	ldi	r24, 0x3F	; 63
+     8ba:	8e e3       	ldi	r24, 0x3E	; 62
+     8bc:	91 e0       	ldi	r25, 0x01	; 1
+     8be:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
+     8c2:	2f ef       	ldi	r18, 0xFF	; 255
+     8c4:	8f eb       	ldi	r24, 0xBF	; 191
+     8c6:	91 e2       	ldi	r25, 0x21	; 33
+     8c8:	21 50       	subi	r18, 0x01	; 1
+     8ca:	80 40       	sbci	r24, 0x00	; 0
+     8cc:	90 40       	sbci	r25, 0x00	; 0
+     8ce:	e1 f7       	brne	.-8      	; 0x8c8 <_Z8OpenLockv+0x14>
+     8d0:	00 c0       	rjmp	.+0      	; 0x8d2 <_Z8OpenLockv+0x1e>
+     8d2:	00 00       	nop
+	_delay_ms(1000);
+	PORTB = 255;
+     8d4:	8f ef       	ldi	r24, 0xFF	; 255
+     8d6:	85 b9       	out	0x05, r24	; 5
+	showMenuText();
+     8d8:	0e 94 62 03 	call	0x6c4	; 0x6c4 <_Z12showMenuTextv>
+     8dc:	08 95       	ret
+
+000008de <_Z12AccessDeniedv>:
+
+}
+
+void AccessDenied(){
+
+	clearDisplay();
+     8de:	0e 94 6b 03 	call	0x6d6	; 0x6d6 <_Z12clearDisplayv>
+	text_row1("Access denied!");
+     8e2:	8e e4       	ldi	r24, 0x4E	; 78
      8e4:	91 e0       	ldi	r25, 0x01	; 1
      8e6:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
      8ea:	2f ef       	ldi	r18, 0xFF	; 255
@@ -1264,1536 +1274,1580 @@ void OpenLock(){
      8f0:	21 50       	subi	r18, 0x01	; 1
      8f2:	80 40       	sbci	r24, 0x00	; 0
      8f4:	90 40       	sbci	r25, 0x00	; 0
-     8f6:	e1 f7       	brne	.-8      	; 0x8f0 <_Z8OpenLockv+0x14>
-     8f8:	00 c0       	rjmp	.+0      	; 0x8fa <_Z8OpenLockv+0x1e>
+     8f6:	e1 f7       	brne	.-8      	; 0x8f0 <_Z12AccessDeniedv+0x12>
+     8f8:	00 c0       	rjmp	.+0      	; 0x8fa <_Z12AccessDeniedv+0x1c>
      8fa:	00 00       	nop
 	_delay_ms(1000);
-	PORTB = 255;
-     8fc:	8f ef       	ldi	r24, 0xFF	; 255
-     8fe:	85 b9       	out	0x05, r24	; 5
 	showMenuText();
-     900:	0e 94 62 03 	call	0x6c4	; 0x6c4 <_Z12showMenuTextv>
-     904:	08 95       	ret
+     8fc:	0e 94 62 03 	call	0x6c4	; 0x6c4 <_Z12showMenuTextv>
+     900:	08 95       	ret
 
-00000906 <_Z12AccessDeniedv>:
-
-}
-
-void AccessDenied(){
-
-	clearDisplay();
-     906:	0e 94 6b 03 	call	0x6d6	; 0x6d6 <_Z12clearDisplayv>
-	text_row1("Access denied!");
-     90a:	8f e4       	ldi	r24, 0x4F	; 79
-     90c:	91 e0       	ldi	r25, 0x01	; 1
-     90e:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
-     912:	2f ef       	ldi	r18, 0xFF	; 255
-     914:	8f eb       	ldi	r24, 0xBF	; 191
-     916:	91 e2       	ldi	r25, 0x21	; 33
-     918:	21 50       	subi	r18, 0x01	; 1
-     91a:	80 40       	sbci	r24, 0x00	; 0
-     91c:	90 40       	sbci	r25, 0x00	; 0
-     91e:	e1 f7       	brne	.-8      	; 0x918 <_Z12AccessDeniedv+0x12>
-     920:	00 c0       	rjmp	.+0      	; 0x922 <_Z12AccessDeniedv+0x1c>
-     922:	00 00       	nop
-	_delay_ms(1000);
-	showMenuText();
-     924:	0e 94 62 03 	call	0x6c4	; 0x6c4 <_Z12showMenuTextv>
-     928:	08 95       	ret
-
-0000092a <_Z12findFreeSlotv>:
+00000902 <_Z12findFreeSlotv>:
 }
 
 
 int findFreeSlot() {
-     92a:	cf 93       	push	r28
-     92c:	df 93       	push	r29
+     902:	cf 93       	push	r28
+     904:	df 93       	push	r29
 	
 	for (int i = 0; i < MAX_CHIPS; i++) {
-     92e:	c0 e0       	ldi	r28, 0x00	; 0
-     930:	d0 e0       	ldi	r29, 0x00	; 0
+     906:	c0 e0       	ldi	r28, 0x00	; 0
+     908:	d0 e0       	ldi	r29, 0x00	; 0
 		
-		if (EEPROM_read(STATUS_START_ADDR + i) == 0xFF) { // 255 je volná (0xFF), 0 je obsazená (0x00)
-     932:	ce 01       	movw	r24, r28
-     934:	0a 96       	adiw	r24, 0x0a	; 10
-     936:	0e 94 53 03 	call	0x6a6	; 0x6a6 <_Z11EEPROM_readj>
-     93a:	8f 3f       	cpi	r24, 0xFF	; 255
-     93c:	39 f0       	breq	.+14     	; 0x94c <_Z12findFreeSlotv+0x22>
+		if (EEPROM_read(STATUS_START_ADDR + i) == 0xFF) { // 255 je voln? (0xFF), 0 je obsazen? (0x00)
+     90a:	ce 01       	movw	r24, r28
+     90c:	0a 96       	adiw	r24, 0x0a	; 10
+     90e:	0e 94 53 03 	call	0x6a6	; 0x6a6 <_Z11EEPROM_readj>
+     912:	8f 3f       	cpi	r24, 0xFF	; 255
+     914:	39 f0       	breq	.+14     	; 0x924 <_Z12findFreeSlotv+0x22>
 }
 
 
 int findFreeSlot() {
 	
 	for (int i = 0; i < MAX_CHIPS; i++) {
-     93e:	21 96       	adiw	r28, 0x01	; 1
-     940:	ca 30       	cpi	r28, 0x0A	; 10
-     942:	d1 05       	cpc	r29, r1
-     944:	b1 f7       	brne	.-20     	; 0x932 <_Z12findFreeSlotv+0x8>
+     916:	21 96       	adiw	r28, 0x01	; 1
+     918:	ca 30       	cpi	r28, 0x0A	; 10
+     91a:	d1 05       	cpc	r29, r1
+     91c:	b1 f7       	brne	.-20     	; 0x90a <_Z12findFreeSlotv+0x8>
 			return i;
 			
 		}
 	}
 	
-	return -1; // Když není žádné místo volné
-     946:	8f ef       	ldi	r24, 0xFF	; 255
-     948:	9f ef       	ldi	r25, 0xFF	; 255
-     94a:	02 c0       	rjmp	.+4      	; 0x950 <_Z12findFreeSlotv+0x26>
-     94c:	8c 2f       	mov	r24, r28
-     94e:	9d 2f       	mov	r25, r29
+	return -1; // Kdy? nen? ??dn? m?sto voln?
+     91e:	8f ef       	ldi	r24, 0xFF	; 255
+     920:	9f ef       	ldi	r25, 0xFF	; 255
+     922:	02 c0       	rjmp	.+4      	; 0x928 <_Z12findFreeSlotv+0x26>
+     924:	8c 2f       	mov	r24, r28
+     926:	9d 2f       	mov	r25, r29
 	
 }
-     950:	df 91       	pop	r29
-     952:	cf 91       	pop	r28
-     954:	08 95       	ret
+     928:	df 91       	pop	r29
+     92a:	cf 91       	pop	r28
+     92c:	08 95       	ret
 
-00000956 <_Z8saveChipPci>:
+0000092e <_Z8saveChipPci>:
 
 void saveChip(char chip[16], int slot) {
-     956:	cf 92       	push	r12
-     958:	df 92       	push	r13
-     95a:	ef 92       	push	r14
-     95c:	ff 92       	push	r15
-     95e:	0f 93       	push	r16
-     960:	1f 93       	push	r17
-     962:	cf 93       	push	r28
-     964:	df 93       	push	r29
-     966:	c8 2e       	mov	r12, r24
-     968:	d9 2e       	mov	r13, r25
-     96a:	eb 01       	movw	r28, r22
+     92e:	cf 92       	push	r12
+     930:	df 92       	push	r13
+     932:	ef 92       	push	r14
+     934:	ff 92       	push	r15
+     936:	0f 93       	push	r16
+     938:	1f 93       	push	r17
+     93a:	cf 93       	push	r28
+     93c:	df 93       	push	r29
+     93e:	c8 2e       	mov	r12, r24
+     940:	d9 2e       	mov	r13, r25
+     942:	eb 01       	movw	r28, r22
 
-	EEPROM_write(STATUS_START_ADDR + slot, 0x00);
-     96c:	60 e0       	ldi	r22, 0x00	; 0
-     96e:	ce 01       	movw	r24, r28
-     970:	0a 96       	adiw	r24, 0x0a	; 10
-     972:	0e 94 5a 03 	call	0x6b4	; 0x6b4 <_Z12EEPROM_writejh>
-	text_row2(debugText);
-	_delay_ms(1000);
-	*/
-	
+	EEPROM_write(STATUS_START_ADDR + slot, 0x00);	
+     944:	60 e0       	ldi	r22, 0x00	; 0
+     946:	ce 01       	movw	r24, r28
+     948:	0a 96       	adiw	r24, 0x0a	; 10
+     94a:	0e 94 5a 03 	call	0x6b4	; 0x6b4 <_Z12EEPROM_writejh>
 	
 	int baseAddress = DATA_START_ADDR + slot * CHIP_LENGTH;
-     976:	7e 01       	movw	r14, r28
-     978:	ee 0c       	add	r14, r14
-     97a:	ff 1c       	adc	r15, r15
-     97c:	ee 0c       	add	r14, r14
-     97e:	ff 1c       	adc	r15, r15
-     980:	ee 0c       	add	r14, r14
-     982:	ff 1c       	adc	r15, r15
-     984:	ee 0c       	add	r14, r14
-     986:	ff 1c       	adc	r15, r15
-     988:	0c 2d       	mov	r16, r12
-     98a:	1d 2d       	mov	r17, r13
-     98c:	e7 01       	movw	r28, r14
-     98e:	64 96       	adiw	r28, 0x14	; 20
-     990:	24 e2       	ldi	r18, 0x24	; 36
-     992:	e2 0e       	add	r14, r18
-     994:	f1 1c       	adc	r15, r1
+     94e:	7e 01       	movw	r14, r28
+     950:	ee 0c       	add	r14, r14
+     952:	ff 1c       	adc	r15, r15
+     954:	ee 0c       	add	r14, r14
+     956:	ff 1c       	adc	r15, r15
+     958:	ee 0c       	add	r14, r14
+     95a:	ff 1c       	adc	r15, r15
+     95c:	ee 0c       	add	r14, r14
+     95e:	ff 1c       	adc	r15, r15
+     960:	0c 2d       	mov	r16, r12
+     962:	1d 2d       	mov	r17, r13
+     964:	e7 01       	movw	r28, r14
+     966:	64 96       	adiw	r28, 0x14	; 20
+     968:	24 e2       	ldi	r18, 0x24	; 36
+     96a:	e2 0e       	add	r14, r18
+     96c:	f1 1c       	adc	r15, r1
 	
 	for (int i = 0; i < CHIP_LENGTH; i++) {
 		EEPROM_write(baseAddress + i, chip[i]);
-     996:	f8 01       	movw	r30, r16
-     998:	61 91       	ld	r22, Z+
-     99a:	8f 01       	movw	r16, r30
-     99c:	ce 01       	movw	r24, r28
-     99e:	0e 94 5a 03 	call	0x6b4	; 0x6b4 <_Z12EEPROM_writejh>
-     9a2:	21 96       	adiw	r28, 0x01	; 1
-	*/
-	
+     96e:	f8 01       	movw	r30, r16
+     970:	61 91       	ld	r22, Z+
+     972:	8f 01       	movw	r16, r30
+     974:	ce 01       	movw	r24, r28
+     976:	0e 94 5a 03 	call	0x6b4	; 0x6b4 <_Z12EEPROM_writejh>
+     97a:	21 96       	adiw	r28, 0x01	; 1
+
+	EEPROM_write(STATUS_START_ADDR + slot, 0x00);	
 	
 	int baseAddress = DATA_START_ADDR + slot * CHIP_LENGTH;
 	
 	for (int i = 0; i < CHIP_LENGTH; i++) {
-     9a4:	ce 15       	cp	r28, r14
-     9a6:	df 05       	cpc	r29, r15
-     9a8:	b1 f7       	brne	.-20     	; 0x996 <_Z8saveChipPci+0x40>
+     97c:	ce 15       	cp	r28, r14
+     97e:	df 05       	cpc	r29, r15
+     980:	b1 f7       	brne	.-20     	; 0x96e <_Z8saveChipPci+0x40>
 		EEPROM_write(baseAddress + i, chip[i]);
 	
 	}
 	
 	
 	clearDisplay();
-     9aa:	0e 94 6b 03 	call	0x6d6	; 0x6d6 <_Z12clearDisplayv>
+     982:	0e 94 6b 03 	call	0x6d6	; 0x6d6 <_Z12clearDisplayv>
 	
 	text_row2(chip);
-     9ae:	8c 2d       	mov	r24, r12
-     9b0:	9d 2d       	mov	r25, r13
-     9b2:	0e 94 d5 01 	call	0x3aa	; 0x3aa <_Z9text_row2Pc>
-     9b6:	ff ef       	ldi	r31, 0xFF	; 255
-     9b8:	2f ed       	ldi	r18, 0xDF	; 223
-     9ba:	80 e1       	ldi	r24, 0x10	; 16
-     9bc:	f1 50       	subi	r31, 0x01	; 1
-     9be:	20 40       	sbci	r18, 0x00	; 0
-     9c0:	80 40       	sbci	r24, 0x00	; 0
-     9c2:	e1 f7       	brne	.-8      	; 0x9bc <_Z8saveChipPci+0x66>
-     9c4:	00 c0       	rjmp	.+0      	; 0x9c6 <_Z8saveChipPci+0x70>
-     9c6:	00 00       	nop
+     986:	8c 2d       	mov	r24, r12
+     988:	9d 2d       	mov	r25, r13
+     98a:	0e 94 d5 01 	call	0x3aa	; 0x3aa <_Z9text_row2Pc>
+     98e:	ff ef       	ldi	r31, 0xFF	; 255
+     990:	2f ed       	ldi	r18, 0xDF	; 223
+     992:	80 e1       	ldi	r24, 0x10	; 16
+     994:	f1 50       	subi	r31, 0x01	; 1
+     996:	20 40       	sbci	r18, 0x00	; 0
+     998:	80 40       	sbci	r24, 0x00	; 0
+     99a:	e1 f7       	brne	.-8      	; 0x994 <_Z8saveChipPci+0x66>
+     99c:	00 c0       	rjmp	.+0      	; 0x99e <_Z8saveChipPci+0x70>
+     99e:	00 00       	nop
 	_delay_ms(500);
 
 }
-     9c8:	df 91       	pop	r29
-     9ca:	cf 91       	pop	r28
-     9cc:	1f 91       	pop	r17
-     9ce:	0f 91       	pop	r16
-     9d0:	ff 90       	pop	r15
-     9d2:	ef 90       	pop	r14
-     9d4:	df 90       	pop	r13
-     9d6:	cf 90       	pop	r12
-     9d8:	08 95       	ret
+     9a0:	df 91       	pop	r29
+     9a2:	cf 91       	pop	r28
+     9a4:	1f 91       	pop	r17
+     9a6:	0f 91       	pop	r16
+     9a8:	ff 90       	pop	r15
+     9aa:	ef 90       	pop	r14
+     9ac:	df 90       	pop	r13
+     9ae:	cf 90       	pop	r12
+     9b0:	08 95       	ret
 
-000009da <_Z8readChipiPc>:
+000009b2 <_Z8readChipiPc>:
 
 int readChip(int slot, char buffer[16]) {
-     9da:	cf 92       	push	r12
-     9dc:	df 92       	push	r13
-     9de:	ef 92       	push	r14
-     9e0:	ff 92       	push	r15
-     9e2:	0f 93       	push	r16
-     9e4:	1f 93       	push	r17
-     9e6:	cf 93       	push	r28
-     9e8:	df 93       	push	r29
+     9b2:	cf 92       	push	r12
+     9b4:	df 92       	push	r13
+     9b6:	ef 92       	push	r14
+     9b8:	ff 92       	push	r15
+     9ba:	0f 93       	push	r16
+     9bc:	1f 93       	push	r17
+     9be:	cf 93       	push	r28
+     9c0:	df 93       	push	r29
 	
 	if (slot < 0 || slot >= MAX_CHIPS) {
-     9ea:	8a 30       	cpi	r24, 0x0A	; 10
-     9ec:	91 05       	cpc	r25, r1
-     9ee:	08 f5       	brcc	.+66     	; 0xa32 <_Z8readChipiPc+0x58>
-     9f0:	7b 01       	movw	r14, r22
-     9f2:	8c 01       	movw	r16, r24
+     9c2:	8a 30       	cpi	r24, 0x0A	; 10
+     9c4:	91 05       	cpc	r25, r1
+     9c6:	08 f5       	brcc	.+66     	; 0xa0a <_Z8readChipiPc+0x58>
+     9c8:	7b 01       	movw	r14, r22
+     9ca:	8c 01       	movw	r16, r24
 		
 		return 2; // Mimo hranici
 		
 	}
 
 	if (EEPROM_read(STATUS_START_ADDR + slot) == 0xFF) {
-     9f4:	0a 96       	adiw	r24, 0x0a	; 10
-     9f6:	0e 94 53 03 	call	0x6a6	; 0x6a6 <_Z11EEPROM_readj>
-     9fa:	8f 3f       	cpi	r24, 0xFF	; 255
-     9fc:	e9 f0       	breq	.+58     	; 0xa38 <_Z8readChipiPc+0x5e>
+     9cc:	0a 96       	adiw	r24, 0x0a	; 10
+     9ce:	0e 94 53 03 	call	0x6a6	; 0x6a6 <_Z11EEPROM_readj>
+     9d2:	8f 3f       	cpi	r24, 0xFF	; 255
+     9d4:	e9 f0       	breq	.+58     	; 0xa10 <_Z8readChipiPc+0x5e>
 		
-		return 1; // Na slotu není uložen chip
+		return 1; // Na slotu nen? ulo?en chip
 		
 	}
 
 	int baseAddress = DATA_START_ADDR + slot * CHIP_LENGTH;
-     9fe:	02 95       	swap	r16
-     a00:	12 95       	swap	r17
-     a02:	10 7f       	andi	r17, 0xF0	; 240
-     a04:	10 27       	eor	r17, r16
-     a06:	00 7f       	andi	r16, 0xF0	; 240
-     a08:	10 27       	eor	r17, r16
-     a0a:	e8 01       	movw	r28, r16
-     a0c:	64 96       	adiw	r28, 0x14	; 20
-     a0e:	67 01       	movw	r12, r14
-     a10:	0c 5d       	subi	r16, 0xDC	; 220
-     a12:	1f 4f       	sbci	r17, 0xFF	; 255
+     9d6:	02 95       	swap	r16
+     9d8:	12 95       	swap	r17
+     9da:	10 7f       	andi	r17, 0xF0	; 240
+     9dc:	10 27       	eor	r17, r16
+     9de:	00 7f       	andi	r16, 0xF0	; 240
+     9e0:	10 27       	eor	r17, r16
+     9e2:	e8 01       	movw	r28, r16
+     9e4:	64 96       	adiw	r28, 0x14	; 20
+     9e6:	67 01       	movw	r12, r14
+     9e8:	0c 5d       	subi	r16, 0xDC	; 220
+     9ea:	1f 4f       	sbci	r17, 0xFF	; 255
 	
 	for (int i = 0; i < CHIP_LENGTH; i++) {
 		
 		buffer[i] = EEPROM_read(baseAddress + i);
-     a14:	ce 01       	movw	r24, r28
-     a16:	0e 94 53 03 	call	0x6a6	; 0x6a6 <_Z11EEPROM_readj>
-     a1a:	f6 01       	movw	r30, r12
-     a1c:	81 93       	st	Z+, r24
-     a1e:	6f 01       	movw	r12, r30
-     a20:	21 96       	adiw	r28, 0x01	; 1
+     9ec:	ce 01       	movw	r24, r28
+     9ee:	0e 94 53 03 	call	0x6a6	; 0x6a6 <_Z11EEPROM_readj>
+     9f2:	f6 01       	movw	r30, r12
+     9f4:	81 93       	st	Z+, r24
+     9f6:	6f 01       	movw	r12, r30
+     9f8:	21 96       	adiw	r28, 0x01	; 1
 		
 	}
 
 	int baseAddress = DATA_START_ADDR + slot * CHIP_LENGTH;
 	
 	for (int i = 0; i < CHIP_LENGTH; i++) {
-     a22:	c0 17       	cp	r28, r16
-     a24:	d1 07       	cpc	r29, r17
-     a26:	b1 f7       	brne	.-20     	; 0xa14 <_Z8readChipiPc+0x3a>
+     9fa:	c0 17       	cp	r28, r16
+     9fc:	d1 07       	cpc	r29, r17
+     9fe:	b1 f7       	brne	.-20     	; 0x9ec <_Z8readChipiPc+0x3a>
 		
 		buffer[i] = EEPROM_read(baseAddress + i);
 		
 	}
 
 	buffer[CHIP_LENGTH - 1] = '\0';
-     a28:	f7 01       	movw	r30, r14
-     a2a:	17 86       	std	Z+15, r1	; 0x0f
+     a00:	f7 01       	movw	r30, r14
+     a02:	17 86       	std	Z+15, r1	; 0x0f
 
-	return 0; // Všechno v poøádku
-     a2c:	80 e0       	ldi	r24, 0x00	; 0
-     a2e:	90 e0       	ldi	r25, 0x00	; 0
-     a30:	05 c0       	rjmp	.+10     	; 0xa3c <_Z8readChipiPc+0x62>
+	return 0; // V?echno v po??dku
+     a04:	80 e0       	ldi	r24, 0x00	; 0
+     a06:	90 e0       	ldi	r25, 0x00	; 0
+     a08:	05 c0       	rjmp	.+10     	; 0xa14 <_Z8readChipiPc+0x62>
 
 int readChip(int slot, char buffer[16]) {
 	
 	if (slot < 0 || slot >= MAX_CHIPS) {
 		
 		return 2; // Mimo hranici
-     a32:	82 e0       	ldi	r24, 0x02	; 2
-     a34:	90 e0       	ldi	r25, 0x00	; 0
-     a36:	02 c0       	rjmp	.+4      	; 0xa3c <_Z8readChipiPc+0x62>
+     a0a:	82 e0       	ldi	r24, 0x02	; 2
+     a0c:	90 e0       	ldi	r25, 0x00	; 0
+     a0e:	02 c0       	rjmp	.+4      	; 0xa14 <_Z8readChipiPc+0x62>
 		
 	}
 
 	if (EEPROM_read(STATUS_START_ADDR + slot) == 0xFF) {
 		
-		return 1; // Na slotu není uložen chip
-     a38:	81 e0       	ldi	r24, 0x01	; 1
-     a3a:	90 e0       	ldi	r25, 0x00	; 0
+		return 1; // Na slotu nen? ulo?en chip
+     a10:	81 e0       	ldi	r24, 0x01	; 1
+     a12:	90 e0       	ldi	r25, 0x00	; 0
 
 	buffer[CHIP_LENGTH - 1] = '\0';
 
-	return 0; // Všechno v poøádku
+	return 0; // V?echno v po??dku
 	
 }
-     a3c:	df 91       	pop	r29
-     a3e:	cf 91       	pop	r28
-     a40:	1f 91       	pop	r17
-     a42:	0f 91       	pop	r16
-     a44:	ff 90       	pop	r15
-     a46:	ef 90       	pop	r14
-     a48:	df 90       	pop	r13
-     a4a:	cf 90       	pop	r12
-     a4c:	08 95       	ret
+     a14:	df 91       	pop	r29
+     a16:	cf 91       	pop	r28
+     a18:	1f 91       	pop	r17
+     a1a:	0f 91       	pop	r16
+     a1c:	ff 90       	pop	r15
+     a1e:	ef 90       	pop	r14
+     a20:	df 90       	pop	r13
+     a22:	cf 90       	pop	r12
+     a24:	08 95       	ret
 
-00000a4e <_Z12isChipStoredPc>:
+00000a26 <_Z12isChipStoredPc>:
 
 int isChipStored(char chip[16]) {
-     a4e:	ef 92       	push	r14
-     a50:	ff 92       	push	r15
-     a52:	0f 93       	push	r16
-     a54:	1f 93       	push	r17
-     a56:	cf 93       	push	r28
-     a58:	df 93       	push	r29
-     a5a:	cd b7       	in	r28, 0x3d	; 61
-     a5c:	de b7       	in	r29, 0x3e	; 62
-     a5e:	60 97       	sbiw	r28, 0x10	; 16
-     a60:	0f b6       	in	r0, 0x3f	; 63
-     a62:	f8 94       	cli
-     a64:	de bf       	out	0x3e, r29	; 62
-     a66:	0f be       	out	0x3f, r0	; 63
-     a68:	cd bf       	out	0x3d, r28	; 61
-     a6a:	7c 01       	movw	r14, r24
+     a26:	ef 92       	push	r14
+     a28:	ff 92       	push	r15
+     a2a:	0f 93       	push	r16
+     a2c:	1f 93       	push	r17
+     a2e:	cf 93       	push	r28
+     a30:	df 93       	push	r29
+     a32:	cd b7       	in	r28, 0x3d	; 61
+     a34:	de b7       	in	r29, 0x3e	; 62
+     a36:	60 97       	sbiw	r28, 0x10	; 16
+     a38:	0f b6       	in	r0, 0x3f	; 63
+     a3a:	f8 94       	cli
+     a3c:	de bf       	out	0x3e, r29	; 62
+     a3e:	0f be       	out	0x3f, r0	; 63
+     a40:	cd bf       	out	0x3d, r28	; 61
+     a42:	7c 01       	movw	r14, r24
 	
 	char buffer[CHIP_LENGTH];
 
 	for (int i = 0; i < MAX_CHIPS; i++) {
-     a6c:	00 e0       	ldi	r16, 0x00	; 0
-     a6e:	10 e0       	ldi	r17, 0x00	; 0
+     a44:	00 e0       	ldi	r16, 0x00	; 0
+     a46:	10 e0       	ldi	r17, 0x00	; 0
 		
 		if (readChip(i, buffer) == 0 && strcmp(buffer, chip) == 0) {
-     a70:	be 01       	movw	r22, r28
-     a72:	6f 5f       	subi	r22, 0xFF	; 255
-     a74:	7f 4f       	sbci	r23, 0xFF	; 255
-     a76:	c8 01       	movw	r24, r16
-     a78:	0e 94 ed 04 	call	0x9da	; 0x9da <_Z8readChipiPc>
-     a7c:	89 2b       	or	r24, r25
-     a7e:	69 f4       	brne	.+26     	; 0xa9a <_Z12isChipStoredPc+0x4c>
-     a80:	b7 01       	movw	r22, r14
-     a82:	ce 01       	movw	r24, r28
-     a84:	01 96       	adiw	r24, 0x01	; 1
-     a86:	0e 94 72 08 	call	0x10e4	; 0x10e4 <strcmp>
-     a8a:	89 2b       	or	r24, r25
-     a8c:	31 f4       	brne	.+12     	; 0xa9a <_Z12isChipStoredPc+0x4c>
-			return 1; // Èip nalezen
-     a8e:	81 e0       	ldi	r24, 0x01	; 1
-     a90:	90 e0       	ldi	r25, 0x00	; 0
-     a92:	09 c0       	rjmp	.+18     	; 0xaa6 <_Z12isChipStoredPc+0x58>
+     a48:	be 01       	movw	r22, r28
+     a4a:	6f 5f       	subi	r22, 0xFF	; 255
+     a4c:	7f 4f       	sbci	r23, 0xFF	; 255
+     a4e:	c8 01       	movw	r24, r16
+     a50:	0e 94 d9 04 	call	0x9b2	; 0x9b2 <_Z8readChipiPc>
+     a54:	89 2b       	or	r24, r25
+     a56:	69 f4       	brne	.+26     	; 0xa72 <_Z12isChipStoredPc+0x4c>
+     a58:	b7 01       	movw	r22, r14
+     a5a:	ce 01       	movw	r24, r28
+     a5c:	01 96       	adiw	r24, 0x01	; 1
+     a5e:	0e 94 94 08 	call	0x1128	; 0x1128 <strcmp>
+     a62:	89 2b       	or	r24, r25
+     a64:	31 f4       	brne	.+12     	; 0xa72 <_Z12isChipStoredPc+0x4c>
+			return 1; // ?ip nalezen
+     a66:	81 e0       	ldi	r24, 0x01	; 1
+     a68:	90 e0       	ldi	r25, 0x00	; 0
+     a6a:	09 c0       	rjmp	.+18     	; 0xa7e <_Z12isChipStoredPc+0x58>
 			
 		}
 
 	}
 
-	return 0; // Èip nebyl nalezen
-     a94:	80 e0       	ldi	r24, 0x00	; 0
-     a96:	90 e0       	ldi	r25, 0x00	; 0
-     a98:	06 c0       	rjmp	.+12     	; 0xaa6 <_Z12isChipStoredPc+0x58>
+	return 0; // ?ip nebyl nalezen
+     a6c:	80 e0       	ldi	r24, 0x00	; 0
+     a6e:	90 e0       	ldi	r25, 0x00	; 0
+     a70:	06 c0       	rjmp	.+12     	; 0xa7e <_Z12isChipStoredPc+0x58>
 
 int isChipStored(char chip[16]) {
 	
 	char buffer[CHIP_LENGTH];
 
 	for (int i = 0; i < MAX_CHIPS; i++) {
-     a9a:	0f 5f       	subi	r16, 0xFF	; 255
-     a9c:	1f 4f       	sbci	r17, 0xFF	; 255
-     a9e:	0a 30       	cpi	r16, 0x0A	; 10
-     aa0:	11 05       	cpc	r17, r1
-     aa2:	31 f7       	brne	.-52     	; 0xa70 <_Z12isChipStoredPc+0x22>
-     aa4:	f7 cf       	rjmp	.-18     	; 0xa94 <_Z12isChipStoredPc+0x46>
+     a72:	0f 5f       	subi	r16, 0xFF	; 255
+     a74:	1f 4f       	sbci	r17, 0xFF	; 255
+     a76:	0a 30       	cpi	r16, 0x0A	; 10
+     a78:	11 05       	cpc	r17, r1
+     a7a:	31 f7       	brne	.-52     	; 0xa48 <_Z12isChipStoredPc+0x22>
+     a7c:	f7 cf       	rjmp	.-18     	; 0xa6c <_Z12isChipStoredPc+0x46>
 
 	}
 
-	return 0; // Èip nebyl nalezen
+	return 0; // ?ip nebyl nalezen
 	
 }
-     aa6:	60 96       	adiw	r28, 0x10	; 16
-     aa8:	0f b6       	in	r0, 0x3f	; 63
-     aaa:	f8 94       	cli
-     aac:	de bf       	out	0x3e, r29	; 62
-     aae:	0f be       	out	0x3f, r0	; 63
-     ab0:	cd bf       	out	0x3d, r28	; 61
-     ab2:	df 91       	pop	r29
-     ab4:	cf 91       	pop	r28
-     ab6:	1f 91       	pop	r17
-     ab8:	0f 91       	pop	r16
-     aba:	ff 90       	pop	r15
-     abc:	ef 90       	pop	r14
-     abe:	08 95       	ret
+     a7e:	60 96       	adiw	r28, 0x10	; 16
+     a80:	0f b6       	in	r0, 0x3f	; 63
+     a82:	f8 94       	cli
+     a84:	de bf       	out	0x3e, r29	; 62
+     a86:	0f be       	out	0x3f, r0	; 63
+     a88:	cd bf       	out	0x3d, r28	; 61
+     a8a:	df 91       	pop	r29
+     a8c:	cf 91       	pop	r28
+     a8e:	1f 91       	pop	r17
+     a90:	0f 91       	pop	r16
+     a92:	ff 90       	pop	r15
+     a94:	ef 90       	pop	r14
+     a96:	08 95       	ret
 
-00000ac0 <_Z7AddChipv>:
+00000a98 <_Z7AddChipv>:
 
 int AddChip() {
-     ac0:	0f 93       	push	r16
-     ac2:	1f 93       	push	r17
-     ac4:	cf 93       	push	r28
-     ac6:	df 93       	push	r29
-     ac8:	cd b7       	in	r28, 0x3d	; 61
-     aca:	de b7       	in	r29, 0x3e	; 62
-     acc:	60 97       	sbiw	r28, 0x10	; 16
-     ace:	0f b6       	in	r0, 0x3f	; 63
-     ad0:	f8 94       	cli
-     ad2:	de bf       	out	0x3e, r29	; 62
-     ad4:	0f be       	out	0x3f, r0	; 63
-     ad6:	cd bf       	out	0x3d, r28	; 61
+     a98:	0f 93       	push	r16
+     a9a:	1f 93       	push	r17
+     a9c:	cf 93       	push	r28
+     a9e:	df 93       	push	r29
+     aa0:	cd b7       	in	r28, 0x3d	; 61
+     aa2:	de b7       	in	r29, 0x3e	; 62
+     aa4:	60 97       	sbiw	r28, 0x10	; 16
+     aa6:	0f b6       	in	r0, 0x3f	; 63
+     aa8:	f8 94       	cli
+     aaa:	de bf       	out	0x3e, r29	; 62
+     aac:	0f be       	out	0x3f, r0	; 63
+     aae:	cd bf       	out	0x3d, r28	; 61
 	EECR |= (1<<EEPE);
 }
 
 void startTimer(){
 	
 	idle_time = 0;
-     ad8:	10 92 e1 01 	sts	0x01E1, r1	; 0x8001e1 <__data_end+0x1>
-     adc:	10 92 e0 01 	sts	0x01E0, r1	; 0x8001e0 <__data_end>
+     ab0:	10 92 df 01 	sts	0x01DF, r1	; 0x8001df <__data_end+0x1>
+     ab4:	10 92 de 01 	sts	0x01DE, r1	; 0x8001de <__data_end>
 
 int AddChip() {
 	
 	startTimer();
 
 	int freeSLot = findFreeSlot();
-     ae0:	0e 94 95 04 	call	0x92a	; 0x92a <_Z12findFreeSlotv>
-     ae4:	8c 01       	movw	r16, r24
-	snprintf(textt, sizeof(textt), "Free slot %d", freeSLot);
-	text_row1(textt);
-	_delay_ms(500);
-	*/
+     ab8:	0e 94 81 04 	call	0x902	; 0x902 <_Z12findFreeSlotv>
+     abc:	8c 01       	movw	r16, r24
 	
 	if(freeSLot == -1){
-     ae6:	0f 3f       	cpi	r16, 0xFF	; 255
-     ae8:	8f ef       	ldi	r24, 0xFF	; 255
-     aea:	18 07       	cpc	r17, r24
-     aec:	f1 f1       	breq	.+124    	; 0xb6a <_Z7AddChipv+0xaa>
+     abe:	01 96       	adiw	r24, 0x01	; 1
+     ac0:	09 f4       	brne	.+2      	; 0xac4 <_Z7AddChipv+0x2c>
+     ac2:	46 c0       	rjmp	.+140    	; 0xb50 <_Z7AddChipv+0xb8>
 		return 0; //Prekrocen max pocet chipu
 
 	}
 
 	text_row1("Enclose CHIP");
-     aee:	8b e1       	ldi	r24, 0x1B	; 27
-     af0:	91 e0       	ldi	r25, 0x01	; 1
-     af2:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
+     ac4:	8b e1       	ldi	r24, 0x1B	; 27
+     ac6:	91 e0       	ldi	r25, 0x01	; 1
+     ac8:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
 	text_row2("for ADD");
-     af6:	8e e5       	ldi	r24, 0x5E	; 94
-     af8:	91 e0       	ldi	r25, 0x01	; 1
-     afa:	0e 94 d5 01 	call	0x3aa	; 0x3aa <_Z9text_row2Pc>
-	idle_time = 0;
-	
-}
+     acc:	8d e5       	ldi	r24, 0x5D	; 93
+     ace:	91 e0       	ldi	r25, 0x01	; 1
+     ad0:	0e 94 d5 01 	call	0x3aa	; 0x3aa <_Z9text_row2Pc>
 
-bool timesUP(){
-	return (idle_time >= TIME_TO_EXIT_MS);
-     afe:	20 91 e0 01 	lds	r18, 0x01E0	; 0x8001e0 <__data_end>
-     b02:	30 91 e1 01 	lds	r19, 0x01E1	; 0x8001e1 <__data_end+0x1>
+	while (1) {
+
+		if (data_OK) {
+     ad4:	80 91 e7 01 	lds	r24, 0x01E7	; 0x8001e7 <data_OK>
+     ad8:	81 11       	cpse	r24, r1
+     ada:	43 c0       	rjmp	.+134    	; 0xb62 <_Z7AddChipv+0xca>
+			
+			return 2; // V?e ok
+
+		}
+
+		if(timesUP()) {
+     adc:	80 91 de 01 	lds	r24, 0x01DE	; 0x8001de <__data_end>
+     ae0:	90 91 df 01 	lds	r25, 0x01DF	; 0x8001df <__data_end+0x1>
+     ae4:	80 3a       	cpi	r24, 0xA0	; 160
+     ae6:	9f 40       	sbci	r25, 0x0F	; 15
+     ae8:	2c f1       	brlt	.+74     	; 0xb34 <_Z7AddChipv+0x9c>
+     aea:	35 c0       	rjmp	.+106    	; 0xb56 <_Z7AddChipv+0xbe>
+     aec:	d9 01       	movw	r26, r18
+     aee:	ae 0f       	add	r26, r30
+     af0:	bf 1f       	adc	r27, r31
+		if (data_OK) {
+
+			char chip[16];
+
+			for (int i = 0; i < 16; i++) {
+				chip[i] = (char)data_prijata[i + 2];
+     af2:	a6 51       	subi	r26, 0x16	; 22
+     af4:	be 4f       	sbci	r27, 0xFE	; 254
+     af6:	8c 91       	ld	r24, X
+     af8:	81 93       	st	Z+, r24
+
+		if (data_OK) {
+
+			char chip[16];
+
+			for (int i = 0; i < 16; i++) {
+     afa:	e4 17       	cp	r30, r20
+     afc:	f5 07       	cpc	r31, r21
+     afe:	b1 f7       	brne	.-20     	; 0xaec <_Z7AddChipv+0x54>
+				chip[i] = (char)data_prijata[i + 2];
+			}
+
+			data_OK = false;
+     b00:	10 92 e7 01 	sts	0x01E7, r1	; 0x8001e7 <data_OK>
+
+			if (isChipStored(chip)) {
+     b04:	ce 01       	movw	r24, r28
+     b06:	01 96       	adiw	r24, 0x01	; 1
+     b08:	0e 94 13 05 	call	0xa26	; 0xa26 <_Z12isChipStoredPc>
+     b0c:	89 2b       	or	r24, r25
+     b0e:	41 f4       	brne	.+16     	; 0xb20 <_Z7AddChipv+0x88>
+				
+				return 3; // Indikace, ?e ?ip ji? existuje
+				
+			}
+
+			saveChip(chip, freeSLot);
+     b10:	b8 01       	movw	r22, r16
+     b12:	ce 01       	movw	r24, r28
+     b14:	01 96       	adiw	r24, 0x01	; 1
+     b16:	0e 94 97 04 	call	0x92e	; 0x92e <_Z8saveChipPci>
+			
+			return 2; // V?e ok
+     b1a:	82 e0       	ldi	r24, 0x02	; 2
+     b1c:	90 e0       	ldi	r25, 0x00	; 0
+     b1e:	2c c0       	rjmp	.+88     	; 0xb78 <_Z7AddChipv+0xe0>
+
+			data_OK = false;
+
+			if (isChipStored(chip)) {
+				
+				return 3; // Indikace, ?e ?ip ji? existuje
+     b20:	83 e0       	ldi	r24, 0x03	; 3
+     b22:	90 e0       	ldi	r25, 0x00	; 0
+     b24:	29 c0       	rjmp	.+82     	; 0xb78 <_Z7AddChipv+0xe0>
+			
+			return 2; // V?e ok
+
+		}
+
+		if(timesUP()) {
+     b26:	80 91 de 01 	lds	r24, 0x01DE	; 0x8001de <__data_end>
+     b2a:	90 91 df 01 	lds	r25, 0x01DF	; 0x8001df <__data_end+0x1>
+     b2e:	80 3a       	cpi	r24, 0xA0	; 160
+     b30:	9f 40       	sbci	r25, 0x0F	; 15
+     b32:	a4 f4       	brge	.+40     	; 0xb5c <_Z7AddChipv+0xc4>
+     b34:	8f ef       	ldi	r24, 0xFF	; 255
+     b36:	9f ea       	ldi	r25, 0xAF	; 175
+     b38:	21 e0       	ldi	r18, 0x01	; 1
+     b3a:	81 50       	subi	r24, 0x01	; 1
+     b3c:	90 40       	sbci	r25, 0x00	; 0
+     b3e:	20 40       	sbci	r18, 0x00	; 0
+     b40:	e1 f7       	brne	.-8      	; 0xb3a <_Z7AddChipv+0xa2>
+     b42:	00 c0       	rjmp	.+0      	; 0xb44 <_Z7AddChipv+0xac>
+     b44:	00 00       	nop
 	text_row1("Enclose CHIP");
 	text_row2("for ADD");
 
 	while (1) {
 
 		if (data_OK) {
-     b06:	80 91 e9 01 	lds	r24, 0x01E9	; 0x8001e9 <data_OK>
-     b0a:	88 23       	and	r24, r24
-     b0c:	39 f1       	breq	.+78     	; 0xb5c <_Z7AddChipv+0x9c>
-     b0e:	ce 01       	movw	r24, r28
-     b10:	01 96       	adiw	r24, 0x01	; 1
-     b12:	ae 01       	movw	r20, r28
-     b14:	4f 5e       	subi	r20, 0xEF	; 239
-     b16:	5f 4f       	sbci	r21, 0xFF	; 255
-     b18:	fc 01       	movw	r30, r24
-     b1a:	22 e0       	ldi	r18, 0x02	; 2
-     b1c:	30 e0       	ldi	r19, 0x00	; 0
-     b1e:	28 1b       	sub	r18, r24
-     b20:	39 0b       	sbc	r19, r25
-     b22:	d9 01       	movw	r26, r18
-     b24:	ae 0f       	add	r26, r30
-     b26:	bf 1f       	adc	r27, r31
+     b46:	80 91 e7 01 	lds	r24, 0x01E7	; 0x8001e7 <data_OK>
+     b4a:	88 23       	and	r24, r24
+     b4c:	61 f3       	breq	.-40     	; 0xb26 <_Z7AddChipv+0x8e>
+     b4e:	09 c0       	rjmp	.+18     	; 0xb62 <_Z7AddChipv+0xca>
+	startTimer();
 
-			char chip[16];
-
-			for (int i = 0; i < 16; i++) {
-				chip[i] = (char)data_prijata[i + 2];
-     b28:	a4 51       	subi	r26, 0x14	; 20
-     b2a:	be 4f       	sbci	r27, 0xFE	; 254
-     b2c:	8c 91       	ld	r24, X
-     b2e:	81 93       	st	Z+, r24
-
-		if (data_OK) {
-
-			char chip[16];
-
-			for (int i = 0; i < 16; i++) {
-     b30:	e4 17       	cp	r30, r20
-     b32:	f5 07       	cpc	r31, r21
-     b34:	b1 f7       	brne	.-20     	; 0xb22 <_Z7AddChipv+0x62>
-				chip[i] = (char)data_prijata[i + 2];
-			}
-
-			data_OK = false;
-     b36:	10 92 e9 01 	sts	0x01E9, r1	; 0x8001e9 <data_OK>
-
-			if (isChipStored(chip)) {
-     b3a:	ce 01       	movw	r24, r28
-     b3c:	01 96       	adiw	r24, 0x01	; 1
-     b3e:	0e 94 27 05 	call	0xa4e	; 0xa4e <_Z12isChipStoredPc>
-     b42:	89 2b       	or	r24, r25
-     b44:	41 f4       	brne	.+16     	; 0xb56 <_Z7AddChipv+0x96>
-				
-				return 3; // Indikace, že èip již existuje
-				
-			}
-
-			saveChip(chip, freeSLot);
-     b46:	b8 01       	movw	r22, r16
-     b48:	ce 01       	movw	r24, r28
-     b4a:	01 96       	adiw	r24, 0x01	; 1
-     b4c:	0e 94 ab 04 	call	0x956	; 0x956 <_Z8saveChipPci>
-			
-			return 2; // Vše ok
-     b50:	82 e0       	ldi	r24, 0x02	; 2
-     b52:	90 e0       	ldi	r25, 0x00	; 0
-     b54:	0c c0       	rjmp	.+24     	; 0xb6e <_Z7AddChipv+0xae>
-
-			data_OK = false;
-
-			if (isChipStored(chip)) {
-				
-				return 3; // Indikace, že èip již existuje
-     b56:	83 e0       	ldi	r24, 0x03	; 3
-     b58:	90 e0       	ldi	r25, 0x00	; 0
-     b5a:	09 c0       	rjmp	.+18     	; 0xb6e <_Z7AddChipv+0xae>
-			
-			return 2; // Vše ok
-
-		}
-
-		if(timesUP()) return 1; // Times out
-     b5c:	20 31       	cpi	r18, 0x10	; 16
-     b5e:	87 e2       	ldi	r24, 0x27	; 39
-     b60:	38 07       	cpc	r19, r24
-     b62:	8c f2       	brlt	.-94     	; 0xb06 <_Z7AddChipv+0x46>
-     b64:	81 e0       	ldi	r24, 0x01	; 1
-     b66:	90 e0       	ldi	r25, 0x00	; 0
-     b68:	02 c0       	rjmp	.+4      	; 0xb6e <_Z7AddChipv+0xae>
-	text_row1(textt);
-	_delay_ms(500);
-	*/
+	int freeSLot = findFreeSlot();
 	
 	if(freeSLot == -1){
 		return 0; //Prekrocen max pocet chipu
-     b6a:	80 e0       	ldi	r24, 0x00	; 0
-     b6c:	90 e0       	ldi	r25, 0x00	; 0
+     b50:	80 e0       	ldi	r24, 0x00	; 0
+     b52:	90 e0       	ldi	r25, 0x00	; 0
+     b54:	11 c0       	rjmp	.+34     	; 0xb78 <_Z7AddChipv+0xe0>
+			return 2; // V?e ok
+
 		}
 
-		if(timesUP()) return 1; // Times out
+		if(timesUP()) {
+			return 1;
+     b56:	81 e0       	ldi	r24, 0x01	; 1
+     b58:	90 e0       	ldi	r25, 0x00	; 0
+     b5a:	0e c0       	rjmp	.+28     	; 0xb78 <_Z7AddChipv+0xe0>
+     b5c:	81 e0       	ldi	r24, 0x01	; 1
+     b5e:	90 e0       	ldi	r25, 0x00	; 0
+     b60:	0b c0       	rjmp	.+22     	; 0xb78 <_Z7AddChipv+0xe0>
+     b62:	ce 01       	movw	r24, r28
+     b64:	01 96       	adiw	r24, 0x01	; 1
+     b66:	ae 01       	movw	r20, r28
+     b68:	4f 5e       	subi	r20, 0xEF	; 239
+     b6a:	5f 4f       	sbci	r21, 0xFF	; 255
+
+	return 0; // ?ip nebyl nalezen
+	
+}
+
+int AddChip() {
+     b6c:	fc 01       	movw	r30, r24
+     b6e:	22 e0       	ldi	r18, 0x02	; 2
+     b70:	30 e0       	ldi	r19, 0x00	; 0
+     b72:	28 1b       	sub	r18, r24
+     b74:	39 0b       	sbc	r19, r25
+     b76:	ba cf       	rjmp	.-140    	; 0xaec <_Z7AddChipv+0x54>
+		} 
+		
+		_delay_ms(50);
 		
 	}
 }
-     b6e:	60 96       	adiw	r28, 0x10	; 16
-     b70:	0f b6       	in	r0, 0x3f	; 63
-     b72:	f8 94       	cli
-     b74:	de bf       	out	0x3e, r29	; 62
-     b76:	0f be       	out	0x3f, r0	; 63
-     b78:	cd bf       	out	0x3d, r28	; 61
-     b7a:	df 91       	pop	r29
-     b7c:	cf 91       	pop	r28
-     b7e:	1f 91       	pop	r17
-     b80:	0f 91       	pop	r16
-     b82:	08 95       	ret
+     b78:	60 96       	adiw	r28, 0x10	; 16
+     b7a:	0f b6       	in	r0, 0x3f	; 63
+     b7c:	f8 94       	cli
+     b7e:	de bf       	out	0x3e, r29	; 62
+     b80:	0f be       	out	0x3f, r0	; 63
+     b82:	cd bf       	out	0x3d, r28	; 61
+     b84:	df 91       	pop	r29
+     b86:	cf 91       	pop	r28
+     b88:	1f 91       	pop	r17
+     b8a:	0f 91       	pop	r16
+     b8c:	08 95       	ret
 
-00000b84 <_Z10RemoveChipv>:
+00000b8e <_Z10RemoveChipv>:
 
 int RemoveChip() {
-     b84:	ef 92       	push	r14
-     b86:	ff 92       	push	r15
-     b88:	0f 93       	push	r16
-     b8a:	1f 93       	push	r17
-     b8c:	cf 93       	push	r28
-     b8e:	df 93       	push	r29
-     b90:	cd b7       	in	r28, 0x3d	; 61
-     b92:	de b7       	in	r29, 0x3e	; 62
-     b94:	a0 97       	sbiw	r28, 0x20	; 32
-     b96:	0f b6       	in	r0, 0x3f	; 63
-     b98:	f8 94       	cli
-     b9a:	de bf       	out	0x3e, r29	; 62
-     b9c:	0f be       	out	0x3f, r0	; 63
-     b9e:	cd bf       	out	0x3d, r28	; 61
+     b8e:	ef 92       	push	r14
+     b90:	ff 92       	push	r15
+     b92:	0f 93       	push	r16
+     b94:	1f 93       	push	r17
+     b96:	cf 93       	push	r28
+     b98:	df 93       	push	r29
+     b9a:	cd b7       	in	r28, 0x3d	; 61
+     b9c:	de b7       	in	r29, 0x3e	; 62
+     b9e:	a0 97       	sbiw	r28, 0x20	; 32
+     ba0:	0f b6       	in	r0, 0x3f	; 63
+     ba2:	f8 94       	cli
+     ba4:	de bf       	out	0x3e, r29	; 62
+     ba6:	0f be       	out	0x3f, r0	; 63
+     ba8:	cd bf       	out	0x3d, r28	; 61
 	EECR |= (1<<EEPE);
 }
 
 void startTimer(){
 	
 	idle_time = 0;
-     ba0:	10 92 e1 01 	sts	0x01E1, r1	; 0x8001e1 <__data_end+0x1>
-     ba4:	10 92 e0 01 	sts	0x01E0, r1	; 0x8001e0 <__data_end>
+     baa:	10 92 df 01 	sts	0x01DF, r1	; 0x8001df <__data_end+0x1>
+     bae:	10 92 de 01 	sts	0x01DE, r1	; 0x8001de <__data_end>
 
 int RemoveChip() {
 
 	startTimer();
 	
 	text_row1("Enclose CHIP");
-     ba8:	8b e1       	ldi	r24, 0x1B	; 27
-     baa:	91 e0       	ldi	r25, 0x01	; 1
-     bac:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
+     bb2:	8b e1       	ldi	r24, 0x1B	; 27
+     bb4:	91 e0       	ldi	r25, 0x01	; 1
+     bb6:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
 	text_row2("for REMOVE");
-     bb0:	86 e6       	ldi	r24, 0x66	; 102
-     bb2:	91 e0       	ldi	r25, 0x01	; 1
-     bb4:	0e 94 d5 01 	call	0x3aa	; 0x3aa <_Z9text_row2Pc>
-	idle_time = 0;
-	
-}
+     bba:	85 e6       	ldi	r24, 0x65	; 101
+     bbc:	91 e0       	ldi	r25, 0x01	; 1
+     bbe:	0e 94 d5 01 	call	0x3aa	; 0x3aa <_Z9text_row2Pc>
 
-bool timesUP(){
-	return (idle_time >= TIME_TO_EXIT_MS);
-     bb8:	20 91 e0 01 	lds	r18, 0x01E0	; 0x8001e0 <__data_end>
-     bbc:	30 91 e1 01 	lds	r19, 0x01E1	; 0x8001e1 <__data_end+0x1>
+    while (1) {
+		
+        if (data_OK) {
+     bc2:	80 91 e7 01 	lds	r24, 0x01E7	; 0x8001e7 <data_OK>
+     bc6:	81 11       	cpse	r24, r1
+     bc8:	4d c0       	rjmp	.+154    	; 0xc64 <_Z10RemoveChipv+0xd6>
+            }
+
+            return 1; // ?ip nebyl nalezen
+        }
+
+        if (timesUP()) {
+     bca:	80 91 de 01 	lds	r24, 0x01DE	; 0x8001de <__data_end>
+     bce:	90 91 df 01 	lds	r25, 0x01DF	; 0x8001df <__data_end+0x1>
+     bd2:	80 3a       	cpi	r24, 0xA0	; 160
+     bd4:	9f 40       	sbci	r25, 0x0F	; 15
+     bd6:	74 f1       	brlt	.+92     	; 0xc34 <_Z10RemoveChipv+0xa6>
+     bd8:	3b c0       	rjmp	.+118    	; 0xc50 <_Z10RemoveChipv+0xc2>
+     bda:	d9 01       	movw	r26, r18
+     bdc:	ae 0f       	add	r26, r30
+     bde:	bf 1f       	adc	r27, r31
+        if (data_OK) {
+			
+            char chip[16];
+			
+            for (int i = 0; i < 16; i++) {
+                chip[i] = (char)data_prijata[i + 2];
+     be0:	a6 51       	subi	r26, 0x16	; 22
+     be2:	be 4f       	sbci	r27, 0xFE	; 254
+     be4:	8c 91       	ld	r24, X
+     be6:	81 93       	st	Z+, r24
+		
+        if (data_OK) {
+			
+            char chip[16];
+			
+            for (int i = 0; i < 16; i++) {
+     be8:	e4 17       	cp	r30, r20
+     bea:	f5 07       	cpc	r31, r21
+     bec:	b1 f7       	brne	.-20     	; 0xbda <_Z10RemoveChipv+0x4c>
+                chip[i] = (char)data_prijata[i + 2];
+				
+            }
+			
+            data_OK = false;
+     bee:	10 92 e7 01 	sts	0x01E7, r1	; 0x8001e7 <data_OK>
+
+            for (int i = 0; i < MAX_CHIPS; i++) {
+     bf2:	00 e0       	ldi	r16, 0x00	; 0
+     bf4:	10 e0       	ldi	r17, 0x00	; 0
+				
+                char buffer[16];
+				
+                if (readChip(i, buffer) == 0 && strcmp(buffer, chip) == 0) {
+     bf6:	be 01       	movw	r22, r28
+     bf8:	6f 5f       	subi	r22, 0xFF	; 255
+     bfa:	7f 4f       	sbci	r23, 0xFF	; 255
+     bfc:	c8 01       	movw	r24, r16
+     bfe:	0e 94 d9 04 	call	0x9b2	; 0x9b2 <_Z8readChipiPc>
+     c02:	89 2b       	or	r24, r25
+     c04:	09 f0       	breq	.+2      	; 0xc08 <_Z10RemoveChipv+0x7a>
+     c06:	3f c0       	rjmp	.+126    	; 0xc86 <_Z10RemoveChipv+0xf8>
+     c08:	be 01       	movw	r22, r28
+     c0a:	6f 5e       	subi	r22, 0xEF	; 239
+     c0c:	7f 4f       	sbci	r23, 0xFF	; 255
+     c0e:	ce 01       	movw	r24, r28
+     c10:	01 96       	adiw	r24, 0x01	; 1
+     c12:	0e 94 94 08 	call	0x1128	; 0x1128 <strcmp>
+     c16:	7c 01       	movw	r14, r24
+     c18:	89 2b       	or	r24, r25
+     c1a:	a9 f5       	brne	.+106    	; 0xc86 <_Z10RemoveChipv+0xf8>
+     c1c:	2e c0       	rjmp	.+92     	; 0xc7a <_Z10RemoveChipv+0xec>
+
+                    return 0; // ?ip byl ?sp?n? odstran?n
+                }
+            }
+
+            return 1; // ?ip nebyl nalezen
+     c1e:	ee 24       	eor	r14, r14
+     c20:	e3 94       	inc	r14
+     c22:	f1 2c       	mov	r15, r1
+     c24:	37 c0       	rjmp	.+110    	; 0xc94 <_Z10RemoveChipv+0x106>
+        }
+
+        if (timesUP()) {
+     c26:	80 91 de 01 	lds	r24, 0x01DE	; 0x8001de <__data_end>
+     c2a:	90 91 df 01 	lds	r25, 0x01DF	; 0x8001df <__data_end+0x1>
+     c2e:	80 3a       	cpi	r24, 0xA0	; 160
+     c30:	9f 40       	sbci	r25, 0x0F	; 15
+     c32:	9c f4       	brge	.+38     	; 0xc5a <_Z10RemoveChipv+0xcc>
+     c34:	8f ef       	ldi	r24, 0xFF	; 255
+     c36:	9f ea       	ldi	r25, 0xAF	; 175
+     c38:	21 e0       	ldi	r18, 0x01	; 1
+     c3a:	81 50       	subi	r24, 0x01	; 1
+     c3c:	90 40       	sbci	r25, 0x00	; 0
+     c3e:	20 40       	sbci	r18, 0x00	; 0
+     c40:	e1 f7       	brne	.-8      	; 0xc3a <_Z10RemoveChipv+0xac>
+     c42:	00 c0       	rjmp	.+0      	; 0xc44 <_Z10RemoveChipv+0xb6>
+     c44:	00 00       	nop
 	text_row1("Enclose CHIP");
 	text_row2("for REMOVE");
 
     while (1) {
 		
         if (data_OK) {
-     bc0:	80 91 e9 01 	lds	r24, 0x01E9	; 0x8001e9 <data_OK>
-     bc4:	88 23       	and	r24, r24
-     bc6:	79 f1       	breq	.+94     	; 0xc26 <_Z10RemoveChipv+0xa2>
-     bc8:	ce 01       	movw	r24, r28
-     bca:	41 96       	adiw	r24, 0x11	; 17
-     bcc:	ae 01       	movw	r20, r28
-     bce:	4f 5d       	subi	r20, 0xDF	; 223
-     bd0:	5f 4f       	sbci	r21, 0xFF	; 255
-     bd2:	fc 01       	movw	r30, r24
-     bd4:	22 e0       	ldi	r18, 0x02	; 2
-     bd6:	30 e0       	ldi	r19, 0x00	; 0
-     bd8:	28 1b       	sub	r18, r24
-     bda:	39 0b       	sbc	r19, r25
-     bdc:	d9 01       	movw	r26, r18
-     bde:	ae 0f       	add	r26, r30
-     be0:	bf 1f       	adc	r27, r31
-			
-            char chip[16];
-			
-            for (int i = 0; i < 16; i++) {
-                chip[i] = (char)data_prijata[i + 2];
-     be2:	a4 51       	subi	r26, 0x14	; 20
-     be4:	be 4f       	sbci	r27, 0xFE	; 254
-     be6:	8c 91       	ld	r24, X
-     be8:	81 93       	st	Z+, r24
-		
-        if (data_OK) {
-			
-            char chip[16];
-			
-            for (int i = 0; i < 16; i++) {
-     bea:	4e 17       	cp	r20, r30
-     bec:	5f 07       	cpc	r21, r31
-     bee:	b1 f7       	brne	.-20     	; 0xbdc <_Z10RemoveChipv+0x58>
-                chip[i] = (char)data_prijata[i + 2];
-				
-            }
-			
-            data_OK = false;
-     bf0:	10 92 e9 01 	sts	0x01E9, r1	; 0x8001e9 <data_OK>
+     c46:	80 91 e7 01 	lds	r24, 0x01E7	; 0x8001e7 <data_OK>
+     c4a:	88 23       	and	r24, r24
+     c4c:	61 f3       	breq	.-40     	; 0xc26 <_Z10RemoveChipv+0x98>
+     c4e:	0a c0       	rjmp	.+20     	; 0xc64 <_Z10RemoveChipv+0xd6>
 
-            for (int i = 0; i < MAX_CHIPS; i++) {
-     bf4:	00 e0       	ldi	r16, 0x00	; 0
-     bf6:	10 e0       	ldi	r17, 0x00	; 0
-				
-                char buffer[16];
-				
-                if (readChip(i, buffer) == 0 && strcmp(buffer, chip) == 0) {
-     bf8:	be 01       	movw	r22, r28
-     bfa:	6f 5f       	subi	r22, 0xFF	; 255
-     bfc:	7f 4f       	sbci	r23, 0xFF	; 255
-     bfe:	c8 01       	movw	r24, r16
-     c00:	0e 94 ed 04 	call	0x9da	; 0x9da <_Z8readChipiPc>
-     c04:	89 2b       	or	r24, r25
-     c06:	f1 f4       	brne	.+60     	; 0xc44 <_Z10RemoveChipv+0xc0>
-     c08:	be 01       	movw	r22, r28
-     c0a:	6f 5e       	subi	r22, 0xEF	; 239
-     c0c:	7f 4f       	sbci	r23, 0xFF	; 255
-     c0e:	ce 01       	movw	r24, r28
-     c10:	01 96       	adiw	r24, 0x01	; 1
-     c12:	0e 94 72 08 	call	0x10e4	; 0x10e4 <strcmp>
-     c16:	7c 01       	movw	r14, r24
-     c18:	89 2b       	or	r24, r25
-     c1a:	a1 f4       	brne	.+40     	; 0xc44 <_Z10RemoveChipv+0xc0>
-     c1c:	0d c0       	rjmp	.+26     	; 0xc38 <_Z10RemoveChipv+0xb4>
-
-                    return 0; // Èip byl úspìšnì odstranìn
-                }
-            }
-
-            return 1; // Èip nebyl nalezen
-     c1e:	ee 24       	eor	r14, r14
-     c20:	e3 94       	inc	r14
-     c22:	f1 2c       	mov	r15, r1
-     c24:	15 c0       	rjmp	.+42     	; 0xc50 <_Z10RemoveChipv+0xcc>
+            return 1; // ?ip nebyl nalezen
         }
 
         if (timesUP()) {
-     c26:	20 31       	cpi	r18, 0x10	; 16
-     c28:	87 e2       	ldi	r24, 0x27	; 39
-     c2a:	38 07       	cpc	r19, r24
-     c2c:	4c f2       	brlt	.-110    	; 0xbc0 <_Z10RemoveChipv+0x3c>
-            return 2; // Vypršel èasový limit
-     c2e:	68 94       	set
-     c30:	ee 24       	eor	r14, r14
-     c32:	e1 f8       	bld	r14, 1
-     c34:	f1 2c       	mov	r15, r1
-     c36:	0c c0       	rjmp	.+24     	; 0xc50 <_Z10RemoveChipv+0xcc>
+            return 2; // Vypr?el ?asov? limit
+     c50:	68 94       	set
+     c52:	ee 24       	eor	r14, r14
+     c54:	e1 f8       	bld	r14, 1
+     c56:	f1 2c       	mov	r15, r1
+     c58:	1d c0       	rjmp	.+58     	; 0xc94 <_Z10RemoveChipv+0x106>
+     c5a:	68 94       	set
+     c5c:	ee 24       	eor	r14, r14
+     c5e:	e1 f8       	bld	r14, 1
+     c60:	f1 2c       	mov	r15, r1
+     c62:	18 c0       	rjmp	.+48     	; 0xc94 <_Z10RemoveChipv+0x106>
+     c64:	ce 01       	movw	r24, r28
+     c66:	41 96       	adiw	r24, 0x11	; 17
+     c68:	ae 01       	movw	r20, r28
+     c6a:	4f 5d       	subi	r20, 0xDF	; 223
+     c6c:	5f 4f       	sbci	r21, 0xFF	; 255
+		_delay_ms(50);
+		
+	}
+}
+
+int RemoveChip() {
+     c6e:	fc 01       	movw	r30, r24
+     c70:	22 e0       	ldi	r18, 0x02	; 2
+     c72:	30 e0       	ldi	r19, 0x00	; 0
+     c74:	28 1b       	sub	r18, r24
+     c76:	39 0b       	sbc	r19, r25
+     c78:	b0 cf       	rjmp	.-160    	; 0xbda <_Z10RemoveChipv+0x4c>
 				
                 char buffer[16];
 				
                 if (readChip(i, buffer) == 0 && strcmp(buffer, chip) == 0) {
 
                     EEPROM_write(STATUS_START_ADDR + i, 0xFF); 
-     c38:	6f ef       	ldi	r22, 0xFF	; 255
-     c3a:	c8 01       	movw	r24, r16
-     c3c:	0a 96       	adiw	r24, 0x0a	; 10
-     c3e:	0e 94 5a 03 	call	0x6b4	; 0x6b4 <_Z12EEPROM_writejh>
-     c42:	06 c0       	rjmp	.+12     	; 0xc50 <_Z10RemoveChipv+0xcc>
+     c7a:	6f ef       	ldi	r22, 0xFF	; 255
+     c7c:	c8 01       	movw	r24, r16
+     c7e:	0a 96       	adiw	r24, 0x0a	; 10
+     c80:	0e 94 5a 03 	call	0x6b4	; 0x6b4 <_Z12EEPROM_writejh>
+     c84:	07 c0       	rjmp	.+14     	; 0xc94 <_Z10RemoveChipv+0x106>
 				
             }
 			
             data_OK = false;
 
             for (int i = 0; i < MAX_CHIPS; i++) {
-     c44:	0f 5f       	subi	r16, 0xFF	; 255
-     c46:	1f 4f       	sbci	r17, 0xFF	; 255
-     c48:	0a 30       	cpi	r16, 0x0A	; 10
-     c4a:	11 05       	cpc	r17, r1
-     c4c:	a9 f6       	brne	.-86     	; 0xbf8 <_Z10RemoveChipv+0x74>
-     c4e:	e7 cf       	rjmp	.-50     	; 0xc1e <_Z10RemoveChipv+0x9a>
-        if (timesUP()) {
-            return 2; // Vypršel èasový limit
+     c86:	0f 5f       	subi	r16, 0xFF	; 255
+     c88:	1f 4f       	sbci	r17, 0xFF	; 255
+     c8a:	0a 30       	cpi	r16, 0x0A	; 10
+     c8c:	11 05       	cpc	r17, r1
+     c8e:	09 f0       	breq	.+2      	; 0xc92 <_Z10RemoveChipv+0x104>
+     c90:	b2 cf       	rjmp	.-156    	; 0xbf6 <_Z10RemoveChipv+0x68>
+     c92:	c5 cf       	rjmp	.-118    	; 0xc1e <_Z10RemoveChipv+0x90>
 			
         }
+		_delay_ms(50);
+		
     }
 }
-     c50:	c7 01       	movw	r24, r14
-     c52:	a0 96       	adiw	r28, 0x20	; 32
-     c54:	0f b6       	in	r0, 0x3f	; 63
-     c56:	f8 94       	cli
-     c58:	de bf       	out	0x3e, r29	; 62
-     c5a:	0f be       	out	0x3f, r0	; 63
-     c5c:	cd bf       	out	0x3d, r28	; 61
-     c5e:	df 91       	pop	r29
-     c60:	cf 91       	pop	r28
-     c62:	1f 91       	pop	r17
-     c64:	0f 91       	pop	r16
-     c66:	ff 90       	pop	r15
-     c68:	ef 90       	pop	r14
-     c6a:	08 95       	ret
+     c94:	c7 01       	movw	r24, r14
+     c96:	a0 96       	adiw	r28, 0x20	; 32
+     c98:	0f b6       	in	r0, 0x3f	; 63
+     c9a:	f8 94       	cli
+     c9c:	de bf       	out	0x3e, r29	; 62
+     c9e:	0f be       	out	0x3f, r0	; 63
+     ca0:	cd bf       	out	0x3d, r28	; 61
+     ca2:	df 91       	pop	r29
+     ca4:	cf 91       	pop	r28
+     ca6:	1f 91       	pop	r17
+     ca8:	0f 91       	pop	r16
+     caa:	ff 90       	pop	r15
+     cac:	ef 90       	pop	r14
+     cae:	08 95       	ret
 
-00000c6c <_Z18CheckForOpenByRFIDRb>:
+00000cb0 <_Z18CheckForOpenByRFIDRb>:
 
 
 bool CheckForOpenByRFID(bool &open){
-     c6c:	ef 92       	push	r14
-     c6e:	ff 92       	push	r15
-     c70:	1f 93       	push	r17
-     c72:	cf 93       	push	r28
-     c74:	df 93       	push	r29
-     c76:	cd b7       	in	r28, 0x3d	; 61
-     c78:	de b7       	in	r29, 0x3e	; 62
-     c7a:	60 97       	sbiw	r28, 0x10	; 16
-     c7c:	0f b6       	in	r0, 0x3f	; 63
-     c7e:	f8 94       	cli
-     c80:	de bf       	out	0x3e, r29	; 62
-     c82:	0f be       	out	0x3f, r0	; 63
-     c84:	cd bf       	out	0x3d, r28	; 61
-     c86:	bc 01       	movw	r22, r24
+     cb0:	ef 92       	push	r14
+     cb2:	ff 92       	push	r15
+     cb4:	1f 93       	push	r17
+     cb6:	cf 93       	push	r28
+     cb8:	df 93       	push	r29
+     cba:	cd b7       	in	r28, 0x3d	; 61
+     cbc:	de b7       	in	r29, 0x3e	; 62
+     cbe:	60 97       	sbiw	r28, 0x10	; 16
+     cc0:	0f b6       	in	r0, 0x3f	; 63
+     cc2:	f8 94       	cli
+     cc4:	de bf       	out	0x3e, r29	; 62
+     cc6:	0f be       	out	0x3f, r0	; 63
+     cc8:	cd bf       	out	0x3d, r28	; 61
+     cca:	bc 01       	movw	r22, r24
 
 	if(data_OK)
-     c88:	10 91 e9 01 	lds	r17, 0x01E9	; 0x8001e9 <data_OK>
-     c8c:	11 23       	and	r17, r17
-     c8e:	09 f1       	breq	.+66     	; 0xcd2 <_Z18CheckForOpenByRFIDRb+0x66>
-     c90:	ce 01       	movw	r24, r28
-     c92:	01 96       	adiw	r24, 0x01	; 1
-     c94:	ae 01       	movw	r20, r28
-     c96:	4f 5e       	subi	r20, 0xEF	; 239
-     c98:	5f 4f       	sbci	r21, 0xFF	; 255
-     c9a:	fc 01       	movw	r30, r24
-     c9c:	22 e0       	ldi	r18, 0x02	; 2
-     c9e:	30 e0       	ldi	r19, 0x00	; 0
-     ca0:	28 1b       	sub	r18, r24
-     ca2:	39 0b       	sbc	r19, r25
-     ca4:	d9 01       	movw	r26, r18
-     ca6:	ae 0f       	add	r26, r30
-     ca8:	bf 1f       	adc	r27, r31
+     ccc:	10 91 e7 01 	lds	r17, 0x01E7	; 0x8001e7 <data_OK>
+     cd0:	11 23       	and	r17, r17
+     cd2:	09 f1       	breq	.+66     	; 0xd16 <_Z18CheckForOpenByRFIDRb+0x66>
+     cd4:	ce 01       	movw	r24, r28
+     cd6:	01 96       	adiw	r24, 0x01	; 1
+     cd8:	ae 01       	movw	r20, r28
+     cda:	4f 5e       	subi	r20, 0xEF	; 239
+     cdc:	5f 4f       	sbci	r21, 0xFF	; 255
+     cde:	fc 01       	movw	r30, r24
+     ce0:	22 e0       	ldi	r18, 0x02	; 2
+     ce2:	30 e0       	ldi	r19, 0x00	; 0
+     ce4:	28 1b       	sub	r18, r24
+     ce6:	39 0b       	sbc	r19, r25
+     ce8:	d9 01       	movw	r26, r18
+     cea:	ae 0f       	add	r26, r30
+     cec:	bf 1f       	adc	r27, r31
 	{
 		char text[16];
 
 		for (int i = 0; i < 16; i++) {
 			text[i] = (char)data_prijata[i + 2];
-     caa:	a4 51       	subi	r26, 0x14	; 20
-     cac:	be 4f       	sbci	r27, 0xFE	; 254
-     cae:	9c 91       	ld	r25, X
-     cb0:	91 93       	st	Z+, r25
+     cee:	a6 51       	subi	r26, 0x16	; 22
+     cf0:	be 4f       	sbci	r27, 0xFE	; 254
+     cf2:	9c 91       	ld	r25, X
+     cf4:	91 93       	st	Z+, r25
 
 	if(data_OK)
 	{
 		char text[16];
 
 		for (int i = 0; i < 16; i++) {
-     cb2:	e4 17       	cp	r30, r20
-     cb4:	f5 07       	cpc	r31, r21
-     cb6:	b1 f7       	brne	.-20     	; 0xca4 <_Z18CheckForOpenByRFIDRb+0x38>
-     cb8:	7b 01       	movw	r14, r22
+     cf6:	e4 17       	cp	r30, r20
+     cf8:	f5 07       	cpc	r31, r21
+     cfa:	b1 f7       	brne	.-20     	; 0xce8 <_Z18CheckForOpenByRFIDRb+0x38>
+     cfc:	7b 01       	movw	r14, r22
 			text[i] = (char)data_prijata[i + 2];
 		}
 		
 		open = isChipStored(text);
-     cba:	ce 01       	movw	r24, r28
-     cbc:	01 96       	adiw	r24, 0x01	; 1
-     cbe:	0e 94 27 05 	call	0xa4e	; 0xa4e <_Z12isChipStoredPc>
-     cc2:	21 e0       	ldi	r18, 0x01	; 1
-     cc4:	89 2b       	or	r24, r25
-     cc6:	09 f4       	brne	.+2      	; 0xcca <_Z18CheckForOpenByRFIDRb+0x5e>
-     cc8:	20 e0       	ldi	r18, 0x00	; 0
-     cca:	f7 01       	movw	r30, r14
-     ccc:	20 83       	st	Z, r18
+     cfe:	ce 01       	movw	r24, r28
+     d00:	01 96       	adiw	r24, 0x01	; 1
+     d02:	0e 94 13 05 	call	0xa26	; 0xa26 <_Z12isChipStoredPc>
+     d06:	21 e0       	ldi	r18, 0x01	; 1
+     d08:	89 2b       	or	r24, r25
+     d0a:	09 f4       	brne	.+2      	; 0xd0e <_Z18CheckForOpenByRFIDRb+0x5e>
+     d0c:	20 e0       	ldi	r18, 0x00	; 0
+     d0e:	f7 01       	movw	r30, r14
+     d10:	20 83       	st	Z, r18
 
 		data_OK = false;
-     cce:	10 92 e9 01 	sts	0x01E9, r1	; 0x8001e9 <data_OK>
+     d12:	10 92 e7 01 	sts	0x01E7, r1	; 0x8001e7 <data_OK>
 		return true;
 	}
 
 	return false;
 
 }
-     cd2:	81 2f       	mov	r24, r17
-     cd4:	60 96       	adiw	r28, 0x10	; 16
-     cd6:	0f b6       	in	r0, 0x3f	; 63
-     cd8:	f8 94       	cli
-     cda:	de bf       	out	0x3e, r29	; 62
-     cdc:	0f be       	out	0x3f, r0	; 63
-     cde:	cd bf       	out	0x3d, r28	; 61
-     ce0:	df 91       	pop	r29
-     ce2:	cf 91       	pop	r28
-     ce4:	1f 91       	pop	r17
-     ce6:	ff 90       	pop	r15
-     ce8:	ef 90       	pop	r14
-     cea:	08 95       	ret
+     d16:	81 2f       	mov	r24, r17
+     d18:	60 96       	adiw	r28, 0x10	; 16
+     d1a:	0f b6       	in	r0, 0x3f	; 63
+     d1c:	f8 94       	cli
+     d1e:	de bf       	out	0x3e, r29	; 62
+     d20:	0f be       	out	0x3f, r0	; 63
+     d22:	cd bf       	out	0x3d, r28	; 61
+     d24:	df 91       	pop	r29
+     d26:	cf 91       	pop	r28
+     d28:	1f 91       	pop	r17
+     d2a:	ff 90       	pop	r15
+     d2c:	ef 90       	pop	r14
+     d2e:	08 95       	ret
 
-00000cec <_Z10verifyUserv>:
+00000d30 <_Z10verifyUserv>:
 
 int verifyUser(){
-     cec:	1f 93       	push	r17
-     cee:	cf 93       	push	r28
-     cf0:	df 93       	push	r29
-     cf2:	cd b7       	in	r28, 0x3d	; 61
-     cf4:	de b7       	in	r29, 0x3e	; 62
-     cf6:	27 97       	sbiw	r28, 0x07	; 7
-     cf8:	0f b6       	in	r0, 0x3f	; 63
-     cfa:	f8 94       	cli
-     cfc:	de bf       	out	0x3e, r29	; 62
-     cfe:	0f be       	out	0x3f, r0	; 63
-     d00:	cd bf       	out	0x3d, r28	; 61
+     d30:	1f 93       	push	r17
+     d32:	cf 93       	push	r28
+     d34:	df 93       	push	r29
+     d36:	cd b7       	in	r28, 0x3d	; 61
+     d38:	de b7       	in	r29, 0x3e	; 62
+     d3a:	27 97       	sbiw	r28, 0x07	; 7
+     d3c:	0f b6       	in	r0, 0x3f	; 63
+     d3e:	f8 94       	cli
+     d40:	de bf       	out	0x3e, r29	; 62
+     d42:	0f be       	out	0x3f, r0	; 63
+     d44:	cd bf       	out	0x3d, r28	; 61
 	EECR |= (1<<EEPE);
 }
 
 void startTimer(){
 	
 	idle_time = 0;
-     d02:	10 92 e1 01 	sts	0x01E1, r1	; 0x8001e1 <__data_end+0x1>
-     d06:	10 92 e0 01 	sts	0x01E0, r1	; 0x8001e0 <__data_end>
+     d46:	10 92 df 01 	sts	0x01DF, r1	; 0x8001df <__data_end+0x1>
+     d4a:	10 92 de 01 	sts	0x01DE, r1	; 0x8001de <__data_end>
 
 int verifyUser(){
 	
 	startTimer();
 	
 	char code[7] = {0};
-     d0a:	fe 01       	movw	r30, r28
-     d0c:	31 96       	adiw	r30, 0x01	; 1
-     d0e:	87 e0       	ldi	r24, 0x07	; 7
-     d10:	df 01       	movw	r26, r30
-     d12:	1d 92       	st	X+, r1
-     d14:	8a 95       	dec	r24
-     d16:	e9 f7       	brne	.-6      	; 0xd12 <_Z10verifyUserv+0x26>
+     d4e:	fe 01       	movw	r30, r28
+     d50:	31 96       	adiw	r30, 0x01	; 1
+     d52:	87 e0       	ldi	r24, 0x07	; 7
+     d54:	df 01       	movw	r26, r30
+     d56:	1d 92       	st	X+, r1
+     d58:	8a 95       	dec	r24
+     d5a:	e9 f7       	brne	.-6      	; 0xd56 <_Z10verifyUserv+0x26>
 	uint8_t index = 0;
 	char key;
 	
 	clearDisplay();
-     d18:	0e 94 6b 03 	call	0x6d6	; 0x6d6 <_Z12clearDisplayv>
+     d5c:	0e 94 6b 03 	call	0x6d6	; 0x6d6 <_Z12clearDisplayv>
 
 	text_row1("Enter PIN:");
-     d1c:	88 e2       	ldi	r24, 0x28	; 40
-     d1e:	91 e0       	ldi	r25, 0x01	; 1
-     d20:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
+     d60:	88 e2       	ldi	r24, 0x28	; 40
+     d62:	91 e0       	ldi	r25, 0x01	; 1
+     d64:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
 int verifyUser(){
 	
 	startTimer();
 	
 	char code[7] = {0};
 	uint8_t index = 0;
-     d24:	10 e0       	ldi	r17, 0x00	; 0
+     d68:	10 e0       	ldi	r17, 0x00	; 0
 
 	text_row1("Enter PIN:");
 
 	while (1) {
 		
 		kb_on_timer1();
-     d26:	0e 94 b7 02 	call	0x56e	; 0x56e <_Z12kb_on_timer1v>
+     d6a:	0e 94 b7 02 	call	0x56e	; 0x56e <_Z12kb_on_timer1v>
 
 		if (KB_CMD1 & 0x80) {
-     d2a:	80 91 01 02 	lds	r24, 0x0201	; 0x800201 <KB_CMD1>
-     d2e:	88 23       	and	r24, r24
-     d30:	0c f0       	brlt	.+2      	; 0xd34 <_Z10verifyUserv+0x48>
-     d32:	4e c0       	rjmp	.+156    	; 0xdd0 <_Z10verifyUserv+0xe4>
+     d6e:	80 91 ff 01 	lds	r24, 0x01FF	; 0x8001ff <KB_CMD1>
+     d72:	88 23       	and	r24, r24
+     d74:	0c f0       	brlt	.+2      	; 0xd78 <_Z10verifyUserv+0x48>
+     d76:	4e c0       	rjmp	.+156    	; 0xe14 <_Z10verifyUserv+0xe4>
 			
 			key = (char)(KB_CMD1 & 0x7F);
-     d34:	80 91 01 02 	lds	r24, 0x0201	; 0x800201 <KB_CMD1>
-     d38:	8f 77       	andi	r24, 0x7F	; 127
+     d78:	80 91 ff 01 	lds	r24, 0x01FF	; 0x8001ff <KB_CMD1>
+     d7c:	8f 77       	andi	r24, 0x7F	; 127
 			KB_CMD1 = 0;
-     d3a:	10 92 01 02 	sts	0x0201, r1	; 0x800201 <KB_CMD1>
+     d7e:	10 92 ff 01 	sts	0x01FF, r1	; 0x8001ff <KB_CMD1>
 
 			if (key >= '0' && key <= '9' && index < 6) {
-     d3e:	90 ed       	ldi	r25, 0xD0	; 208
-     d40:	98 0f       	add	r25, r24
-     d42:	9a 30       	cpi	r25, 0x0A	; 10
-     d44:	c0 f4       	brcc	.+48     	; 0xd76 <_Z10verifyUserv+0x8a>
-     d46:	16 30       	cpi	r17, 0x06	; 6
-     d48:	b0 f4       	brcc	.+44     	; 0xd76 <_Z10verifyUserv+0x8a>
+     d82:	90 ed       	ldi	r25, 0xD0	; 208
+     d84:	98 0f       	add	r25, r24
+     d86:	9a 30       	cpi	r25, 0x0A	; 10
+     d88:	c0 f4       	brcc	.+48     	; 0xdba <_Z10verifyUserv+0x8a>
+     d8a:	16 30       	cpi	r17, 0x06	; 6
+     d8c:	b0 f4       	brcc	.+44     	; 0xdba <_Z10verifyUserv+0x8a>
 				
 				code[index] = key;
-     d4a:	21 2f       	mov	r18, r17
-     d4c:	30 e0       	ldi	r19, 0x00	; 0
-     d4e:	e1 e0       	ldi	r30, 0x01	; 1
-     d50:	f0 e0       	ldi	r31, 0x00	; 0
-     d52:	ec 0f       	add	r30, r28
-     d54:	fd 1f       	adc	r31, r29
-     d56:	e2 0f       	add	r30, r18
-     d58:	f3 1f       	adc	r31, r19
-     d5a:	80 83       	st	Z, r24
+     d8e:	21 2f       	mov	r18, r17
+     d90:	30 e0       	ldi	r19, 0x00	; 0
+     d92:	e1 e0       	ldi	r30, 0x01	; 1
+     d94:	f0 e0       	ldi	r31, 0x00	; 0
+     d96:	ec 0f       	add	r30, r28
+     d98:	fd 1f       	adc	r31, r29
+     d9a:	e2 0f       	add	r30, r18
+     d9c:	f3 1f       	adc	r31, r19
+     d9e:	80 83       	st	Z, r24
 				code[index + 1] = '\0';
-     d5c:	e2 e0       	ldi	r30, 0x02	; 2
-     d5e:	f0 e0       	ldi	r31, 0x00	; 0
-     d60:	ec 0f       	add	r30, r28
-     d62:	fd 1f       	adc	r31, r29
-     d64:	e2 0f       	add	r30, r18
-     d66:	f3 1f       	adc	r31, r19
-     d68:	10 82       	st	Z, r1
+     da0:	e2 e0       	ldi	r30, 0x02	; 2
+     da2:	f0 e0       	ldi	r31, 0x00	; 0
+     da4:	ec 0f       	add	r30, r28
+     da6:	fd 1f       	adc	r31, r29
+     da8:	e2 0f       	add	r30, r18
+     daa:	f3 1f       	adc	r31, r19
+     dac:	10 82       	st	Z, r1
 				index++;
-     d6a:	1f 5f       	subi	r17, 0xFF	; 255
+     dae:	1f 5f       	subi	r17, 0xFF	; 255
 				text_row2(code);
-     d6c:	ce 01       	movw	r24, r28
-     d6e:	01 96       	adiw	r24, 0x01	; 1
-     d70:	0e 94 d5 01 	call	0x3aa	; 0x3aa <_Z9text_row2Pc>
-     d74:	2d c0       	rjmp	.+90     	; 0xdd0 <_Z10verifyUserv+0xe4>
+     db0:	ce 01       	movw	r24, r28
+     db2:	01 96       	adiw	r24, 0x01	; 1
+     db4:	0e 94 d5 01 	call	0x3aa	; 0x3aa <_Z9text_row2Pc>
+     db8:	2d c0       	rjmp	.+90     	; 0xe14 <_Z10verifyUserv+0xe4>
 				
 				} else if (key == '*' && index > 0) {
-     d76:	8a 32       	cpi	r24, 0x2A	; 42
-     d78:	79 f4       	brne	.+30     	; 0xd98 <_Z10verifyUserv+0xac>
-     d7a:	11 23       	and	r17, r17
-     d7c:	49 f1       	breq	.+82     	; 0xdd0 <_Z10verifyUserv+0xe4>
+     dba:	8a 32       	cpi	r24, 0x2A	; 42
+     dbc:	79 f4       	brne	.+30     	; 0xddc <_Z10verifyUserv+0xac>
+     dbe:	11 23       	and	r17, r17
+     dc0:	49 f1       	breq	.+82     	; 0xe14 <_Z10verifyUserv+0xe4>
 				
 				index--;
-     d7e:	11 50       	subi	r17, 0x01	; 1
+     dc2:	11 50       	subi	r17, 0x01	; 1
 				code[index] = '\0';
-     d80:	e1 e0       	ldi	r30, 0x01	; 1
-     d82:	f0 e0       	ldi	r31, 0x00	; 0
-     d84:	ec 0f       	add	r30, r28
-     d86:	fd 1f       	adc	r31, r29
-     d88:	e1 0f       	add	r30, r17
-     d8a:	f1 1d       	adc	r31, r1
-     d8c:	10 82       	st	Z, r1
+     dc4:	e1 e0       	ldi	r30, 0x01	; 1
+     dc6:	f0 e0       	ldi	r31, 0x00	; 0
+     dc8:	ec 0f       	add	r30, r28
+     dca:	fd 1f       	adc	r31, r29
+     dcc:	e1 0f       	add	r30, r17
+     dce:	f1 1d       	adc	r31, r1
+     dd0:	10 82       	st	Z, r1
 				text_row2(code);
-     d8e:	ce 01       	movw	r24, r28
-     d90:	01 96       	adiw	r24, 0x01	; 1
-     d92:	0e 94 d5 01 	call	0x3aa	; 0x3aa <_Z9text_row2Pc>
-     d96:	1c c0       	rjmp	.+56     	; 0xdd0 <_Z10verifyUserv+0xe4>
+     dd2:	ce 01       	movw	r24, r28
+     dd4:	01 96       	adiw	r24, 0x01	; 1
+     dd6:	0e 94 d5 01 	call	0x3aa	; 0x3aa <_Z9text_row2Pc>
+     dda:	1c c0       	rjmp	.+56     	; 0xe14 <_Z10verifyUserv+0xe4>
 				
 				} else if (key == 'D' && index == 6) {
-     d98:	84 34       	cpi	r24, 0x44	; 68
-     d9a:	c1 f4       	brne	.+48     	; 0xdcc <_Z10verifyUserv+0xe0>
-     d9c:	16 30       	cpi	r17, 0x06	; 6
-     d9e:	c1 f4       	brne	.+48     	; 0xdd0 <_Z10verifyUserv+0xe4>
+     ddc:	84 34       	cpi	r24, 0x44	; 68
+     dde:	c1 f4       	brne	.+48     	; 0xe10 <_Z10verifyUserv+0xe0>
+     de0:	16 30       	cpi	r17, 0x06	; 6
+     de2:	c1 f4       	brne	.+48     	; 0xe14 <_Z10verifyUserv+0xe4>
 				
 					if(ComparePin(code)){
-     da0:	ce 01       	movw	r24, r28
-     da2:	01 96       	adiw	r24, 0x01	; 1
-     da4:	0e 94 1f 04 	call	0x83e	; 0x83e <_Z10ComparePinPKc>
-     da8:	88 23       	and	r24, r24
-     daa:	e9 f0       	breq	.+58     	; 0xde6 <_Z10verifyUserv+0xfa>
+     de4:	ce 01       	movw	r24, r28
+     de6:	01 96       	adiw	r24, 0x01	; 1
+     de8:	0e 94 0b 04 	call	0x816	; 0x816 <_Z10ComparePinPKc>
+     dec:	88 23       	and	r24, r24
+     dee:	e9 f0       	breq	.+58     	; 0xe2a <_Z10verifyUserv+0xfa>
 						
 						text_row1("Verified!");
-     dac:	81 e7       	ldi	r24, 0x71	; 113
-     dae:	91 e0       	ldi	r25, 0x01	; 1
-     db0:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
-     db4:	bf ef       	ldi	r27, 0xFF	; 255
-     db6:	2f eb       	ldi	r18, 0xBF	; 191
-     db8:	81 e2       	ldi	r24, 0x21	; 33
-     dba:	b1 50       	subi	r27, 0x01	; 1
-     dbc:	20 40       	sbci	r18, 0x00	; 0
-     dbe:	80 40       	sbci	r24, 0x00	; 0
-     dc0:	e1 f7       	brne	.-8      	; 0xdba <_Z10verifyUserv+0xce>
-     dc2:	00 c0       	rjmp	.+0      	; 0xdc4 <_Z10verifyUserv+0xd8>
-     dc4:	00 00       	nop
+     df0:	80 e7       	ldi	r24, 0x70	; 112
+     df2:	91 e0       	ldi	r25, 0x01	; 1
+     df4:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
+     df8:	bf ef       	ldi	r27, 0xFF	; 255
+     dfa:	2f eb       	ldi	r18, 0xBF	; 191
+     dfc:	81 e2       	ldi	r24, 0x21	; 33
+     dfe:	b1 50       	subi	r27, 0x01	; 1
+     e00:	20 40       	sbci	r18, 0x00	; 0
+     e02:	80 40       	sbci	r24, 0x00	; 0
+     e04:	e1 f7       	brne	.-8      	; 0xdfe <_Z10verifyUserv+0xce>
+     e06:	00 c0       	rjmp	.+0      	; 0xe08 <_Z10verifyUserv+0xd8>
+     e08:	00 00       	nop
 						_delay_ms(1000);
 						
 						return 0;
-     dc6:	80 e0       	ldi	r24, 0x00	; 0
-     dc8:	90 e0       	ldi	r25, 0x00	; 0
-     dca:	12 c0       	rjmp	.+36     	; 0xdf0 <_Z10verifyUserv+0x104>
+     e0a:	80 e0       	ldi	r24, 0x00	; 0
+     e0c:	90 e0       	ldi	r25, 0x00	; 0
+     e0e:	12 c0       	rjmp	.+36     	; 0xe34 <_Z10verifyUserv+0x104>
 					}
 							
 				
 				
 					break;
 				} else if (key == '#') { 
-     dcc:	83 32       	cpi	r24, 0x23	; 35
-     dce:	71 f0       	breq	.+28     	; 0xdec <_Z10verifyUserv+0x100>
+     e10:	83 32       	cpi	r24, 0x23	; 35
+     e12:	71 f0       	breq	.+28     	; 0xe30 <_Z10verifyUserv+0x100>
 					return 3; // Akce zrusena
 					
 				}
 		}
 		
 		if(timesUP()) return 2; // cas vyprsel
-     dd0:	80 91 e0 01 	lds	r24, 0x01E0	; 0x8001e0 <__data_end>
-     dd4:	90 91 e1 01 	lds	r25, 0x01E1	; 0x8001e1 <__data_end+0x1>
-     dd8:	80 31       	cpi	r24, 0x10	; 16
-     dda:	97 42       	sbci	r25, 0x27	; 39
-     ddc:	0c f4       	brge	.+2      	; 0xde0 <_Z10verifyUserv+0xf4>
-     dde:	a3 cf       	rjmp	.-186    	; 0xd26 <_Z10verifyUserv+0x3a>
-     de0:	82 e0       	ldi	r24, 0x02	; 2
-     de2:	90 e0       	ldi	r25, 0x00	; 0
-     de4:	05 c0       	rjmp	.+10     	; 0xdf0 <_Z10verifyUserv+0x104>
+     e14:	80 91 de 01 	lds	r24, 0x01DE	; 0x8001de <__data_end>
+     e18:	90 91 df 01 	lds	r25, 0x01DF	; 0x8001df <__data_end+0x1>
+     e1c:	80 3a       	cpi	r24, 0xA0	; 160
+     e1e:	9f 40       	sbci	r25, 0x0F	; 15
+     e20:	0c f4       	brge	.+2      	; 0xe24 <_Z10verifyUserv+0xf4>
+     e22:	a3 cf       	rjmp	.-186    	; 0xd6a <_Z10verifyUserv+0x3a>
+     e24:	82 e0       	ldi	r24, 0x02	; 2
+     e26:	90 e0       	ldi	r25, 0x00	; 0
+     e28:	05 c0       	rjmp	.+10     	; 0xe34 <_Z10verifyUserv+0x104>
 						
 						return 0;
 						
 					} else {
 						
 						return 1; // Neni takovy pin
-     de6:	81 e0       	ldi	r24, 0x01	; 1
-     de8:	90 e0       	ldi	r25, 0x00	; 0
-     dea:	02 c0       	rjmp	.+4      	; 0xdf0 <_Z10verifyUserv+0x104>
+     e2a:	81 e0       	ldi	r24, 0x01	; 1
+     e2c:	90 e0       	ldi	r25, 0x00	; 0
+     e2e:	02 c0       	rjmp	.+4      	; 0xe34 <_Z10verifyUserv+0x104>
 				
 				
 					break;
 				} else if (key == '#') { 
 					
 					return 3; // Akce zrusena
-     dec:	83 e0       	ldi	r24, 0x03	; 3
-     dee:	90 e0       	ldi	r25, 0x00	; 0
+     e30:	83 e0       	ldi	r24, 0x03	; 3
+     e32:	90 e0       	ldi	r25, 0x00	; 0
 		
 		if(timesUP()) return 2; // cas vyprsel
 		
 	}
 	
 }
-     df0:	27 96       	adiw	r28, 0x07	; 7
-     df2:	0f b6       	in	r0, 0x3f	; 63
-     df4:	f8 94       	cli
-     df6:	de bf       	out	0x3e, r29	; 62
-     df8:	0f be       	out	0x3f, r0	; 63
-     dfa:	cd bf       	out	0x3d, r28	; 61
-     dfc:	df 91       	pop	r29
-     dfe:	cf 91       	pop	r28
-     e00:	1f 91       	pop	r17
-     e02:	08 95       	ret
+     e34:	27 96       	adiw	r28, 0x07	; 7
+     e36:	0f b6       	in	r0, 0x3f	; 63
+     e38:	f8 94       	cli
+     e3a:	de bf       	out	0x3e, r29	; 62
+     e3c:	0f be       	out	0x3f, r0	; 63
+     e3e:	cd bf       	out	0x3d, r28	; 61
+     e40:	df 91       	pop	r29
+     e42:	cf 91       	pop	r28
+     e44:	1f 91       	pop	r17
+     e46:	08 95       	ret
 
-00000e04 <_Z7restartv>:
+00000e48 <_Z7restartv>:
 				: "n" (_SFR_MEM_ADDR(_WD_CONTROL_REG)),
 				"r" ((uint8_t)(_BV(_WD_CHANGE_BIT) | _BV(WDE))),
 				"r" ((uint8_t) ((value & 0x08 ? _WD_PS3_MASK : 0x00) |
 						_BV(WDE) | (value & 0x07)) )
 				: "r0"
 		);
-     e04:	98 e0       	ldi	r25, 0x08	; 8
-     e06:	88 e1       	ldi	r24, 0x18	; 24
-     e08:	0f b6       	in	r0, 0x3f	; 63
-     e0a:	f8 94       	cli
-     e0c:	a8 95       	wdr
-     e0e:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__TEXT_REGION_LENGTH__+0x7e0060>
-     e12:	0f be       	out	0x3f, r0	; 63
-     e14:	90 93 60 00 	sts	0x0060, r25	; 0x800060 <__TEXT_REGION_LENGTH__+0x7e0060>
-     e18:	ff cf       	rjmp	.-2      	; 0xe18 <_Z7restartv+0x14>
+     e48:	98 e0       	ldi	r25, 0x08	; 8
+     e4a:	88 e1       	ldi	r24, 0x18	; 24
+     e4c:	0f b6       	in	r0, 0x3f	; 63
+     e4e:	f8 94       	cli
+     e50:	a8 95       	wdr
+     e52:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+     e56:	0f be       	out	0x3f, r0	; 63
+     e58:	90 93 60 00 	sts	0x0060, r25	; 0x800060 <__DATA_REGION_ORIGIN__>
+     e5c:	ff cf       	rjmp	.-2      	; 0xe5c <_Z7restartv+0x14>
 
-00000e1a <main>:
+00000e5e <main>:
 	wdt_enable(WDTO_15MS); // Povolit watchdog s timeoutem 15 ms
-	while(1);              // Poèkej, než watchdog resetne MCU
+	while(1);              // Po?kej, ne? watchdog resetne MCU
 }
 
 int main(void)
 {
-     e1a:	cf 93       	push	r28
-     e1c:	df 93       	push	r29
-     e1e:	cd b7       	in	r28, 0x3d	; 61
-     e20:	de b7       	in	r29, 0x3e	; 62
-     e22:	28 97       	sbiw	r28, 0x08	; 8
-     e24:	0f b6       	in	r0, 0x3f	; 63
-     e26:	f8 94       	cli
-     e28:	de bf       	out	0x3e, r29	; 62
-     e2a:	0f be       	out	0x3f, r0	; 63
-     e2c:	cd bf       	out	0x3d, r28	; 61
+     e5e:	cf 93       	push	r28
+     e60:	df 93       	push	r29
+     e62:	cd b7       	in	r28, 0x3d	; 61
+     e64:	de b7       	in	r29, 0x3e	; 62
+     e66:	28 97       	sbiw	r28, 0x08	; 8
+     e68:	0f b6       	in	r0, 0x3f	; 63
+     e6a:	f8 94       	cli
+     e6c:	de bf       	out	0x3e, r29	; 62
+     e6e:	0f be       	out	0x3f, r0	; 63
+     e70:	cd bf       	out	0x3d, r28	; 61
 	
-	MCUSR &= ~(1<<WDRF); // Vymazání flagu watchdog resetu
-     e2e:	84 b7       	in	r24, 0x34	; 52
-     e30:	87 7f       	andi	r24, 0xF7	; 247
-     e32:	84 bf       	out	0x34, r24	; 52
+	MCUSR &= ~(1<<WDRF); // Vymaz?n? flagu watchdog resetu
+     e72:	84 b7       	in	r24, 0x34	; 52
+     e74:	87 7f       	andi	r24, 0xF7	; 247
+     e76:	84 bf       	out	0x34, r24	; 52
 				"out __SREG__,__tmp_reg__"   "\n\t"
 				: [TEMPREG] "=d" (temp_reg)
 				: [WDTREG]  "n"  (_SFR_MEM_ADDR(_WD_CONTROL_REG)),
 				[WDCE_WDE]  "n"  ((uint8_t)(_BV(_WD_CHANGE_BIT) | _BV(WDE)))
 				: "r0"
 		);
-     e34:	0f b6       	in	r0, 0x3f	; 63
-     e36:	f8 94       	cli
-     e38:	a8 95       	wdr
-     e3a:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__TEXT_REGION_LENGTH__+0x7e0060>
-     e3e:	88 61       	ori	r24, 0x18	; 24
-     e40:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__TEXT_REGION_LENGTH__+0x7e0060>
-     e44:	10 92 60 00 	sts	0x0060, r1	; 0x800060 <__TEXT_REGION_LENGTH__+0x7e0060>
-     e48:	0f be       	out	0x3f, r0	; 63
-	wdt_disable();       // Vypnutí watchdogu
+     e78:	0f b6       	in	r0, 0x3f	; 63
+     e7a:	f8 94       	cli
+     e7c:	a8 95       	wdr
+     e7e:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+     e82:	88 61       	ori	r24, 0x18	; 24
+     e84:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+     e88:	10 92 60 00 	sts	0x0060, r1	; 0x800060 <__DATA_REGION_ORIGIN__>
+     e8c:	0f be       	out	0x3f, r0	; 63
+	wdt_disable();       // Vypnut? watchdogu
 	
 	SetRegistersInit();	
-     e4a:	0e 94 29 04 	call	0x852	; 0x852 <_Z16SetRegistersInitv>
+     e8e:	0e 94 15 04 	call	0x82a	; 0x82a <_Z16SetRegistersInitv>
 
 	if(EEPROM_read(FIRST_STARTUP) == 0xFF){
-     e4e:	80 e0       	ldi	r24, 0x00	; 0
-     e50:	90 e0       	ldi	r25, 0x00	; 0
-     e52:	0e 94 53 03 	call	0x6a6	; 0x6a6 <_Z11EEPROM_readj>
-     e56:	8f 3f       	cpi	r24, 0xFF	; 255
-     e58:	19 f4       	brne	.+6      	; 0xe60 <main+0x46>
+     e92:	80 e0       	ldi	r24, 0x00	; 0
+     e94:	90 e0       	ldi	r25, 0x00	; 0
+     e96:	0e 94 53 03 	call	0x6a6	; 0x6a6 <_Z11EEPROM_readj>
+     e9a:	8f 3f       	cpi	r24, 0xFF	; 255
+     e9c:	19 f4       	brne	.+6      	; 0xea4 <main+0x46>
 		
 		FirstStartUp();		
-     e5a:	0e 94 8a 03 	call	0x714	; 0x714 <_Z12FirstStartUpv>
-     e5e:	15 c0       	rjmp	.+42     	; 0xe8a <main+0x70>
-     e60:	0f 2e       	mov	r0, r31
-     e62:	f2 ee       	ldi	r31, 0xE2	; 226
-     e64:	ef 2e       	mov	r14, r31
-     e66:	f1 e0       	ldi	r31, 0x01	; 1
-     e68:	ff 2e       	mov	r15, r31
-     e6a:	f0 2d       	mov	r31, r0
-	MCUSR &= ~(1<<WDRF); // Vymazání flagu watchdog resetu
-	wdt_disable();       // Vypnutí watchdogu
+     e9e:	0e 94 8a 03 	call	0x714	; 0x714 <_Z12FirstStartUpv>
+     ea2:	15 c0       	rjmp	.+42     	; 0xece <main+0x70>
+     ea4:	0f 2e       	mov	r0, r31
+     ea6:	f0 ee       	ldi	r31, 0xE0	; 224
+     ea8:	ef 2e       	mov	r14, r31
+     eaa:	f1 e0       	ldi	r31, 0x01	; 1
+     eac:	ff 2e       	mov	r15, r31
+     eae:	f0 2d       	mov	r31, r0
+	MCUSR &= ~(1<<WDRF); // Vymaz?n? flagu watchdog resetu
+	wdt_disable();       // Vypnut? watchdogu
 	
 	SetRegistersInit();	
 
 	if(EEPROM_read(FIRST_STARTUP) == 0xFF){
-     e6c:	00 e0       	ldi	r16, 0x00	; 0
-     e6e:	10 e0       	ldi	r17, 0x00	; 0
+     eb0:	00 e0       	ldi	r16, 0x00	; 0
+     eb2:	10 e0       	ldi	r17, 0x00	; 0
 		FirstStartUp();		
 		
 	} else {
 		
 		for (int i = 0; i < 6; i++) {
 			pristupovyPin[i] = EEPROM_read(PIN_START_ADDR + i);
-     e70:	0f 5f       	subi	r16, 0xFF	; 255
-     e72:	1f 4f       	sbci	r17, 0xFF	; 255
-     e74:	c8 01       	movw	r24, r16
-     e76:	0e 94 53 03 	call	0x6a6	; 0x6a6 <_Z11EEPROM_readj>
-     e7a:	d7 01       	movw	r26, r14
-     e7c:	8d 93       	st	X+, r24
-     e7e:	7d 01       	movw	r14, r26
+     eb4:	0f 5f       	subi	r16, 0xFF	; 255
+     eb6:	1f 4f       	sbci	r17, 0xFF	; 255
+     eb8:	c8 01       	movw	r24, r16
+     eba:	0e 94 53 03 	call	0x6a6	; 0x6a6 <_Z11EEPROM_readj>
+     ebe:	d7 01       	movw	r26, r14
+     ec0:	8d 93       	st	X+, r24
+     ec2:	7d 01       	movw	r14, r26
 		
 		FirstStartUp();		
 		
 	} else {
 		
 		for (int i = 0; i < 6; i++) {
-     e80:	06 30       	cpi	r16, 0x06	; 6
-     e82:	11 05       	cpc	r17, r1
-     e84:	a9 f7       	brne	.-22     	; 0xe70 <main+0x56>
+     ec4:	06 30       	cpi	r16, 0x06	; 6
+     ec6:	11 05       	cpc	r17, r1
+     ec8:	a9 f7       	brne	.-22     	; 0xeb4 <main+0x56>
 			pristupovyPin[i] = EEPROM_read(PIN_START_ADDR + i);
 			
 		} pristupovyPin[6] = '\0';
-     e86:	10 92 e8 01 	sts	0x01E8, r1	; 0x8001e8 <pristupovyPin+0x6>
+     eca:	10 92 e6 01 	sts	0x01E6, r1	; 0x8001e6 <pristupovyPin+0x6>
 		
 	}
 
 	showMenuText();
-     e8a:	0e 94 62 03 	call	0x6c4	; 0x6c4 <_Z12showMenuTextv>
+     ece:	0e 94 62 03 	call	0x6c4	; 0x6c4 <_Z12showMenuTextv>
 
 	bool canOpen = false;
-     e8e:	19 82       	std	Y+1, r1	; 0x01
+     ed2:	19 82       	std	Y+1, r1	; 0x01
 	char key;
 	char zadanyPin[7] = {0};
-     e90:	fe 01       	movw	r30, r28
-     e92:	32 96       	adiw	r30, 0x02	; 2
-     e94:	87 e0       	ldi	r24, 0x07	; 7
-     e96:	df 01       	movw	r26, r30
-     e98:	1d 92       	st	X+, r1
-     e9a:	8a 95       	dec	r24
-     e9c:	e9 f7       	brne	.-6      	; 0xe98 <main+0x7e>
+     ed4:	fe 01       	movw	r30, r28
+     ed6:	32 96       	adiw	r30, 0x02	; 2
+     ed8:	87 e0       	ldi	r24, 0x07	; 7
+     eda:	df 01       	movw	r26, r30
+     edc:	1d 92       	st	X+, r1
+     ede:	8a 95       	dec	r24
+     ee0:	e9 f7       	brne	.-6      	; 0xedc <main+0x7e>
 	uint8_t pinIndex = 0;
-     e9e:	10 e0       	ldi	r17, 0x00	; 0
+     ee2:	10 e0       	ldi	r17, 0x00	; 0
 
 	while (1)
 	{
 		
 		if(CheckForOpenByRFID(canOpen)){
-     ea0:	ce 01       	movw	r24, r28
-     ea2:	01 96       	adiw	r24, 0x01	; 1
-     ea4:	0e 94 36 06 	call	0xc6c	; 0xc6c <_Z18CheckForOpenByRFIDRb>
-     ea8:	88 23       	and	r24, r24
-     eaa:	41 f0       	breq	.+16     	; 0xebc <main+0xa2>
+     ee4:	ce 01       	movw	r24, r28
+     ee6:	01 96       	adiw	r24, 0x01	; 1
+     ee8:	0e 94 58 06 	call	0xcb0	; 0xcb0 <_Z18CheckForOpenByRFIDRb>
+     eec:	88 23       	and	r24, r24
+     eee:	41 f0       	breq	.+16     	; 0xf00 <main+0xa2>
 
 			if(canOpen) OpenLock();
-     eac:	89 81       	ldd	r24, Y+1	; 0x01
-     eae:	88 23       	and	r24, r24
-     eb0:	19 f0       	breq	.+6      	; 0xeb8 <main+0x9e>
-     eb2:	0e 94 6e 04 	call	0x8dc	; 0x8dc <_Z8OpenLockv>
-     eb6:	02 c0       	rjmp	.+4      	; 0xebc <main+0xa2>
+     ef0:	89 81       	ldd	r24, Y+1	; 0x01
+     ef2:	88 23       	and	r24, r24
+     ef4:	19 f0       	breq	.+6      	; 0xefc <main+0x9e>
+     ef6:	0e 94 5a 04 	call	0x8b4	; 0x8b4 <_Z8OpenLockv>
+     efa:	02 c0       	rjmp	.+4      	; 0xf00 <main+0xa2>
 			else AccessDenied();
-     eb8:	0e 94 83 04 	call	0x906	; 0x906 <_Z12AccessDeniedv>
+     efc:	0e 94 6f 04 	call	0x8de	; 0x8de <_Z12AccessDeniedv>
 
 		}
 
 		kb_on_timer1();
-     ebc:	0e 94 b7 02 	call	0x56e	; 0x56e <_Z12kb_on_timer1v>
+     f00:	0e 94 b7 02 	call	0x56e	; 0x56e <_Z12kb_on_timer1v>
 
 		if (KB_CMD1 & 0x80){
-     ec0:	80 91 01 02 	lds	r24, 0x0201	; 0x800201 <KB_CMD1>
-     ec4:	88 23       	and	r24, r24
-     ec6:	64 f7       	brge	.-40     	; 0xea0 <main+0x86>
+     f04:	80 91 ff 01 	lds	r24, 0x01FF	; 0x8001ff <KB_CMD1>
+     f08:	88 23       	and	r24, r24
+     f0a:	64 f7       	brge	.-40     	; 0xee4 <main+0x86>
 
 			key = (char)(KB_CMD1 & 0x7F);
-     ec8:	80 91 01 02 	lds	r24, 0x0201	; 0x800201 <KB_CMD1>
-     ecc:	8f 77       	andi	r24, 0x7F	; 127
+     f0c:	80 91 ff 01 	lds	r24, 0x01FF	; 0x8001ff <KB_CMD1>
+     f10:	8f 77       	andi	r24, 0x7F	; 127
 			KB_CMD1 = 0;
-     ece:	10 92 01 02 	sts	0x0201, r1	; 0x800201 <KB_CMD1>
+     f12:	10 92 ff 01 	sts	0x01FF, r1	; 0x8001ff <KB_CMD1>
 
 			if (key >= '0' && key <= '9' && pinIndex < 6) {
-     ed2:	90 ed       	ldi	r25, 0xD0	; 208
-     ed4:	98 0f       	add	r25, r24
-     ed6:	9a 30       	cpi	r25, 0x0A	; 10
-     ed8:	c0 f4       	brcc	.+48     	; 0xf0a <main+0xf0>
-     eda:	16 30       	cpi	r17, 0x06	; 6
-     edc:	b0 f4       	brcc	.+44     	; 0xf0a <main+0xf0>
+     f16:	90 ed       	ldi	r25, 0xD0	; 208
+     f18:	98 0f       	add	r25, r24
+     f1a:	9a 30       	cpi	r25, 0x0A	; 10
+     f1c:	c0 f4       	brcc	.+48     	; 0xf4e <main+0xf0>
+     f1e:	16 30       	cpi	r17, 0x06	; 6
+     f20:	b0 f4       	brcc	.+44     	; 0xf4e <main+0xf0>
 
 				zadanyPin[pinIndex] = key;
-     ede:	21 2f       	mov	r18, r17
-     ee0:	30 e0       	ldi	r19, 0x00	; 0
-     ee2:	e2 e0       	ldi	r30, 0x02	; 2
-     ee4:	f0 e0       	ldi	r31, 0x00	; 0
-     ee6:	ec 0f       	add	r30, r28
-     ee8:	fd 1f       	adc	r31, r29
-     eea:	e2 0f       	add	r30, r18
-     eec:	f3 1f       	adc	r31, r19
-     eee:	80 83       	st	Z, r24
+     f22:	21 2f       	mov	r18, r17
+     f24:	30 e0       	ldi	r19, 0x00	; 0
+     f26:	e2 e0       	ldi	r30, 0x02	; 2
+     f28:	f0 e0       	ldi	r31, 0x00	; 0
+     f2a:	ec 0f       	add	r30, r28
+     f2c:	fd 1f       	adc	r31, r29
+     f2e:	e2 0f       	add	r30, r18
+     f30:	f3 1f       	adc	r31, r19
+     f32:	80 83       	st	Z, r24
 				zadanyPin[pinIndex + 1] = '\0';
-     ef0:	e3 e0       	ldi	r30, 0x03	; 3
-     ef2:	f0 e0       	ldi	r31, 0x00	; 0
-     ef4:	ec 0f       	add	r30, r28
-     ef6:	fd 1f       	adc	r31, r29
-     ef8:	e2 0f       	add	r30, r18
-     efa:	f3 1f       	adc	r31, r19
-     efc:	10 82       	st	Z, r1
+     f34:	e3 e0       	ldi	r30, 0x03	; 3
+     f36:	f0 e0       	ldi	r31, 0x00	; 0
+     f38:	ec 0f       	add	r30, r28
+     f3a:	fd 1f       	adc	r31, r29
+     f3c:	e2 0f       	add	r30, r18
+     f3e:	f3 1f       	adc	r31, r19
+     f40:	10 82       	st	Z, r1
 				pinIndex++;
-     efe:	1f 5f       	subi	r17, 0xFF	; 255
+     f42:	1f 5f       	subi	r17, 0xFF	; 255
 				text_row2(zadanyPin);
-     f00:	ce 01       	movw	r24, r28
-     f02:	02 96       	adiw	r24, 0x02	; 2
-     f04:	0e 94 d5 01 	call	0x3aa	; 0x3aa <_Z9text_row2Pc>
-     f08:	cb cf       	rjmp	.-106    	; 0xea0 <main+0x86>
+     f44:	ce 01       	movw	r24, r28
+     f46:	02 96       	adiw	r24, 0x02	; 2
+     f48:	0e 94 d5 01 	call	0x3aa	; 0x3aa <_Z9text_row2Pc>
+     f4c:	cb cf       	rjmp	.-106    	; 0xee4 <main+0x86>
 				
 			} else if (key == '*' && pinIndex > 0) {
-     f0a:	8a 32       	cpi	r24, 0x2A	; 42
-     f0c:	79 f4       	brne	.+30     	; 0xf2c <main+0x112>
-     f0e:	11 23       	and	r17, r17
-     f10:	39 f2       	breq	.-114    	; 0xea0 <main+0x86>
+     f4e:	8a 32       	cpi	r24, 0x2A	; 42
+     f50:	79 f4       	brne	.+30     	; 0xf70 <main+0x112>
+     f52:	11 23       	and	r17, r17
+     f54:	39 f2       	breq	.-114    	; 0xee4 <main+0x86>
 
 				pinIndex--;
-     f12:	11 50       	subi	r17, 0x01	; 1
+     f56:	11 50       	subi	r17, 0x01	; 1
 				zadanyPin[pinIndex] = '\0';
-     f14:	e2 e0       	ldi	r30, 0x02	; 2
-     f16:	f0 e0       	ldi	r31, 0x00	; 0
-     f18:	ec 0f       	add	r30, r28
-     f1a:	fd 1f       	adc	r31, r29
-     f1c:	e1 0f       	add	r30, r17
-     f1e:	f1 1d       	adc	r31, r1
-     f20:	10 82       	st	Z, r1
+     f58:	e2 e0       	ldi	r30, 0x02	; 2
+     f5a:	f0 e0       	ldi	r31, 0x00	; 0
+     f5c:	ec 0f       	add	r30, r28
+     f5e:	fd 1f       	adc	r31, r29
+     f60:	e1 0f       	add	r30, r17
+     f62:	f1 1d       	adc	r31, r1
+     f64:	10 82       	st	Z, r1
 				text_row2(zadanyPin);
-     f22:	ce 01       	movw	r24, r28
-     f24:	02 96       	adiw	r24, 0x02	; 2
-     f26:	0e 94 d5 01 	call	0x3aa	; 0x3aa <_Z9text_row2Pc>
-     f2a:	ba cf       	rjmp	.-140    	; 0xea0 <main+0x86>
+     f66:	ce 01       	movw	r24, r28
+     f68:	02 96       	adiw	r24, 0x02	; 2
+     f6a:	0e 94 d5 01 	call	0x3aa	; 0x3aa <_Z9text_row2Pc>
+     f6e:	ba cf       	rjmp	.-140    	; 0xee4 <main+0x86>
 				
 			} else if (key == 'D' && pinIndex == 6) {
-     f2c:	84 34       	cpi	r24, 0x44	; 68
-     f2e:	89 f4       	brne	.+34     	; 0xf52 <main+0x138>
-     f30:	16 30       	cpi	r17, 0x06	; 6
-     f32:	09 f0       	breq	.+2      	; 0xf36 <main+0x11c>
-     f34:	b5 cf       	rjmp	.-150    	; 0xea0 <main+0x86>
+     f70:	84 34       	cpi	r24, 0x44	; 68
+     f72:	89 f4       	brne	.+34     	; 0xf96 <main+0x138>
+     f74:	16 30       	cpi	r17, 0x06	; 6
+     f76:	09 f0       	breq	.+2      	; 0xf7a <main+0x11c>
+     f78:	b5 cf       	rjmp	.-150    	; 0xee4 <main+0x86>
 				
 				if(ComparePin(zadanyPin)) OpenLock();
-     f36:	ce 01       	movw	r24, r28
-     f38:	02 96       	adiw	r24, 0x02	; 2
-     f3a:	0e 94 1f 04 	call	0x83e	; 0x83e <_Z10ComparePinPKc>
-     f3e:	88 23       	and	r24, r24
-     f40:	21 f0       	breq	.+8      	; 0xf4a <main+0x130>
-     f42:	0e 94 6e 04 	call	0x8dc	; 0x8dc <_Z8OpenLockv>
+     f7a:	ce 01       	movw	r24, r28
+     f7c:	02 96       	adiw	r24, 0x02	; 2
+     f7e:	0e 94 0b 04 	call	0x816	; 0x816 <_Z10ComparePinPKc>
+     f82:	88 23       	and	r24, r24
+     f84:	21 f0       	breq	.+8      	; 0xf8e <main+0x130>
+     f86:	0e 94 5a 04 	call	0x8b4	; 0x8b4 <_Z8OpenLockv>
 				else AccessDenied();
 
 				pinIndex = 0;
-     f46:	10 e0       	ldi	r17, 0x00	; 0
-     f48:	ab cf       	rjmp	.-170    	; 0xea0 <main+0x86>
+     f8a:	10 e0       	ldi	r17, 0x00	; 0
+     f8c:	ab cf       	rjmp	.-170    	; 0xee4 <main+0x86>
 				text_row2(zadanyPin);
 				
 			} else if (key == 'D' && pinIndex == 6) {
 				
 				if(ComparePin(zadanyPin)) OpenLock();
 				else AccessDenied();
-     f4a:	0e 94 83 04 	call	0x906	; 0x906 <_Z12AccessDeniedv>
+     f8e:	0e 94 6f 04 	call	0x8de	; 0x8de <_Z12AccessDeniedv>
 
 				pinIndex = 0;
-     f4e:	10 e0       	ldi	r17, 0x00	; 0
-     f50:	a7 cf       	rjmp	.-178    	; 0xea0 <main+0x86>
+     f92:	10 e0       	ldi	r17, 0x00	; 0
+     f94:	a7 cf       	rjmp	.-178    	; 0xee4 <main+0x86>
 
 			} else if(key == 'A') {
-     f52:	81 34       	cpi	r24, 0x41	; 65
-     f54:	09 f0       	breq	.+2      	; 0xf58 <main+0x13e>
-     f56:	4c c0       	rjmp	.+152    	; 0xff0 <main+0x1d6>
+     f96:	81 34       	cpi	r24, 0x41	; 65
+     f98:	09 f0       	breq	.+2      	; 0xf9c <main+0x13e>
+     f9a:	4c c0       	rjmp	.+152    	; 0x1034 <main+0x1d6>
 				
 				int resultt = verifyUser();
-     f58:	0e 94 76 06 	call	0xcec	; 0xcec <_Z10verifyUserv>
+     f9c:	0e 94 98 06 	call	0xd30	; 0xd30 <_Z10verifyUserv>
 
 				if(resultt == 0){
-     f5c:	00 97       	sbiw	r24, 0x00	; 0
-     f5e:	41 f5       	brne	.+80     	; 0xfb0 <main+0x196>
+     fa0:	00 97       	sbiw	r24, 0x00	; 0
+     fa2:	41 f5       	brne	.+80     	; 0xff4 <main+0x196>
 		
 					int result = AddChip();
-     f60:	0e 94 60 05 	call	0xac0	; 0xac0 <_Z7AddChipv>
-     f64:	7c 01       	movw	r14, r24
+     fa4:	0e 94 4c 05 	call	0xa98	; 0xa98 <_Z7AddChipv>
+     fa8:	7c 01       	movw	r14, r24
 					clearDisplay();	
-     f66:	0e 94 6b 03 	call	0x6d6	; 0x6d6 <_Z12clearDisplayv>
+     faa:	0e 94 6b 03 	call	0x6d6	; 0x6d6 <_Z12clearDisplayv>
 					
 					if(result == 0) text_row1("No Space!");
-     f6a:	e1 14       	cp	r14, r1
-     f6c:	f1 04       	cpc	r15, r1
-     f6e:	29 f4       	brne	.+10     	; 0xf7a <main+0x160>
-     f70:	8b e7       	ldi	r24, 0x7B	; 123
-     f72:	91 e0       	ldi	r25, 0x01	; 1
-     f74:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
-     f78:	2f c0       	rjmp	.+94     	; 0xfd8 <main+0x1be>
+     fae:	e1 14       	cp	r14, r1
+     fb0:	f1 04       	cpc	r15, r1
+     fb2:	29 f4       	brne	.+10     	; 0xfbe <main+0x160>
+     fb4:	8a e7       	ldi	r24, 0x7A	; 122
+     fb6:	91 e0       	ldi	r25, 0x01	; 1
+     fb8:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
+     fbc:	2f c0       	rjmp	.+94     	; 0x101c <main+0x1be>
 					else if(result == 1) text_row1("Timed out!");
-     f7a:	b1 e0       	ldi	r27, 0x01	; 1
-     f7c:	eb 16       	cp	r14, r27
-     f7e:	f1 04       	cpc	r15, r1
-     f80:	29 f4       	brne	.+10     	; 0xf8c <main+0x172>
-     f82:	85 e8       	ldi	r24, 0x85	; 133
-     f84:	91 e0       	ldi	r25, 0x01	; 1
-     f86:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
-     f8a:	26 c0       	rjmp	.+76     	; 0xfd8 <main+0x1be>
+     fbe:	b1 e0       	ldi	r27, 0x01	; 1
+     fc0:	eb 16       	cp	r14, r27
+     fc2:	f1 04       	cpc	r15, r1
+     fc4:	29 f4       	brne	.+10     	; 0xfd0 <main+0x172>
+     fc6:	84 e8       	ldi	r24, 0x84	; 132
+     fc8:	91 e0       	ldi	r25, 0x01	; 1
+     fca:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
+     fce:	26 c0       	rjmp	.+76     	; 0x101c <main+0x1be>
 					else if (result == 2) text_row1("Success!");
-     f8c:	e2 e0       	ldi	r30, 0x02	; 2
-     f8e:	ee 16       	cp	r14, r30
-     f90:	f1 04       	cpc	r15, r1
-     f92:	29 f4       	brne	.+10     	; 0xf9e <main+0x184>
-     f94:	80 e9       	ldi	r24, 0x90	; 144
-     f96:	91 e0       	ldi	r25, 0x01	; 1
-     f98:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
-     f9c:	1d c0       	rjmp	.+58     	; 0xfd8 <main+0x1be>
+     fd0:	e2 e0       	ldi	r30, 0x02	; 2
+     fd2:	ee 16       	cp	r14, r30
+     fd4:	f1 04       	cpc	r15, r1
+     fd6:	29 f4       	brne	.+10     	; 0xfe2 <main+0x184>
+     fd8:	8f e8       	ldi	r24, 0x8F	; 143
+     fda:	91 e0       	ldi	r25, 0x01	; 1
+     fdc:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
+     fe0:	1d c0       	rjmp	.+58     	; 0x101c <main+0x1be>
 					else if (result == 3) text_row1("Already Added!");
-     f9e:	f3 e0       	ldi	r31, 0x03	; 3
-     fa0:	ef 16       	cp	r14, r31
-     fa2:	f1 04       	cpc	r15, r1
-     fa4:	c9 f4       	brne	.+50     	; 0xfd8 <main+0x1be>
-     fa6:	89 e9       	ldi	r24, 0x99	; 153
-     fa8:	91 e0       	ldi	r25, 0x01	; 1
-     faa:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
-     fae:	14 c0       	rjmp	.+40     	; 0xfd8 <main+0x1be>
+     fe2:	f3 e0       	ldi	r31, 0x03	; 3
+     fe4:	ef 16       	cp	r14, r31
+     fe6:	f1 04       	cpc	r15, r1
+     fe8:	c9 f4       	brne	.+50     	; 0x101c <main+0x1be>
+     fea:	88 e9       	ldi	r24, 0x98	; 152
+     fec:	91 e0       	ldi	r25, 0x01	; 1
+     fee:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
+     ff2:	14 c0       	rjmp	.+40     	; 0x101c <main+0x1be>
 
 				} else if (resultt == 1) AccessDenied();
-     fb0:	81 30       	cpi	r24, 0x01	; 1
-     fb2:	91 05       	cpc	r25, r1
-     fb4:	19 f4       	brne	.+6      	; 0xfbc <main+0x1a2>
-     fb6:	0e 94 83 04 	call	0x906	; 0x906 <_Z12AccessDeniedv>
-     fba:	0e c0       	rjmp	.+28     	; 0xfd8 <main+0x1be>
+     ff4:	81 30       	cpi	r24, 0x01	; 1
+     ff6:	91 05       	cpc	r25, r1
+     ff8:	19 f4       	brne	.+6      	; 0x1000 <main+0x1a2>
+     ffa:	0e 94 6f 04 	call	0x8de	; 0x8de <_Z12AccessDeniedv>
+     ffe:	0e c0       	rjmp	.+28     	; 0x101c <main+0x1be>
 				else if (resultt == 2) text_row1("Timed out!");
-     fbc:	82 30       	cpi	r24, 0x02	; 2
-     fbe:	91 05       	cpc	r25, r1
-     fc0:	29 f4       	brne	.+10     	; 0xfcc <main+0x1b2>
-     fc2:	85 e8       	ldi	r24, 0x85	; 133
-     fc4:	91 e0       	ldi	r25, 0x01	; 1
-     fc6:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
-     fca:	06 c0       	rjmp	.+12     	; 0xfd8 <main+0x1be>
+    1000:	82 30       	cpi	r24, 0x02	; 2
+    1002:	91 05       	cpc	r25, r1
+    1004:	29 f4       	brne	.+10     	; 0x1010 <main+0x1b2>
+    1006:	84 e8       	ldi	r24, 0x84	; 132
+    1008:	91 e0       	ldi	r25, 0x01	; 1
+    100a:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
+    100e:	06 c0       	rjmp	.+12     	; 0x101c <main+0x1be>
 				else if (resultt == 3) text_row1("Event cancelled!");
-     fcc:	03 97       	sbiw	r24, 0x03	; 3
-     fce:	21 f4       	brne	.+8      	; 0xfd8 <main+0x1be>
-     fd0:	88 ea       	ldi	r24, 0xA8	; 168
-     fd2:	91 e0       	ldi	r25, 0x01	; 1
-     fd4:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
-     fd8:	2f ef       	ldi	r18, 0xFF	; 255
-     fda:	8f eb       	ldi	r24, 0xBF	; 191
-     fdc:	91 e2       	ldi	r25, 0x21	; 33
-     fde:	21 50       	subi	r18, 0x01	; 1
-     fe0:	80 40       	sbci	r24, 0x00	; 0
-     fe2:	90 40       	sbci	r25, 0x00	; 0
-     fe4:	e1 f7       	brne	.-8      	; 0xfde <main+0x1c4>
-     fe6:	00 c0       	rjmp	.+0      	; 0xfe8 <main+0x1ce>
-     fe8:	00 00       	nop
+    1010:	03 97       	sbiw	r24, 0x03	; 3
+    1012:	21 f4       	brne	.+8      	; 0x101c <main+0x1be>
+    1014:	87 ea       	ldi	r24, 0xA7	; 167
+    1016:	91 e0       	ldi	r25, 0x01	; 1
+    1018:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
+    101c:	2f ef       	ldi	r18, 0xFF	; 255
+    101e:	8f eb       	ldi	r24, 0xBF	; 191
+    1020:	91 e2       	ldi	r25, 0x21	; 33
+    1022:	21 50       	subi	r18, 0x01	; 1
+    1024:	80 40       	sbci	r24, 0x00	; 0
+    1026:	90 40       	sbci	r25, 0x00	; 0
+    1028:	e1 f7       	brne	.-8      	; 0x1022 <main+0x1c4>
+    102a:	00 c0       	rjmp	.+0      	; 0x102c <main+0x1ce>
+    102c:	00 00       	nop
 
 				_delay_ms(1000);
 				showMenuText();
-     fea:	0e 94 62 03 	call	0x6c4	; 0x6c4 <_Z12showMenuTextv>
-     fee:	58 cf       	rjmp	.-336    	; 0xea0 <main+0x86>
+    102e:	0e 94 62 03 	call	0x6c4	; 0x6c4 <_Z12showMenuTextv>
+    1032:	58 cf       	rjmp	.-336    	; 0xee4 <main+0x86>
 
 			} else if (key == 'B') {
-     ff0:	82 34       	cpi	r24, 0x42	; 66
-     ff2:	09 f0       	breq	.+2      	; 0xff6 <main+0x1dc>
-     ff4:	43 c0       	rjmp	.+134    	; 0x107c <main+0x262>
+    1034:	82 34       	cpi	r24, 0x42	; 66
+    1036:	09 f0       	breq	.+2      	; 0x103a <main+0x1dc>
+    1038:	43 c0       	rjmp	.+134    	; 0x10c0 <main+0x262>
 				
 				int resultt = verifyUser();
-     ff6:	0e 94 76 06 	call	0xcec	; 0xcec <_Z10verifyUserv>
+    103a:	0e 94 98 06 	call	0xd30	; 0xd30 <_Z10verifyUserv>
 				
 				if(resultt == 0){
-     ffa:	00 97       	sbiw	r24, 0x00	; 0
-     ffc:	f9 f4       	brne	.+62     	; 0x103c <main+0x222>
+    103e:	00 97       	sbiw	r24, 0x00	; 0
+    1040:	f9 f4       	brne	.+62     	; 0x1080 <main+0x222>
 				
 					int result = RemoveChip();
-     ffe:	0e 94 c2 05 	call	0xb84	; 0xb84 <_Z10RemoveChipv>
-    1002:	7c 01       	movw	r14, r24
+    1042:	0e 94 c7 05 	call	0xb8e	; 0xb8e <_Z10RemoveChipv>
+    1046:	7c 01       	movw	r14, r24
 					clearDisplay();
-    1004:	0e 94 6b 03 	call	0x6d6	; 0x6d6 <_Z12clearDisplayv>
+    1048:	0e 94 6b 03 	call	0x6d6	; 0x6d6 <_Z12clearDisplayv>
 
 					if (result == 0) text_row1("Chip removed!");
-    1008:	e1 14       	cp	r14, r1
-    100a:	f1 04       	cpc	r15, r1
-    100c:	29 f4       	brne	.+10     	; 0x1018 <main+0x1fe>
-    100e:	89 eb       	ldi	r24, 0xB9	; 185
-    1010:	91 e0       	ldi	r25, 0x01	; 1
-    1012:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
-    1016:	26 c0       	rjmp	.+76     	; 0x1064 <main+0x24a>
+    104c:	e1 14       	cp	r14, r1
+    104e:	f1 04       	cpc	r15, r1
+    1050:	29 f4       	brne	.+10     	; 0x105c <main+0x1fe>
+    1052:	88 eb       	ldi	r24, 0xB8	; 184
+    1054:	91 e0       	ldi	r25, 0x01	; 1
+    1056:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
+    105a:	26 c0       	rjmp	.+76     	; 0x10a8 <main+0x24a>
 					else if (result == 1) text_row1("Not found!");
-    1018:	a1 e0       	ldi	r26, 0x01	; 1
-    101a:	ea 16       	cp	r14, r26
-    101c:	f1 04       	cpc	r15, r1
-    101e:	29 f4       	brne	.+10     	; 0x102a <main+0x210>
-    1020:	87 ec       	ldi	r24, 0xC7	; 199
-    1022:	91 e0       	ldi	r25, 0x01	; 1
-    1024:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
-    1028:	1d c0       	rjmp	.+58     	; 0x1064 <main+0x24a>
+    105c:	a1 e0       	ldi	r26, 0x01	; 1
+    105e:	ea 16       	cp	r14, r26
+    1060:	f1 04       	cpc	r15, r1
+    1062:	29 f4       	brne	.+10     	; 0x106e <main+0x210>
+    1064:	86 ec       	ldi	r24, 0xC6	; 198
+    1066:	91 e0       	ldi	r25, 0x01	; 1
+    1068:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
+    106c:	1d c0       	rjmp	.+58     	; 0x10a8 <main+0x24a>
 					else if (result == 2) text_row1("Timed out!");
-    102a:	b2 e0       	ldi	r27, 0x02	; 2
-    102c:	eb 16       	cp	r14, r27
-    102e:	f1 04       	cpc	r15, r1
-    1030:	c9 f4       	brne	.+50     	; 0x1064 <main+0x24a>
-    1032:	85 e8       	ldi	r24, 0x85	; 133
-    1034:	91 e0       	ldi	r25, 0x01	; 1
-    1036:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
-    103a:	14 c0       	rjmp	.+40     	; 0x1064 <main+0x24a>
+    106e:	b2 e0       	ldi	r27, 0x02	; 2
+    1070:	eb 16       	cp	r14, r27
+    1072:	f1 04       	cpc	r15, r1
+    1074:	c9 f4       	brne	.+50     	; 0x10a8 <main+0x24a>
+    1076:	84 e8       	ldi	r24, 0x84	; 132
+    1078:	91 e0       	ldi	r25, 0x01	; 1
+    107a:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
+    107e:	14 c0       	rjmp	.+40     	; 0x10a8 <main+0x24a>
 					
 				} else if (resultt == 1) AccessDenied();
-    103c:	81 30       	cpi	r24, 0x01	; 1
-    103e:	91 05       	cpc	r25, r1
-    1040:	19 f4       	brne	.+6      	; 0x1048 <main+0x22e>
-    1042:	0e 94 83 04 	call	0x906	; 0x906 <_Z12AccessDeniedv>
-    1046:	0e c0       	rjmp	.+28     	; 0x1064 <main+0x24a>
+    1080:	81 30       	cpi	r24, 0x01	; 1
+    1082:	91 05       	cpc	r25, r1
+    1084:	19 f4       	brne	.+6      	; 0x108c <main+0x22e>
+    1086:	0e 94 6f 04 	call	0x8de	; 0x8de <_Z12AccessDeniedv>
+    108a:	0e c0       	rjmp	.+28     	; 0x10a8 <main+0x24a>
 				else if (resultt == 2) text_row1("Timed out!");
-    1048:	82 30       	cpi	r24, 0x02	; 2
-    104a:	91 05       	cpc	r25, r1
-    104c:	29 f4       	brne	.+10     	; 0x1058 <main+0x23e>
-    104e:	85 e8       	ldi	r24, 0x85	; 133
-    1050:	91 e0       	ldi	r25, 0x01	; 1
-    1052:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
-    1056:	06 c0       	rjmp	.+12     	; 0x1064 <main+0x24a>
+    108c:	82 30       	cpi	r24, 0x02	; 2
+    108e:	91 05       	cpc	r25, r1
+    1090:	29 f4       	brne	.+10     	; 0x109c <main+0x23e>
+    1092:	84 e8       	ldi	r24, 0x84	; 132
+    1094:	91 e0       	ldi	r25, 0x01	; 1
+    1096:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
+    109a:	06 c0       	rjmp	.+12     	; 0x10a8 <main+0x24a>
 				else if (resultt == 3) text_row1("Event cancelled!");
-    1058:	03 97       	sbiw	r24, 0x03	; 3
-    105a:	21 f4       	brne	.+8      	; 0x1064 <main+0x24a>
-    105c:	88 ea       	ldi	r24, 0xA8	; 168
-    105e:	91 e0       	ldi	r25, 0x01	; 1
-    1060:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
-    1064:	ef ef       	ldi	r30, 0xFF	; 255
-    1066:	ff eb       	ldi	r31, 0xBF	; 191
-    1068:	21 e2       	ldi	r18, 0x21	; 33
-    106a:	e1 50       	subi	r30, 0x01	; 1
-    106c:	f0 40       	sbci	r31, 0x00	; 0
-    106e:	20 40       	sbci	r18, 0x00	; 0
-    1070:	e1 f7       	brne	.-8      	; 0x106a <main+0x250>
-    1072:	00 c0       	rjmp	.+0      	; 0x1074 <main+0x25a>
-    1074:	00 00       	nop
+    109c:	03 97       	sbiw	r24, 0x03	; 3
+    109e:	21 f4       	brne	.+8      	; 0x10a8 <main+0x24a>
+    10a0:	87 ea       	ldi	r24, 0xA7	; 167
+    10a2:	91 e0       	ldi	r25, 0x01	; 1
+    10a4:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
+    10a8:	ef ef       	ldi	r30, 0xFF	; 255
+    10aa:	ff eb       	ldi	r31, 0xBF	; 191
+    10ac:	21 e2       	ldi	r18, 0x21	; 33
+    10ae:	e1 50       	subi	r30, 0x01	; 1
+    10b0:	f0 40       	sbci	r31, 0x00	; 0
+    10b2:	20 40       	sbci	r18, 0x00	; 0
+    10b4:	e1 f7       	brne	.-8      	; 0x10ae <main+0x250>
+    10b6:	00 c0       	rjmp	.+0      	; 0x10b8 <main+0x25a>
+    10b8:	00 00       	nop
 
 				_delay_ms(1000);
 				showMenuText();
-    1076:	0e 94 62 03 	call	0x6c4	; 0x6c4 <_Z12showMenuTextv>
-    107a:	12 cf       	rjmp	.-476    	; 0xea0 <main+0x86>
+    10ba:	0e 94 62 03 	call	0x6c4	; 0x6c4 <_Z12showMenuTextv>
+    10be:	12 cf       	rjmp	.-476    	; 0xee4 <main+0x86>
 				
 			} else if (key == 'C') { // Reset PINU
-    107c:	83 34       	cpi	r24, 0x43	; 67
-    107e:	09 f0       	breq	.+2      	; 0x1082 <main+0x268>
-    1080:	0f cf       	rjmp	.-482    	; 0xea0 <main+0x86>
+    10c0:	83 34       	cpi	r24, 0x43	; 67
+    10c2:	09 f0       	breq	.+2      	; 0x10c6 <main+0x268>
+    10c4:	0f cf       	rjmp	.-482    	; 0xee4 <main+0x86>
 			
 				int resultt = verifyUser();
-    1082:	0e 94 76 06 	call	0xcec	; 0xcec <_Z10verifyUserv>
+    10c6:	0e 94 98 06 	call	0xd30	; 0xd30 <_Z10verifyUserv>
 						
 				if(resultt == 0){
-    1086:	00 97       	sbiw	r24, 0x00	; 0
-    1088:	69 f4       	brne	.+26     	; 0x10a4 <main+0x28a>
+    10ca:	00 97       	sbiw	r24, 0x00	; 0
+    10cc:	69 f4       	brne	.+26     	; 0x10e8 <main+0x28a>
 					clearDisplay();
-    108a:	0e 94 6b 03 	call	0x6d6	; 0x6d6 <_Z12clearDisplayv>
+    10ce:	0e 94 6b 03 	call	0x6d6	; 0x6d6 <_Z12clearDisplayv>
 					EEPROM_write(FIRST_STARTUP, 0xFF);
-    108e:	6f ef       	ldi	r22, 0xFF	; 255
-    1090:	80 e0       	ldi	r24, 0x00	; 0
-    1092:	90 e0       	ldi	r25, 0x00	; 0
-    1094:	0e 94 5a 03 	call	0x6b4	; 0x6b4 <_Z12EEPROM_writejh>
+    10d2:	6f ef       	ldi	r22, 0xFF	; 255
+    10d4:	80 e0       	ldi	r24, 0x00	; 0
+    10d6:	90 e0       	ldi	r25, 0x00	; 0
+    10d8:	0e 94 5a 03 	call	0x6b4	; 0x6b4 <_Z12EEPROM_writejh>
 					text_row1("PIN Removed!");
-    1098:	82 ed       	ldi	r24, 0xD2	; 210
-    109a:	91 e0       	ldi	r25, 0x01	; 1
-    109c:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
+    10dc:	81 ed       	ldi	r24, 0xD1	; 209
+    10de:	91 e0       	ldi	r25, 0x01	; 1
+    10e0:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
 					restart();
-    10a0:	0e 94 02 07 	call	0xe04	; 0xe04 <_Z7restartv>
+    10e4:	0e 94 24 07 	call	0xe48	; 0xe48 <_Z7restartv>
 					
 				} else if (resultt == 1) AccessDenied();
-    10a4:	81 30       	cpi	r24, 0x01	; 1
-    10a6:	91 05       	cpc	r25, r1
-    10a8:	19 f4       	brne	.+6      	; 0x10b0 <main+0x296>
-    10aa:	0e 94 83 04 	call	0x906	; 0x906 <_Z12AccessDeniedv>
-    10ae:	0e c0       	rjmp	.+28     	; 0x10cc <main+0x2b2>
+    10e8:	81 30       	cpi	r24, 0x01	; 1
+    10ea:	91 05       	cpc	r25, r1
+    10ec:	19 f4       	brne	.+6      	; 0x10f4 <main+0x296>
+    10ee:	0e 94 6f 04 	call	0x8de	; 0x8de <_Z12AccessDeniedv>
+    10f2:	0e c0       	rjmp	.+28     	; 0x1110 <__stack+0x11>
 				else if (resultt == 2) text_row1("Timed out!");
-    10b0:	82 30       	cpi	r24, 0x02	; 2
-    10b2:	91 05       	cpc	r25, r1
-    10b4:	29 f4       	brne	.+10     	; 0x10c0 <main+0x2a6>
-    10b6:	85 e8       	ldi	r24, 0x85	; 133
-    10b8:	91 e0       	ldi	r25, 0x01	; 1
-    10ba:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
-    10be:	06 c0       	rjmp	.+12     	; 0x10cc <main+0x2b2>
+    10f4:	82 30       	cpi	r24, 0x02	; 2
+    10f6:	91 05       	cpc	r25, r1
+    10f8:	29 f4       	brne	.+10     	; 0x1104 <__stack+0x5>
+    10fa:	84 e8       	ldi	r24, 0x84	; 132
+    10fc:	91 e0       	ldi	r25, 0x01	; 1
+    10fe:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
+    1102:	06 c0       	rjmp	.+12     	; 0x1110 <__stack+0x11>
 				else if (resultt == 3) text_row1("Event cancelled!");
-    10c0:	03 97       	sbiw	r24, 0x03	; 3
-    10c2:	21 f4       	brne	.+8      	; 0x10cc <main+0x2b2>
-    10c4:	88 ea       	ldi	r24, 0xA8	; 168
-    10c6:	91 e0       	ldi	r25, 0x01	; 1
-    10c8:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
-    10cc:	8f ef       	ldi	r24, 0xFF	; 255
-    10ce:	9f eb       	ldi	r25, 0xBF	; 191
-    10d0:	a1 e2       	ldi	r26, 0x21	; 33
-    10d2:	81 50       	subi	r24, 0x01	; 1
-    10d4:	90 40       	sbci	r25, 0x00	; 0
-    10d6:	a0 40       	sbci	r26, 0x00	; 0
-    10d8:	e1 f7       	brne	.-8      	; 0x10d2 <main+0x2b8>
-    10da:	00 c0       	rjmp	.+0      	; 0x10dc <main+0x2c2>
-    10dc:	00 00       	nop
+    1104:	03 97       	sbiw	r24, 0x03	; 3
+    1106:	21 f4       	brne	.+8      	; 0x1110 <__stack+0x11>
+    1108:	87 ea       	ldi	r24, 0xA7	; 167
+    110a:	91 e0       	ldi	r25, 0x01	; 1
+    110c:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
+    1110:	8f ef       	ldi	r24, 0xFF	; 255
+    1112:	9f eb       	ldi	r25, 0xBF	; 191
+    1114:	a1 e2       	ldi	r26, 0x21	; 33
+    1116:	81 50       	subi	r24, 0x01	; 1
+    1118:	90 40       	sbci	r25, 0x00	; 0
+    111a:	a0 40       	sbci	r26, 0x00	; 0
+    111c:	e1 f7       	brne	.-8      	; 0x1116 <__stack+0x17>
+    111e:	00 c0       	rjmp	.+0      	; 0x1120 <__stack+0x21>
+    1120:	00 00       	nop
 
 				_delay_ms(1000);
 				showMenuText();
-    10de:	0e 94 62 03 	call	0x6c4	; 0x6c4 <_Z12showMenuTextv>
-    10e2:	de ce       	rjmp	.-580    	; 0xea0 <main+0x86>
+    1122:	0e 94 62 03 	call	0x6c4	; 0x6c4 <_Z12showMenuTextv>
+    1126:	de ce       	rjmp	.-580    	; 0xee4 <main+0x86>
 
-000010e4 <strcmp>:
-    10e4:	fb 01       	movw	r30, r22
-    10e6:	dc 01       	movw	r26, r24
-    10e8:	8d 91       	ld	r24, X+
-    10ea:	01 90       	ld	r0, Z+
-    10ec:	80 19       	sub	r24, r0
-    10ee:	01 10       	cpse	r0, r1
-    10f0:	d9 f3       	breq	.-10     	; 0x10e8 <strcmp+0x4>
-    10f2:	99 0b       	sbc	r25, r25
-    10f4:	08 95       	ret
+00001128 <strcmp>:
+    1128:	fb 01       	movw	r30, r22
+    112a:	dc 01       	movw	r26, r24
+    112c:	8d 91       	ld	r24, X+
+    112e:	01 90       	ld	r0, Z+
+    1130:	80 19       	sub	r24, r0
+    1132:	01 10       	cpse	r0, r1
+    1134:	d9 f3       	breq	.-10     	; 0x112c <strcmp+0x4>
+    1136:	99 0b       	sbc	r25, r25
+    1138:	08 95       	ret
 
-000010f6 <_exit>:
-    10f6:	f8 94       	cli
+0000113a <_exit>:
+    113a:	f8 94       	cli
 
-000010f8 <__stop_program>:
-    10f8:	ff cf       	rjmp	.-2      	; 0x10f8 <__stop_program>
+0000113c <__stop_program>:
+    113c:	ff cf       	rjmp	.-2      	; 0x113c <__stop_program>

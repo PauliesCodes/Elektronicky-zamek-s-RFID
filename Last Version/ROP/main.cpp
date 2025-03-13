@@ -18,20 +18,19 @@
 #include <stdio.h>
 #include <avr/wdt.h>
 
-#include "G:\\MIR\\INCLUDE\\lcd_i2c_u.h"
-//#include "W:\\School\\ROP\\INCLUDE\\bit_mac_u.h"
-#include "G:\\MIR\\INCLUDE\\i2c_u.h"
-#include "G:\\MIR\\INCLUDE\\kbd_u.h"
+#include "..//..//INCLUDE/lcd_i2c_u.h"
+#include "..//..//INCLUDE/i2c_u.h"
+#include "..//..//INCLUDE/kbd_u.h"
 
 #define MAX_CHIPS 10
 #define STATUS_START_ADDR 10 
-#define STATUS_ADDR_LENGHT 10 // 10,11,12,13,14,15,16,17,18,19
-#define DATA_START_ADDR 20 // Vždy 16 20-35,36-51,.... 
+#define STATUS_ADDR_LENGHT 10 
+#define DATA_START_ADDR 20 
 #define FIRST_STARTUP 0
 #define PIN_START_ADDR 1
 #define CHIP_LENGTH 16
 #define PIN_LENGTH 7
-#define TIME_TO_EXIT_MS 10000
+#define TIME_TO_EXIT_MS 4000
 
 volatile uint8_t data_prijata[16];
 volatile uint8_t i = 0;
@@ -104,10 +103,6 @@ bool timesUP(){
 	return (idle_time >= TIME_TO_EXIT_MS);
 }
 
-
-//const char ulozenyKod[16] = "0112E9D2E8C0"; // muj do skoly cip xd
-//const char ulozenyKod[16] = "1112E9D2E8C0";
-
 void showMenuText(){
 
 	text_row1("Enter PIN");
@@ -163,15 +158,16 @@ void FirstStartUp() {
 				text_row2(code);
 				
 				} else if (key == 'D' && index == 6) {
-				
-				text_row1("Code saved!");
-				_delay_ms(1000);
-				
+								
 				for (int i = 0; i < 7; i++) {
 					pristupovyPin[i] = code[i];
-					savePin(code);
-					EEPROM_write(FIRST_STARTUP, 0x00);
 				}
+				
+				savePin(code);
+				EEPROM_write(FIRST_STARTUP, 0x00);
+
+				text_row1("Pin saved!");
+				_delay_ms(1000);
 
 				break;
 			}
@@ -206,10 +202,10 @@ void SetRegistersInit(){
 	i2c_init();
 	set_bit(prt(pwr));
 
-	TCCR1B = (1 << WGM12);                // CTC mód
-	TCCR1B |= (1 << CS12) | (1 << CS10);  // Pøeddìlièka 1024
+	TCCR1B = (1 << WGM12);                // CTC m?d
+	TCCR1B |= (1 << CS12) | (1 << CS10);  // P?edd?li?ka 1024
 	OCR1A = 108;                          // Hodnota pro 10 ms interval
-	TIMSK1 = (1 << OCIE1A);               // Povolení pøerušení na compare match
+	TIMSK1 = (1 << OCIE1A);               // Povolen? p?eru?en? na compare match
 
 	sei();
 	
@@ -249,28 +245,19 @@ int findFreeSlot() {
 	
 	for (int i = 0; i < MAX_CHIPS; i++) {
 		
-		if (EEPROM_read(STATUS_START_ADDR + i) == 0xFF) { // 255 je volná (0xFF), 0 je obsazená (0x00)
+		if (EEPROM_read(STATUS_START_ADDR + i) == 0xFF) { // 255 je voln? (0xFF), 0 je obsazen? (0x00)
 			return i;
 			
 		}
 	}
 	
-	return -1; // Když není žádné místo volné
+	return -1; // Kdy? nen? ??dn? m?sto voln?
 	
 }
 
 void saveChip(char chip[16], int slot) {
 
-	EEPROM_write(STATUS_START_ADDR + slot, 0x00);
-	/*
-	//Jen na test
-	unsigned char status = EEPROM_read(STATUS_START_ADDR + 0);
-	char debugText[16];
-	sprintf(debugText, "Status: %02X", status);
-	text_row2(debugText);
-	_delay_ms(1000);
-	*/
-	
+	EEPROM_write(STATUS_START_ADDR + slot, 0x00);	
 	
 	int baseAddress = DATA_START_ADDR + slot * CHIP_LENGTH;
 	
@@ -297,7 +284,7 @@ int readChip(int slot, char buffer[16]) {
 
 	if (EEPROM_read(STATUS_START_ADDR + slot) == 0xFF) {
 		
-		return 1; // Na slotu není uložen chip
+		return 1; // Na slotu nen? ulo?en chip
 		
 	}
 
@@ -311,7 +298,7 @@ int readChip(int slot, char buffer[16]) {
 
 	buffer[CHIP_LENGTH - 1] = '\0';
 
-	return 0; // Všechno v poøádku
+	return 0; // V?echno v po??dku
 	
 }
 
@@ -322,13 +309,13 @@ int isChipStored(char chip[16]) {
 	for (int i = 0; i < MAX_CHIPS; i++) {
 		
 		if (readChip(i, buffer) == 0 && strcmp(buffer, chip) == 0) {
-			return 1; // Èip nalezen
+			return 1; // ?ip nalezen
 			
 		}
 
 	}
 
-	return 0; // Èip nebyl nalezen
+	return 0; // ?ip nebyl nalezen
 	
 }
 
@@ -337,13 +324,6 @@ int AddChip() {
 	startTimer();
 
 	int freeSLot = findFreeSlot();
-	
-	/*
-	char textt[17];      
-	snprintf(textt, sizeof(textt), "Free slot %d", freeSLot);
-	text_row1(textt);
-	_delay_ms(500);
-	*/
 	
 	if(freeSLot == -1){
 		return 0; //Prekrocen max pocet chipu
@@ -367,17 +347,21 @@ int AddChip() {
 
 			if (isChipStored(chip)) {
 				
-				return 3; // Indikace, že èip již existuje
+				return 3; // Indikace, ?e ?ip ji? existuje
 				
 			}
 
 			saveChip(chip, freeSLot);
 			
-			return 2; // Vše ok
+			return 2; // V?e ok
 
 		}
 
-		if(timesUP()) return 1; // Times out
+		if(timesUP()) {
+			return 1;
+		} 
+		
+		_delay_ms(50);
 		
 	}
 }
@@ -409,24 +393,20 @@ int RemoveChip() {
                 if (readChip(i, buffer) == 0 && strcmp(buffer, chip) == 0) {
 
                     EEPROM_write(STATUS_START_ADDR + i, 0xFF); 
-                    
-                    /* 
-                    for (int j = 0; j < CHIP_LENGTH; j++) {
-                        EEPROM_write(DATA_START_ADDR + i * CHIP_LENGTH + j, 0xFF); 
-                    }
-                    */
 
-                    return 0; // Èip byl úspìšnì odstranìn
+                    return 0; // ?ip byl ?sp?n? odstran?n
                 }
             }
 
-            return 1; // Èip nebyl nalezen
+            return 1; // ?ip nebyl nalezen
         }
 
         if (timesUP()) {
-            return 2; // Vypršel èasový limit
+            return 2; // Vypr?el ?asov? limit
 			
         }
+		_delay_ms(50);
+		
     }
 }
 
@@ -519,14 +499,14 @@ int verifyUser(){
 
 void restart() {
 	wdt_enable(WDTO_15MS); // Povolit watchdog s timeoutem 15 ms
-	while(1);              // Poèkej, než watchdog resetne MCU
+	while(1);              // Po?kej, ne? watchdog resetne MCU
 }
 
 int main(void)
 {
 	
-	MCUSR &= ~(1<<WDRF); // Vymazání flagu watchdog resetu
-	wdt_disable();       // Vypnutí watchdogu
+	MCUSR &= ~(1<<WDRF); // Vymaz?n? flagu watchdog resetu
+	wdt_disable();       // Vypnut? watchdogu
 	
 	SetRegistersInit();	
 
@@ -644,26 +624,8 @@ int main(void)
 
 				_delay_ms(1000);
 				showMenuText();
-			
-			
-			/*
-				char dataa[16];
-				
-				for (int i = 0; i < MAX_CHIPS; i++) {
-					
-					if (EEPROM_read(STATUS_START_ADDR + i) == 0xFF) { // 255 je volná (0xFF), 0 je obsazená (0x00)
-						dataa[i] = '1';
-						
-					} else 	dataa[i] = '0';
-
-				}
-				
-				text_row2(dataa);
-				_delay_ms(1000);*/
-			
 							
 			}
-			
 		}
 	}
 }
