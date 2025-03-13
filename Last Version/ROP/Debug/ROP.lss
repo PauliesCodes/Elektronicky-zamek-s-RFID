@@ -25,9 +25,9 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
  10 .debug_str    00000a75  00000000  00000000  00006864  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00002555  00000000  00000000  000072d9  2**0
+ 11 .debug_loc    00002549  00000000  00000000  000072d9  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000208  00000000  00000000  0000982e  2**0
+ 12 .debug_ranges 00000208  00000000  00000000  00009822  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -1043,60 +1043,59 @@ void FirstStartUp() {
      7b8:	31 f6       	brne	.-116    	; 0x746 <_Z12FirstStartUpv+0x32>
      7ba:	16 30       	cpi	r17, 0x06	; 6
      7bc:	21 f6       	brne	.-120    	; 0x746 <_Z12FirstStartUpv+0x32>
+     7be:	fe 01       	movw	r30, r28
+     7c0:	31 96       	adiw	r30, 0x01	; 1
+     7c2:	a0 ee       	ldi	r26, 0xE0	; 224
+     7c4:	b1 e0       	ldi	r27, 0x01	; 1
+     7c6:	9e 01       	movw	r18, r28
+     7c8:	28 5f       	subi	r18, 0xF8	; 248
+     7ca:	3f 4f       	sbci	r19, 0xFF	; 255
+								
+				for (int i = 0; i < 7; i++) {
+					pristupovyPin[i] = code[i];
+     7cc:	81 91       	ld	r24, Z+
+     7ce:	8d 93       	st	X+, r24
+				code[index] = '\0';
+				text_row2(code);
 				
+				} else if (key == 'D' && index == 6) {
+								
+				for (int i = 0; i < 7; i++) {
+     7d0:	e2 17       	cp	r30, r18
+     7d2:	f3 07       	cpc	r31, r19
+     7d4:	d9 f7       	brne	.-10     	; 0x7cc <_Z12FirstStartUpv+0xb8>
+					pristupovyPin[i] = code[i];
+				}
+				
+				savePin(code);
+     7d6:	ce 01       	movw	r24, r28
+     7d8:	01 96       	adiw	r24, 0x01	; 1
+     7da:	0e 94 74 03 	call	0x6e8	; 0x6e8 <_Z7savePinPKc>
+				EEPROM_write(FIRST_STARTUP, 0x00);
+     7de:	60 e0       	ldi	r22, 0x00	; 0
+     7e0:	80 e0       	ldi	r24, 0x00	; 0
+     7e2:	90 e0       	ldi	r25, 0x00	; 0
+     7e4:	0e 94 5a 03 	call	0x6b4	; 0x6b4 <_Z12EEPROM_writejh>
+
 				text_row1("Pin saved!");
-     7be:	83 e3       	ldi	r24, 0x33	; 51
-     7c0:	91 e0       	ldi	r25, 0x01	; 1
-     7c2:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
+     7e8:	83 e3       	ldi	r24, 0x33	; 51
+     7ea:	91 e0       	ldi	r25, 0x01	; 1
+     7ec:	0e 94 6f 01 	call	0x2de	; 0x2de <_Z9text_row1Pc>
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
-     7c6:	bf ef       	ldi	r27, 0xFF	; 255
-     7c8:	2f eb       	ldi	r18, 0xBF	; 191
-     7ca:	81 e2       	ldi	r24, 0x21	; 33
-     7cc:	b1 50       	subi	r27, 0x01	; 1
-     7ce:	20 40       	sbci	r18, 0x00	; 0
-     7d0:	80 40       	sbci	r24, 0x00	; 0
-     7d2:	e1 f7       	brne	.-8      	; 0x7cc <_Z12FirstStartUpv+0xb8>
-     7d4:	00 c0       	rjmp	.+0      	; 0x7d6 <_Z12FirstStartUpv+0xc2>
-     7d6:	00 00       	nop
-     7d8:	fe 01       	movw	r30, r28
-     7da:	31 96       	adiw	r30, 0x01	; 1
-     7dc:	a0 ee       	ldi	r26, 0xE0	; 224
-     7de:	b1 e0       	ldi	r27, 0x01	; 1
-     7e0:	9e 01       	movw	r18, r28
-     7e2:	28 5f       	subi	r18, 0xF8	; 248
-     7e4:	3f 4f       	sbci	r19, 0xFF	; 255
-				_delay_ms(1000);
-				
-				for (int i = 0; i < 7; i++) {
-					pristupovyPin[i] = code[i];
-     7e6:	81 91       	ld	r24, Z+
-     7e8:	8d 93       	st	X+, r24
-				} else if (key == 'D' && index == 6) {
-				
-				text_row1("Pin saved!");
-				_delay_ms(1000);
-				
-				for (int i = 0; i < 7; i++) {
-     7ea:	e2 17       	cp	r30, r18
-     7ec:	f3 07       	cpc	r31, r19
-     7ee:	d9 f7       	brne	.-10     	; 0x7e6 <_Z12FirstStartUpv+0xd2>
-					pristupovyPin[i] = code[i];
-				}
-				
-				savePin(code);
-     7f0:	ce 01       	movw	r24, r28
-     7f2:	01 96       	adiw	r24, 0x01	; 1
-     7f4:	0e 94 74 03 	call	0x6e8	; 0x6e8 <_Z7savePinPKc>
-				EEPROM_write(FIRST_STARTUP, 0x00);
-     7f8:	60 e0       	ldi	r22, 0x00	; 0
-     7fa:	80 e0       	ldi	r24, 0x00	; 0
-     7fc:	90 e0       	ldi	r25, 0x00	; 0
-     7fe:	0e 94 5a 03 	call	0x6b4	; 0x6b4 <_Z12EEPROM_writejh>
+     7f0:	bf ef       	ldi	r27, 0xFF	; 255
+     7f2:	2f eb       	ldi	r18, 0xBF	; 191
+     7f4:	81 e2       	ldi	r24, 0x21	; 33
+     7f6:	b1 50       	subi	r27, 0x01	; 1
+     7f8:	20 40       	sbci	r18, 0x00	; 0
+     7fa:	80 40       	sbci	r24, 0x00	; 0
+     7fc:	e1 f7       	brne	.-8      	; 0x7f6 <_Z12FirstStartUpv+0xe2>
+     7fe:	00 c0       	rjmp	.+0      	; 0x800 <_Z12FirstStartUpv+0xec>
+     800:	00 00       	nop
 
 				break;
 			}
@@ -1141,7 +1140,7 @@ void SetRegistersInit(){
 
 	UCSR0A = 0;
      82a:	10 92 c0 00 	sts	0x00C0, r1	; 0x8000c0 <__DATA_REGION_ORIGIN__+0x60>
-	UCSR0B |= (1<<RXCIE0)|(1<<RXEN0)|(1<<TXEN0); //povoleni p?eru?en? od p??jmu
+	UCSR0B |= (1<<RXCIE0)|(1<<RXEN0)|(1<<TXEN0); //Povolení pøerušení od pøijmu
      82e:	e1 ec       	ldi	r30, 0xC1	; 193
      830:	f0 e0       	ldi	r31, 0x00	; 0
      832:	80 81       	ld	r24, Z
@@ -1159,43 +1158,43 @@ void SetRegistersInit(){
      846:	90 93 c5 00 	sts	0x00C5, r25	; 0x8000c5 <__DATA_REGION_ORIGIN__+0x65>
      84a:	80 93 c4 00 	sts	0x00C4, r24	; 0x8000c4 <__DATA_REGION_ORIGIN__+0x64>
 
+	TCCR1B = (1 << WGM12);                // CTC mód
+     84e:	e1 e8       	ldi	r30, 0x81	; 129
+     850:	f0 e0       	ldi	r31, 0x00	; 0
+     852:	88 e0       	ldi	r24, 0x08	; 8
+     854:	80 83       	st	Z, r24
+	TCCR1B |= (1 << CS12) | (1 << CS10);  // Pøeddìlièka 1024
+     856:	80 81       	ld	r24, Z
+     858:	85 60       	ori	r24, 0x05	; 5
+     85a:	80 83       	st	Z, r24
+	OCR1A = 108;                          // Hodnota pro 10 ms interval
+     85c:	8c e6       	ldi	r24, 0x6C	; 108
+     85e:	90 e0       	ldi	r25, 0x00	; 0
+     860:	90 93 89 00 	sts	0x0089, r25	; 0x800089 <__DATA_REGION_ORIGIN__+0x29>
+     864:	80 93 88 00 	sts	0x0088, r24	; 0x800088 <__DATA_REGION_ORIGIN__+0x28>
+	TIMSK1 = (1 << OCIE1A);               // Povolení pøerušení na compare match
+     868:	82 e0       	ldi	r24, 0x02	; 2
+     86a:	80 93 6f 00 	sts	0x006F, r24	; 0x80006f <__DATA_REGION_ORIGIN__+0xf>
+
 	DDRA = 0b11111111;
-     84e:	8f ef       	ldi	r24, 0xFF	; 255
-     850:	81 b9       	out	0x01, r24	; 1
+     86e:	8f ef       	ldi	r24, 0xFF	; 255
+     870:	81 b9       	out	0x01, r24	; 1
 	PORTA= 0b10000000;
-     852:	90 e8       	ldi	r25, 0x80	; 128
-     854:	92 b9       	out	0x02, r25	; 2
+     872:	90 e8       	ldi	r25, 0x80	; 128
+     874:	92 b9       	out	0x02, r25	; 2
 
 	DDRB = 255;
-     856:	84 b9       	out	0x04, r24	; 4
+     876:	84 b9       	out	0x04, r24	; 4
 	PORTB = 255;
-     858:	85 b9       	out	0x05, r24	; 5
+     878:	85 b9       	out	0x05, r24	; 5
 	
 	kb_init();
-     85a:	0e 94 3b 02 	call	0x476	; 0x476 <_Z7kb_initv>
+     87a:	0e 94 3b 02 	call	0x476	; 0x476 <_Z7kb_initv>
 	i2c_init();
-     85e:	0e 94 5d 00 	call	0xba	; 0xba <_Z8i2c_initv>
+     87e:	0e 94 5d 00 	call	0xba	; 0xba <_Z8i2c_initv>
 	set_bit(prt(pwr));
-     862:	10 9a       	sbi	0x02, 0	; 2
-
-	TCCR1B = (1 << WGM12);                // CTC m?d
-     864:	e1 e8       	ldi	r30, 0x81	; 129
-     866:	f0 e0       	ldi	r31, 0x00	; 0
-     868:	88 e0       	ldi	r24, 0x08	; 8
-     86a:	80 83       	st	Z, r24
-	TCCR1B |= (1 << CS12) | (1 << CS10);  // P?edd?li?ka 1024
-     86c:	80 81       	ld	r24, Z
-     86e:	85 60       	ori	r24, 0x05	; 5
-     870:	80 83       	st	Z, r24
-	OCR1A = 108;                          // Hodnota pro 10 ms interval
-     872:	8c e6       	ldi	r24, 0x6C	; 108
-     874:	90 e0       	ldi	r25, 0x00	; 0
-     876:	90 93 89 00 	sts	0x0089, r25	; 0x800089 <__DATA_REGION_ORIGIN__+0x29>
-     87a:	80 93 88 00 	sts	0x0088, r24	; 0x800088 <__DATA_REGION_ORIGIN__+0x28>
-	TIMSK1 = (1 << OCIE1A);               // Povolen? p?eru?en? na compare match
-     87e:	82 e0       	ldi	r24, 0x02	; 2
-     880:	80 93 6f 00 	sts	0x006F, r24	; 0x80006f <__DATA_REGION_ORIGIN__+0xf>
-
+     882:	10 9a       	sbi	0x02, 0	; 2
+	
 	sei();
      884:	78 94       	sei
 	
@@ -1294,7 +1293,7 @@ int findFreeSlot() {
      906:	c0 e0       	ldi	r28, 0x00	; 0
      908:	d0 e0       	ldi	r29, 0x00	; 0
 		
-		if (EEPROM_read(STATUS_START_ADDR + i) == 0xFF) { // 255 je voln? (0xFF), 0 je obsazen? (0x00)
+		if (EEPROM_read(STATUS_START_ADDR + i) == 0xFF) { // 255(0xFF) volno, 0(0x00) obsazeno
      90a:	ce 01       	movw	r24, r28
      90c:	0a 96       	adiw	r24, 0x0a	; 10
      90e:	0e 94 53 03 	call	0x6a6	; 0x6a6 <_Z11EEPROM_readj>
@@ -1315,7 +1314,7 @@ int findFreeSlot() {
 		}
 	}
 	
-	return -1; // Kdy? nen? ??dn? m?sto voln?
+	return -1; // Když není žádné volné místo
      91e:	8f ef       	ldi	r24, 0xFF	; 255
      920:	9f ef       	ldi	r25, 0xFF	; 255
      922:	02 c0       	rjmp	.+4      	; 0x928 <_Z12findFreeSlotv+0x26>
@@ -1446,7 +1445,7 @@ int readChip(int slot, char buffer[16]) {
      9d2:	8f 3f       	cpi	r24, 0xFF	; 255
      9d4:	e9 f0       	breq	.+58     	; 0xa10 <_Z8readChipiPc+0x5e>
 		
-		return 1; // Na slotu nen? ulo?en chip
+		return 1; // Na slotu není uložen chip
 		
 	}
 
@@ -1490,7 +1489,7 @@ int readChip(int slot, char buffer[16]) {
      a00:	f7 01       	movw	r30, r14
      a02:	17 86       	std	Z+15, r1	; 0x0f
 
-	return 0; // V?echno v po??dku
+	return 0; // Všechno v poøádku
      a04:	80 e0       	ldi	r24, 0x00	; 0
      a06:	90 e0       	ldi	r25, 0x00	; 0
      a08:	05 c0       	rjmp	.+10     	; 0xa14 <_Z8readChipiPc+0x62>
@@ -1508,13 +1507,13 @@ int readChip(int slot, char buffer[16]) {
 
 	if (EEPROM_read(STATUS_START_ADDR + slot) == 0xFF) {
 		
-		return 1; // Na slotu nen? ulo?en chip
+		return 1; // Na slotu není uložen chip
      a10:	81 e0       	ldi	r24, 0x01	; 1
      a12:	90 e0       	ldi	r25, 0x00	; 0
 
 	buffer[CHIP_LENGTH - 1] = '\0';
 
-	return 0; // V?echno v po??dku
+	return 0; // Všechno v poøádku
 	
 }
      a14:	df 91       	pop	r29
@@ -1566,7 +1565,7 @@ int isChipStored(char chip[16]) {
      a5e:	0e 94 94 08 	call	0x1128	; 0x1128 <strcmp>
      a62:	89 2b       	or	r24, r25
      a64:	31 f4       	brne	.+12     	; 0xa72 <_Z12isChipStoredPc+0x4c>
-			return 1; // ?ip nalezen
+			return 1; // Èip nalezen
      a66:	81 e0       	ldi	r24, 0x01	; 1
      a68:	90 e0       	ldi	r25, 0x00	; 0
      a6a:	09 c0       	rjmp	.+18     	; 0xa7e <_Z12isChipStoredPc+0x58>
@@ -1575,7 +1574,7 @@ int isChipStored(char chip[16]) {
 
 	}
 
-	return 0; // ?ip nebyl nalezen
+	return 0; // Èip nebyl nalezen
      a6c:	80 e0       	ldi	r24, 0x00	; 0
      a6e:	90 e0       	ldi	r25, 0x00	; 0
      a70:	06 c0       	rjmp	.+12     	; 0xa7e <_Z12isChipStoredPc+0x58>
@@ -1594,7 +1593,7 @@ int isChipStored(char chip[16]) {
 
 	}
 
-	return 0; // ?ip nebyl nalezen
+	return 0; // Èip nebyl nalezen
 	
 }
      a7e:	60 96       	adiw	r28, 0x10	; 16
@@ -1793,7 +1792,7 @@ int AddChip() {
      b68:	4f 5e       	subi	r20, 0xEF	; 239
      b6a:	5f 4f       	sbci	r21, 0xFF	; 255
 
-	return 0; // ?ip nebyl nalezen
+	return 0; // Èip nebyl nalezen
 	
 }
 
@@ -2375,7 +2374,7 @@ int verifyUser(){
 
 00000e5e <main>:
 	wdt_enable(WDTO_15MS); // Povolit watchdog s timeoutem 15 ms
-	while(1);              // Po?kej, ne? watchdog resetne MCU
+	while(1);              // Poèkání dokud watchdog neresetuje mcu
 }
 
 int main(void)
@@ -2391,7 +2390,7 @@ int main(void)
      e6e:	0f be       	out	0x3f, r0	; 63
      e70:	cd bf       	out	0x3d, r28	; 61
 	
-	MCUSR &= ~(1<<WDRF); // Vymaz?n? flagu watchdog resetu
+	MCUSR &= ~(1<<WDRF); // Vymazání flagu watchdog resetu
      e72:	84 b7       	in	r24, 0x34	; 52
      e74:	87 7f       	andi	r24, 0xF7	; 247
      e76:	84 bf       	out	0x34, r24	; 52
@@ -2409,7 +2408,7 @@ int main(void)
      e84:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
      e88:	10 92 60 00 	sts	0x0060, r1	; 0x800060 <__DATA_REGION_ORIGIN__>
      e8c:	0f be       	out	0x3f, r0	; 63
-	wdt_disable();       // Vypnut? watchdogu
+	wdt_disable();       // Vypnutí watchdogu
 	
 	SetRegistersInit();	
      e8e:	0e 94 15 04 	call	0x82a	; 0x82a <_Z16SetRegistersInitv>
@@ -2430,8 +2429,8 @@ int main(void)
      eaa:	f1 e0       	ldi	r31, 0x01	; 1
      eac:	ff 2e       	mov	r15, r31
      eae:	f0 2d       	mov	r31, r0
-	MCUSR &= ~(1<<WDRF); // Vymaz?n? flagu watchdog resetu
-	wdt_disable();       // Vypnut? watchdogu
+	MCUSR &= ~(1<<WDRF); // Vymazání flagu watchdog resetu
+	wdt_disable();       // Vypnutí watchdogu
 	
 	SetRegistersInit();	
 

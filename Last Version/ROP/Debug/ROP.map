@@ -605,9 +605,9 @@ END GROUP
  .debug_str     0x00000252      0x823 main.o
                                 0x85c (size before relaxing)
 
-.debug_loc      0x00000000     0x2555
+.debug_loc      0x00000000     0x2549
  *(.debug_loc)
- .debug_loc     0x00000000     0x2555 main.o
+ .debug_loc     0x00000000     0x2549 main.o
 
 .debug_macinfo
  *(.debug_macinfo)
