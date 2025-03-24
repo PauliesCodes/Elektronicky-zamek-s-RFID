@@ -1646,7 +1646,7 @@ int AddChip() {
      abe:	01 96       	adiw	r24, 0x01	; 1
      ac0:	09 f4       	brne	.+2      	; 0xac4 <_Z7AddChipv+0x2c>
      ac2:	46 c0       	rjmp	.+140    	; 0xb50 <_Z7AddChipv+0xb8>
-		return 0; //Prekrocen max pocet chipu
+		return 0; // Pøekroèen maximální poèet èipù
 
 	}
 
@@ -1666,7 +1666,7 @@ int AddChip() {
      ad8:	81 11       	cpse	r24, r1
      ada:	43 c0       	rjmp	.+134    	; 0xb62 <_Z7AddChipv+0xca>
 			
-			return 2; // V?e ok
+			return 2; // Vše ok
 
 		}
 
@@ -1712,7 +1712,7 @@ int AddChip() {
      b0c:	89 2b       	or	r24, r25
      b0e:	41 f4       	brne	.+16     	; 0xb20 <_Z7AddChipv+0x88>
 				
-				return 3; // Indikace, ?e ?ip ji? existuje
+				return 3; // Indikace, že èip existuje
 				
 			}
 
@@ -1722,7 +1722,7 @@ int AddChip() {
      b14:	01 96       	adiw	r24, 0x01	; 1
      b16:	0e 94 97 04 	call	0x92e	; 0x92e <_Z8saveChipPci>
 			
-			return 2; // V?e ok
+			return 2; // Vše ok
      b1a:	82 e0       	ldi	r24, 0x02	; 2
      b1c:	90 e0       	ldi	r25, 0x00	; 0
      b1e:	2c c0       	rjmp	.+88     	; 0xb78 <_Z7AddChipv+0xe0>
@@ -1731,12 +1731,12 @@ int AddChip() {
 
 			if (isChipStored(chip)) {
 				
-				return 3; // Indikace, ?e ?ip ji? existuje
+				return 3; // Indikace, že èip existuje
      b20:	83 e0       	ldi	r24, 0x03	; 3
      b22:	90 e0       	ldi	r25, 0x00	; 0
      b24:	29 c0       	rjmp	.+82     	; 0xb78 <_Z7AddChipv+0xe0>
 			
-			return 2; // V?e ok
+			return 2; // Vše ok
 
 		}
 
@@ -1770,16 +1770,16 @@ int AddChip() {
 	int freeSLot = findFreeSlot();
 	
 	if(freeSLot == -1){
-		return 0; //Prekrocen max pocet chipu
+		return 0; // Pøekroèen maximální poèet èipù
      b50:	80 e0       	ldi	r24, 0x00	; 0
      b52:	90 e0       	ldi	r25, 0x00	; 0
      b54:	11 c0       	rjmp	.+34     	; 0xb78 <_Z7AddChipv+0xe0>
-			return 2; // V?e ok
+			return 2; // Vše ok
 
 		}
 
 		if(timesUP()) {
-			return 1;
+			return 1; // Èas vypršel
      b56:	81 e0       	ldi	r24, 0x01	; 1
      b58:	90 e0       	ldi	r25, 0x00	; 0
      b5a:	0e c0       	rjmp	.+28     	; 0xb78 <_Z7AddChipv+0xe0>
@@ -1868,7 +1868,7 @@ int RemoveChip() {
      bc8:	4d c0       	rjmp	.+154    	; 0xc64 <_Z10RemoveChipv+0xd6>
             }
 
-            return 1; // ?ip nebyl nalezen
+            return 1; // Èip nebyl nalezen
         }
 
         if (timesUP()) {
@@ -1933,11 +1933,11 @@ int RemoveChip() {
      c1a:	a9 f5       	brne	.+106    	; 0xc86 <_Z10RemoveChipv+0xf8>
      c1c:	2e c0       	rjmp	.+92     	; 0xc7a <_Z10RemoveChipv+0xec>
 
-                    return 0; // ?ip byl ?sp?n? odstran?n
+                    return 0; // Èip byl úspìšnì odstranìn
                 }
             }
 
-            return 1; // ?ip nebyl nalezen
+            return 1; // Èip nebyl nalezen
      c1e:	ee 24       	eor	r14, r14
      c20:	e3 94       	inc	r14
      c22:	f1 2c       	mov	r15, r1
@@ -1970,11 +1970,11 @@ int RemoveChip() {
      c4c:	61 f3       	breq	.-40     	; 0xc26 <_Z10RemoveChipv+0x98>
      c4e:	0a c0       	rjmp	.+20     	; 0xc64 <_Z10RemoveChipv+0xd6>
 
-            return 1; // ?ip nebyl nalezen
+            return 1; // Èip nebyl nalezen
         }
 
         if (timesUP()) {
-            return 2; // Vypr?el ?asov? limit
+            return 2; // Èas vypršel
      c50:	68 94       	set
      c52:	ee 24       	eor	r14, r14
      c54:	e1 f8       	bld	r14, 1
@@ -2306,12 +2306,12 @@ int verifyUser(){
 				} else if (key == '#') { 
      e10:	83 32       	cpi	r24, 0x23	; 35
      e12:	71 f0       	breq	.+28     	; 0xe30 <_Z10verifyUserv+0x100>
-					return 3; // Akce zrusena
+					return 3; // Akce pøerušena
 					
 				}
 		}
 		
-		if(timesUP()) return 2; // cas vyprsel
+		if(timesUP()) return 2; // Èas vypršel
      e14:	80 91 de 01 	lds	r24, 0x01DE	; 0x8001de <__data_end>
      e18:	90 91 df 01 	lds	r25, 0x01DF	; 0x8001df <__data_end+0x1>
      e1c:	80 3a       	cpi	r24, 0xA0	; 160
@@ -2326,7 +2326,7 @@ int verifyUser(){
 						
 					} else {
 						
-						return 1; // Neni takovy pin
+						return 1; // Špatný pin
      e2a:	81 e0       	ldi	r24, 0x01	; 1
      e2c:	90 e0       	ldi	r25, 0x00	; 0
      e2e:	02 c0       	rjmp	.+4      	; 0xe34 <_Z10verifyUserv+0x104>
@@ -2335,11 +2335,11 @@ int verifyUser(){
 					break;
 				} else if (key == '#') { 
 					
-					return 3; // Akce zrusena
+					return 3; // Akce pøerušena
      e30:	83 e0       	ldi	r24, 0x03	; 3
      e32:	90 e0       	ldi	r25, 0x00	; 0
 		
-		if(timesUP()) return 2; // cas vyprsel
+		if(timesUP()) return 2; // Èas vypršel
 		
 	}
 	
@@ -2373,8 +2373,8 @@ int verifyUser(){
      e5c:	ff cf       	rjmp	.-2      	; 0xe5c <_Z7restartv+0x14>
 
 00000e5e <main>:
-	wdt_enable(WDTO_15MS); // Povolit watchdog s timeoutem 15 ms
-	while(1);              // Poèkání dokud watchdog neresetuje mcu
+	wdt_enable(WDTO_15MS); // Povolit watchdog s timeout 15 ms
+	while(1);              // Poèkání dokud watchdog neresetuje MCU
 }
 
 int main(void)
