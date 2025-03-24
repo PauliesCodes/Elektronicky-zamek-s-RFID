@@ -1,0 +1,49 @@
+Microchip Studio for AVR® and SAM Devices. Online. MicroChip. 2022. Dostupné z: https://www.microchip.com/en-us/tools-resources/develop/microchip-studio. [cit. 2025-03-24].
+
+GitHub. Online. 2008. Dostupné z: https://github.com/. [cit. 2025-03-24].
+
+GitHub. Online. Wikipedia. 2009. Dostupné z: https://en.wikipedia.org/wiki/GitHub. [cit. 2025-03-24].
+
+Čtečka RFID ID-12LA - 125kHz - SparkFun SEN-11827. Online. Botland. 2019. Dostupné z: https://botland.cz/stazene-produkty/1757-ctecka-rfid-id-12la-125khz-sparkfun-sen-11827-5904422330309.html. [cit. 2025-03-24].
+
+LCD displej - Modrý, 16x2 znaků. Online. Dratek.cz. 2010. Dostupné z: https://dratek.cz/arduino/836-display-modry-16x2-znaku.html. [cit. 2025-03-24].
+
+M74HCT245B1 budič sběrnice. Online. Kondik.cz. 2017. Dostupné z: https://www.kondik.cz/io-m74hct245b1/?srsltid=AfmBOorwGk_bVB0WJTZDiTPNDUaOFoSeI-31_KFC23gw7RY26j2e_vWh. [cit. 2025-03-24].
+
+
+
+RFID
+LCD
+EEPROM
+IDE
+AVR
+SAM
+COM
+USB
+HW
+PCB
+COMS
+USART
+I2C
+RISC
+SRAM
+PWM
+ADC
+SPI
+JTAG
+RX
+TX
+SDA
+SCL
+DPS
+THT
+UDR0
+OCR1A
+EECR
+EEPE
+EEAR
+EERE
+EEDR
+EEMPE
+DDRA
+DDRB
