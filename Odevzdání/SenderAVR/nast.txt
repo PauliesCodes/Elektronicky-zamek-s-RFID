@@ -1,0 +1,6 @@
+I:\EL\Sender\SenderAVR.exe
+$(TargetDir)$(ItemFileName).hex
+
+pro C++:
+
+$(TargetDir)$(TargetName).hex
