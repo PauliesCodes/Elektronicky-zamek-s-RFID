@@ -1,0 +1,57 @@
+/*
+ * Test_LCD_I2C.cpp
+ *
+ * Created: 15.12.2022 12:44:47
+ * Author : pvesely
+ */ 
+
+
+#define F_CPU 11059200
+
+#define sda ibit (PORTD, 7)
+#define scl ibit (PORTD, 6)
+#define pwr ibit (PORTD, 0)
+
+#include <avr/io.h>
+#include <util/delay.h>
+#include <avr/interrupt.h>
+#include <string.h>
+#include <stdio.h>
+#include "i2c_u.h"
+#include "bit_mac_u.h"
+#include "lcd_i2c_u.h"
+
+
+
+
+
+int main(void)
+{
+    DDRD = 0b11111111;
+	PORTD= 0b10000000;
+	
+	i2c_init();
+	set_bit(prt(pwr));	
+	
+		
+	if (i2c_open_wr(HWA,0))
+	{
+		lcd_clr();
+		lcd_on();
+		cur_on();
+		cur_blink_off();
+		_delay_ms(1);
+		i2c_stop();
+	}	
+	
+
+	text_row1("   ahoj");
+	text_row2(" nazdar");
+	 
+
+    while (1) 
+    {
+    }
+}
+
+

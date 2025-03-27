@@ -1,0 +1,66 @@
+/*
+ * RIFD.cpp
+ *
+ * Created: 19.02.2024 12:42:52
+ * Author : jvesela
+ */ 
+
+#define F_CPU	11059200
+#define lcd_port PORTC
+
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include "G:/MIT/INCLUDE/lcd_u.h"
+
+volatile uint8_t data_prijata[16];
+volatile uint8_t i = 0;
+volatile bool start_OK = false;
+volatile bool data_OK = false;
+volatile bool stejny = false;
+
+ISR(USART0_RX_vect)
+{
+	if(UDR0 == 0x02)
+	{
+		start_OK = true;
+	}
+	if (start_OK)
+	{
+		data_prijata[i] = UDR0;
+		i++;
+		if(i > 13)
+		{
+			data_OK = true;
+			i = 0;
+			start_OK = false;
+		}
+	}
+}
+
+int main(void)
+{
+    init_lcd();
+	lcd_printf(1,"ctecka cipu");
+	
+	UCSR0A = 0;
+	UCSR0B |= (1<<RXCIE0)|(1<<RXEN0)|(1<<TXEN0);	//povoleni pøerušení od pøíjmu
+	UCSR0C |= (1<<UPM01)|(1<<UCSZ01)|(1<<UCSZ00);
+	UBRR0 = 71;		//9600
+	sei();
+	
+    while (1) 
+    {
+		if(data_OK)
+		{
+			const char* text = (const char*) data_prijata + 2;
+			lcd_printf(2,text);
+			data_OK = false;
+			
+		}
+    }
+}
+
+
+
+
+
